@@ -14,8 +14,8 @@
 pub mod analyzer;
 pub mod cache;
 pub mod claude_layer;
-pub mod cursor_layer;
 pub mod client;
+pub mod cursor_layer;
 pub mod error;
 pub mod prompts;
 pub mod response;
