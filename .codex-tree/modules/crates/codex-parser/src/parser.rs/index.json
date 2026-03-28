@@ -1,7 +1,7 @@
 {
   "path": "crates/codex-parser/src/parser.rs",
   "language": "rust",
-  "content_hash": "sha256:c156fd2fefa84013c1a5e439b0076d7ca14e31eb4d0c25d15f48706f652c14fd",
+  "content_hash": "sha256:478b3cd0b0d4598c7dd5bd882d47a7bc7616841ab54c3d82effa34e4ce3e7e7f",
   "symbols": [
     {
       "name": "parse_file",
@@ -9,7 +9,7 @@
       "visibility": "public",
       "span": {
         "start_line": 21,
-        "end_line": 74
+        "end_line": 67
       },
       "signature": "pub fn parse_file(path: &Path, source: &[u8], registry: &ParserRegistry) -> Result<ModuleIndex>",
       "doc_comment": "/// Parse a single source file and return a `ModuleIndex`.\n\n///\n\n/// Steps:\n\n///   1. Resolve the file extension and look up a registered `LanguageAdapter`.\n\n///   2. Build a `tree_sitter::Parser`, set the grammar, and parse the bytes.\n\n///   3. Delegate symbol and import extraction to the adapter.\n\n///   4. Derive the public `exports` list from symbols with public visibility.\n\n///   5. Hash the raw bytes for change-detection.\n"
@@ -19,8 +19,8 @@
       "kind": "function",
       "visibility": "public",
       "span": {
-        "start_line": 84,
-        "end_line": 156
+        "start_line": 77,
+        "end_line": 147
       },
       "signature": "pub fn parse_directory(\n    root: &Path,\n    registry: &ParserRegistry,\n    exclude_dirs: &[&str],\n) -> Result<(TreeStructure, Vec<ModuleIndex>)>",
       "doc_comment": "/// Walk a directory tree and parse every supported source file.\n\n///\n\n/// Returns both a `TreeStructure` (the hierarchy for `tree.json`) and a flat\n\n/// `Vec<ModuleIndex>` (one entry per successfully parsed file).\n\n///\n\n/// Files whose extension has no registered adapter are silently skipped.\n\n/// Directories listed in `exclude_dirs` (matched by directory name, not full\n\n/// path) are not entered.\n"
@@ -30,8 +30,8 @@
       "kind": "function",
       "visibility": "private",
       "span": {
-        "start_line": 161,
-        "end_line": 166
+        "start_line": 152,
+        "end_line": 157
       },
       "signature": "fn compute_hash(source: &[u8]) -> String",
       "doc_comment": "/// SHA-256 content hash, returned as `\"sha256:<hex_lowercase>\"`.\n"
@@ -41,8 +41,8 @@
       "kind": "function",
       "visibility": "private",
       "span": {
-        "start_line": 171,
-        "end_line": 270
+        "start_line": 162,
+        "end_line": 249
       },
       "signature": "fn build_tree_structure(root: &Path, modules: &[ModuleIndex]) -> TreeStructure",
       "doc_comment": "/// Convert a flat list of `ModuleIndex` entries into a `TreeStructure` that\n\n/// contains both `TreeEntry::File` entries and aggregate `TreeEntry::Directory`\n\n/// entries.\n"
@@ -52,8 +52,8 @@
       "kind": "function",
       "visibility": "private",
       "span": {
-        "start_line": 273,
-        "end_line": 278
+        "start_line": 252,
+        "end_line": 257
       },
       "signature": "fn entry_path(entry: &TreeEntry) -> &str",
       "doc_comment": "/// Extract the `path` field from any `TreeEntry` variant.\n"

@@ -1,7 +1,7 @@
 {
   "path": "crates/codex-cli/src/commands/regen.rs",
   "language": "rust",
-  "content_hash": "sha256:c631e125b6143d7017290bfa0b20fb0ca2021efc5b10ced761dcba9dad31ff21",
+  "content_hash": "sha256:80d886a9e7a33d17ca9772e4ddabcb60221f602c769b224cc076d36990457a29",
   "symbols": [
     {
       "name": "run",
@@ -9,7 +9,7 @@
       "visibility": "public",
       "span": {
         "start_line": 21,
-        "end_line": 174
+        "end_line": 170
       },
       "signature": "pub fn run(\n    path: &Path,\n    no_intent: bool,\n    no_claude: bool,\n    _languages: Option<&str>,\n    verbose: bool,\n    quiet: bool,\n) -> Result<()>"
     },
@@ -18,8 +18,8 @@
       "kind": "function",
       "visibility": "private",
       "span": {
-        "start_line": 179,
-        "end_line": 210
+        "start_line": 175,
+        "end_line": 206
       },
       "signature": "fn run_intent_analysis(\n    codex_tree_dir: &std::path::Path,\n    modules: &[codex_parser::types::ModuleIndex],\n    quiet: bool,\n) -> Result<codex_analyzer::types::IntentOutput>",
       "doc_comment": "/// Run intent analysis via Claude API. Returns None with a warning on failure.\n"
@@ -29,8 +29,8 @@
       "kind": "function",
       "visibility": "private",
       "span": {
-        "start_line": 213,
-        "end_line": 240
+        "start_line": 209,
+        "end_line": 236
       },
       "signature": "fn generate_claude_layer(\n    codex_tree_dir: &std::path::Path,\n    tree: &codex_parser::types::TreeStructure,\n    modules: &[codex_parser::types::ModuleIndex],\n    version: &codex_parser::types::TreeVersion,\n    intent: Option<&codex_analyzer::types::IntentOutput>,\n    quiet: bool,\n)",
       "doc_comment": "/// Generate the Claude optimization layer (L1/L2/L3 markdown files).\n"
@@ -74,7 +74,7 @@
       "kind": "use"
     },
     {
-      "source": "crate::utils::{find_git_root, format_size, calculate_dir_size, current_utc_iso8601}",
+      "source": "crate::utils::{calculate_dir_size, current_utc_iso8601, find_git_root, format_size}",
       "kind": "use"
     },
     {

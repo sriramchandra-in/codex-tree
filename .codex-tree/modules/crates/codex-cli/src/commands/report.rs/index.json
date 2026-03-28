@@ -1,7 +1,7 @@
 {
   "path": "crates/codex-cli/src/commands/report.rs",
   "language": "rust",
-  "content_hash": "sha256:af5beab2e29e66f3014f3da3cf6fd20814e3b34daba0f6279a310f042107f8e3",
+  "content_hash": "sha256:05f3b0005861874b4608cc08f7a23f680ffb6d47a4aed7f60b7441605eb05df1",
   "symbols": [
     {
       "name": "Report",
@@ -39,17 +39,17 @@
       "visibility": "public",
       "span": {
         "start_line": 49,
-        "end_line": 175
+        "end_line": 157
       },
-      "signature": "pub fn run(\n    path: &Path,\n    format: &str,\n    _benchmark: bool,\n    _verbose: bool,\n    quiet: bool,\n) -> Result<()>"
+      "signature": "pub fn run(path: &Path, format: &str, _benchmark: bool, _verbose: bool, quiet: bool) -> Result<()>"
     },
     {
       "name": "estimate_tokens",
       "kind": "function",
       "visibility": "private",
       "span": {
-        "start_line": 183,
-        "end_line": 229
+        "start_line": 165,
+        "end_line": 211
       },
       "signature": "fn estimate_tokens(\n    git_root: &Path,\n    codex_tree_dir: &Path,\n    modules: &[ModuleIndex],\n) -> Result<TokenEstimate>",
       "doc_comment": "/// Estimate token counts for raw source vs tree representations.\n\n///\n\n/// The scaffolding reads all file sizes and computes the byte totals.\n\n/// The core decision is how to convert bytes → tokens for each content type.\n"
@@ -59,8 +59,8 @@
       "kind": "enum",
       "visibility": "private",
       "span": {
-        "start_line": 233,
-        "end_line": 236
+        "start_line": 215,
+        "end_line": 218
       },
       "signature": "enum ContentKind"
     },
@@ -69,8 +69,8 @@
       "kind": "function",
       "visibility": "private",
       "span": {
-        "start_line": 250,
-        "end_line": 256
+        "start_line": 232,
+        "end_line": 238
       },
       "signature": "fn bytes_to_tokens(bytes: usize, kind: ContentKind) -> usize",
       "doc_comment": "/// Convert a byte count to an estimated token count using content-aware ratios.\n\n///\n\n/// BPE tokenizers (like Claude's) split text into subword units. The average\n\n/// bytes-per-token ratio varies by content type:\n\n///\n\n/// - **Code** (~3.5 bytes/token): identifiers get split at camelCase/snake_case\n\n///   boundaries, but keywords and operators are usually single tokens. Indentation\n\n///   whitespace compresses well (one token per indent level regardless of spaces).\n\n///\n\n/// - **JSON** (~3.0 bytes/token): more token-dense because of repeated structural\n\n///   characters (`\"`, `{`, `}`, `:`, `,`) that each consume a token, and quoted\n\n///   keys that tokenize less efficiently than bare identifiers.\n"
@@ -80,8 +80,8 @@
       "kind": "function",
       "visibility": "private",
       "span": {
-        "start_line": 260,
-        "end_line": 268
+        "start_line": 242,
+        "end_line": 250
       },
       "signature": "fn format_number(n: usize) -> String"
     }
@@ -108,7 +108,7 @@
       "kind": "use"
     },
     {
-      "source": "crate::utils::{find_git_root, read_all_modules, format_size, calculate_dir_size}",
+      "source": "crate::utils::{calculate_dir_size, find_git_root, format_size, read_all_modules}",
       "kind": "use"
     }
   ],

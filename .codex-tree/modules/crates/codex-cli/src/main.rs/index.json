@@ -1,7 +1,7 @@
 {
   "path": "crates/codex-cli/src/main.rs",
   "language": "rust",
-  "content_hash": "sha256:0954378ad809f34550a25939f4e4f34354ae785719db4c85f6639138c41e1534",
+  "content_hash": "sha256:f66f84ccc5c2d8c7f60f21b584fcf2b097760a1c0fb8159513914dd5aab60f25",
   "symbols": [
     {
       "name": "commands",

@@ -1,45 +1,65 @@
 {
   "path": "crates/codex-analyzer/src/lib.rs",
   "language": "rust",
-  "content_hash": "sha256:f04b8e263649413dc5252214df154c31f6ccc84d0138b0713ba5f412f2a23db0",
+  "content_hash": "sha256:c7a629f4f85e771e35aa5583d0b95038e552bba2d790db883c8fd3b0905de7a2",
   "symbols": [
     {
-      "name": "error",
+      "name": "analyzer",
       "kind": "module",
       "visibility": "public",
       "span": {
         "start_line": 13,
         "end_line": 13
       },
-      "signature": "pub mod error"
+      "signature": "pub mod analyzer"
     },
     {
-      "name": "types",
+      "name": "cache",
       "kind": "module",
       "visibility": "public",
       "span": {
         "start_line": 14,
         "end_line": 14
       },
-      "signature": "pub mod types"
+      "signature": "pub mod cache"
     },
     {
-      "name": "client",
+      "name": "claude_layer",
       "kind": "module",
       "visibility": "public",
       "span": {
         "start_line": 15,
         "end_line": 15
       },
+      "signature": "pub mod claude_layer"
+    },
+    {
+      "name": "client",
+      "kind": "module",
+      "visibility": "public",
+      "span": {
+        "start_line": 16,
+        "end_line": 16
+      },
       "signature": "pub mod client"
+    },
+    {
+      "name": "error",
+      "kind": "module",
+      "visibility": "public",
+      "span": {
+        "start_line": 17,
+        "end_line": 17
+      },
+      "signature": "pub mod error"
     },
     {
       "name": "prompts",
       "kind": "module",
       "visibility": "public",
       "span": {
-        "start_line": 16,
-        "end_line": 16
+        "start_line": 18,
+        "end_line": 18
       },
       "signature": "pub mod prompts"
     },
@@ -48,54 +68,42 @@
       "kind": "module",
       "visibility": "public",
       "span": {
-        "start_line": 17,
-        "end_line": 17
+        "start_line": 19,
+        "end_line": 19
       },
       "signature": "pub mod response"
     },
     {
-      "name": "cache",
-      "kind": "module",
-      "visibility": "public",
-      "span": {
-        "start_line": 18,
-        "end_line": 18
-      },
-      "signature": "pub mod cache"
-    },
-    {
-      "name": "analyzer",
-      "kind": "module",
-      "visibility": "public",
-      "span": {
-        "start_line": 19,
-        "end_line": 19
-      },
-      "signature": "pub mod analyzer"
-    },
-    {
-      "name": "claude_layer",
+      "name": "types",
       "kind": "module",
       "visibility": "public",
       "span": {
         "start_line": 20,
         "end_line": 20
       },
-      "signature": "pub mod claude_layer"
+      "signature": "pub mod types"
     }
   ],
   "imports": [],
   "exports": [
     {
-      "name": "error",
+      "name": "analyzer",
       "kind": "module"
     },
     {
-      "name": "types",
+      "name": "cache",
+      "kind": "module"
+    },
+    {
+      "name": "claude_layer",
       "kind": "module"
     },
     {
       "name": "client",
+      "kind": "module"
+    },
+    {
+      "name": "error",
       "kind": "module"
     },
     {
@@ -107,15 +115,7 @@
       "kind": "module"
     },
     {
-      "name": "cache",
-      "kind": "module"
-    },
-    {
-      "name": "analyzer",
-      "kind": "module"
-    },
-    {
-      "name": "claude_layer",
+      "name": "types",
       "kind": "module"
     }
   ]

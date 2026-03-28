@@ -1,7 +1,7 @@
 {
   "path": "crates/codex-cli/src/commands/update.rs",
   "language": "rust",
-  "content_hash": "sha256:1e46f6607205effa3b7c97a40947fee14f8f6bd8f81a3b1f37963cf16045dea1",
+  "content_hash": "sha256:11719649d2074494b5682ba600c757d450b40e5508c08b7042ecd909a3e1170f",
   "symbols": [
     {
       "name": "run",
@@ -9,7 +9,7 @@
       "visibility": "public",
       "span": {
         "start_line": 29,
-        "end_line": 263
+        "end_line": 266
       },
       "signature": "pub fn run(\n    path: &Path,\n    no_intent: bool,\n    no_claude: bool,\n    no_compact: bool,\n    verbose: bool,\n    quiet: bool,\n) -> Result<()>"
     },
@@ -18,8 +18,8 @@
       "kind": "function",
       "visibility": "private",
       "span": {
-        "start_line": 268,
-        "end_line": 276
+        "start_line": 271,
+        "end_line": 279
       },
       "signature": "fn update_module_on_disk(codex_tree_dir: &Path, module: &ModuleIndex) -> Result<()>",
       "doc_comment": "/// Write a `ModuleIndex` to `modules/{path}/index.json`.\n"
@@ -29,8 +29,8 @@
       "kind": "function",
       "visibility": "private",
       "span": {
-        "start_line": 280,
-        "end_line": 329
+        "start_line": 283,
+        "end_line": 330
       },
       "signature": "fn detect_changed_by_hash(codex_tree_dir: &Path, git_root: &Path) -> Result<Vec<String>>",
       "doc_comment": "/// When there is no `source_commit` in version.json, detect changed files by\n\n/// comparing the `content_hash` in each module index against the current file.\n"
@@ -40,8 +40,8 @@
       "kind": "function",
       "visibility": "private",
       "span": {
-        "start_line": 334,
-        "end_line": 365
+        "start_line": 335,
+        "end_line": 366
       },
       "signature": "fn run_intent_analysis(\n    codex_tree_dir: &std::path::Path,\n    modules: &[codex_parser::types::ModuleIndex],\n    quiet: bool,\n) -> Result<codex_analyzer::types::IntentOutput>",
       "doc_comment": "/// Run intent analysis via Claude API. Returns None with a warning on failure.\n"
@@ -51,8 +51,8 @@
       "kind": "function",
       "visibility": "private",
       "span": {
-        "start_line": 368,
-        "end_line": 395
+        "start_line": 369,
+        "end_line": 396
       },
       "signature": "fn generate_claude_layer(\n    codex_tree_dir: &std::path::Path,\n    tree: &codex_parser::types::TreeStructure,\n    modules: &[codex_parser::types::ModuleIndex],\n    version: &codex_parser::types::TreeVersion,\n    intent: Option<&codex_analyzer::types::IntentOutput>,\n    quiet: bool,\n)",
       "doc_comment": "/// Generate the Claude optimization layer (L1/L2/L3 markdown files).\n"
@@ -104,7 +104,7 @@
       "kind": "use"
     },
     {
-      "source": "crate::utils::{find_git_root, read_all_modules, current_utc_iso8601}",
+      "source": "crate::utils::{current_utc_iso8601, find_git_root, read_all_modules}",
       "kind": "use"
     },
     {

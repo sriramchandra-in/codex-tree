@@ -1,7 +1,7 @@
 {
   "path": "crates/codex-parser/tests/rust_parsing.rs",
   "language": "rust",
-  "content_hash": "sha256:ec208a2d6663746dde1553860b0b9737fb91155f57bf6428e1f8947f63ee4e32",
+  "content_hash": "sha256:14019f58bf383dfb571d1725e63f987760ab3c464089325a893d405e388ee56f",
   "symbols": [
     {
       "name": "registry",
@@ -80,7 +80,7 @@
       "visibility": "private",
       "span": {
         "start_line": 143,
-        "end_line": 170
+        "end_line": 172
       },
       "signature": "fn test_parse_imports()"
     },
@@ -89,8 +89,8 @@
       "kind": "function",
       "visibility": "private",
       "span": {
-        "start_line": 173,
-        "end_line": 217
+        "start_line": 175,
+        "end_line": 219
       },
       "signature": "fn test_parse_multiple_items()"
     },
@@ -99,8 +99,8 @@
       "kind": "function",
       "visibility": "private",
       "span": {
-        "start_line": 220,
-        "end_line": 250
+        "start_line": 222,
+        "end_line": 252
       },
       "signature": "fn test_parse_visibility_variants()"
     }

@@ -1,7 +1,7 @@
 {
   "path": "crates/codex-cli/src/git.rs",
   "language": "rust",
-  "content_hash": "sha256:f52605ca4f488a7e79800ff6d3cb0041dfa4252ebe81caa1ffd31bea4ff4604d",
+  "content_hash": "sha256:c6e879bc96c006b6254e65b69f281e0e673189af948778bc6612d2818d03f55a",
   "symbols": [
     {
       "name": "run_git",
@@ -52,19 +52,18 @@
       "kind": "function",
       "visibility": "public",
       "span": {
-        "start_line": 113,
-        "end_line": 115
+        "start_line": 115,
+        "end_line": 117
       },
-      "signature": "pub fn is_shallow_clone(repo_root: &Path) -> bool",
-      "doc_comment": "/// Returns `true` if the repository is a shallow clone.\n\n///\n\n/// Git stores shallow-clone metadata in `.git/shallow`.\n"
+      "signature": "pub fn is_shallow_clone(repo_root: &Path) -> bool"
     },
     {
       "name": "get_commit_date",
       "kind": "function",
       "visibility": "public",
       "span": {
-        "start_line": 118,
-        "end_line": 124
+        "start_line": 120,
+        "end_line": 126
       },
       "signature": "pub fn get_commit_date(repo_root: &Path, commit: &str) -> Result<String>",
       "doc_comment": "/// Return the ISO-8601 commit date for the given commit SHA.\n"

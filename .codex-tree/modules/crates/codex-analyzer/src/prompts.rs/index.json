@@ -1,7 +1,7 @@
 {
   "path": "crates/codex-analyzer/src/prompts.rs",
   "language": "rust",
-  "content_hash": "sha256:8515bbcf19eb930a2c07fa36e6557b74597544955e207872b9342533ea6117d9",
+  "content_hash": "sha256:5e82186a055c1d9ac38b3ddadb435ee6057283fec46babeecf095479b9855c29",
   "symbols": [
     {
       "name": "MAX_USER_PROMPT_CHARS",

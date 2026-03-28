@@ -1,7 +1,7 @@
 {
   "path": "crates/codex-cli/src/compaction.rs",
   "language": "rust",
-  "content_hash": "sha256:a5e69acec2b1e15ff394338d5f060785eee510e638f26956df35c8c72fca3aa0",
+  "content_hash": "sha256:6ca2daa442927d8d976103f8d1aad07fb3d136495655d70a342c8a93ed726e25",
   "symbols": [
     {
       "name": "COMPACT_DELTA_COUNT",
@@ -62,7 +62,7 @@
       "visibility": "public",
       "span": {
         "start_line": 82,
-        "end_line": 129
+        "end_line": 124
       },
       "signature": "pub fn compact(codex_tree_dir: &Path) -> Result<()>",
       "doc_comment": "/// Apply all pending deltas to the canonical tree and reset the delta state.\n\n///\n\n/// Steps:\n\n/// 1. Read `version.json`\n\n/// 2. Read all delta files from `deltas/` in sequence order\n\n/// 3. Apply each operation to `modules/` and `tree.json`\n\n/// 4. Delete all delta files\n\n/// 5. Reset `delta_count` and `delta_size_bytes` in `version.json`\n"
@@ -72,8 +72,8 @@
       "kind": "function",
       "visibility": "private",
       "span": {
-        "start_line": 134,
-        "end_line": 184
+        "start_line": 129,
+        "end_line": 179
       },
       "signature": "fn apply_operation(\n    codex_tree_dir: &Path,\n    op: &DeltaOperation,\n    tree: &mut TreeStructure,\n) -> Result<()>",
       "doc_comment": "/// Apply a single `DeltaOperation` to the on-disk tree state.\n"
@@ -83,8 +83,8 @@
       "kind": "function",
       "visibility": "private",
       "span": {
-        "start_line": 187,
-        "end_line": 215
+        "start_line": 182,
+        "end_line": 210
       },
       "signature": "fn upsert_tree_entry(tree: &mut TreeStructure, module: &ModuleIndex)",
       "doc_comment": "/// Insert or replace the `TreeEntry::File` for a given `ModuleIndex`.\n"

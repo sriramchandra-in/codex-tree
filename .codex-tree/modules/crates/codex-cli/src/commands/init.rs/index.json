@@ -1,7 +1,7 @@
 {
   "path": "crates/codex-cli/src/commands/init.rs",
   "language": "rust",
-  "content_hash": "sha256:06feb20d8e083d0c1a1f30103b40f55c4f290ea0b5150d70869aabe6de9aca38",
+  "content_hash": "sha256:31ed24eb3ec149033b6de630dccdb35753802dd32e20f15dd31eca6dc656bb90",
   "symbols": [
     {
       "name": "run",
@@ -9,7 +9,7 @@
       "visibility": "public",
       "span": {
         "start_line": 15,
-        "end_line": 176
+        "end_line": 172
       },
       "signature": "pub fn run(\n    path: &Path,\n    no_intent: bool,\n    no_claude: bool,\n    _languages: Option<&str>,\n    dry_run: bool,\n    verbose: bool,\n    quiet: bool,\n) -> Result<()>"
     },
@@ -18,8 +18,8 @@
       "kind": "function",
       "visibility": "private",
       "span": {
-        "start_line": 181,
-        "end_line": 212
+        "start_line": 177,
+        "end_line": 208
       },
       "signature": "fn run_intent_analysis(\n    codex_tree_dir: &std::path::Path,\n    modules: &[codex_parser::types::ModuleIndex],\n    quiet: bool,\n) -> Result<codex_analyzer::types::IntentOutput>",
       "doc_comment": "/// Run intent analysis via Claude API. Returns None with a warning on failure.\n"
@@ -29,8 +29,8 @@
       "kind": "function",
       "visibility": "private",
       "span": {
-        "start_line": 215,
-        "end_line": 242
+        "start_line": 211,
+        "end_line": 238
       },
       "signature": "fn generate_claude_layer(\n    codex_tree_dir: &std::path::Path,\n    tree: &codex_parser::types::TreeStructure,\n    modules: &[codex_parser::types::ModuleIndex],\n    version: &codex_parser::types::TreeVersion,\n    intent: Option<&codex_analyzer::types::IntentOutput>,\n    quiet: bool,\n)",
       "doc_comment": "/// Generate the Claude optimization layer (L1/L2/L3 markdown files).\n"
@@ -66,7 +66,7 @@
       "kind": "use"
     },
     {
-      "source": "crate::utils::{find_git_root, format_size, calculate_dir_size}",
+      "source": "crate::utils::{calculate_dir_size, find_git_root, format_size}",
       "kind": "use"
     },
     {

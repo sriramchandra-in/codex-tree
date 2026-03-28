@@ -1,7 +1,7 @@
 {
   "path": "crates/codex-cli/src/commands/check.rs",
   "language": "rust",
-  "content_hash": "sha256:d31b31d4458bdcf1971847b104b0e48c49cf1c281150941c8f14e350cd21ea1f",
+  "content_hash": "sha256:fc8d996328dbafeede1cc8877c84e69f401b543fe737dd29f602844f578d149b",
   "symbols": [
     {
       "name": "CheckReport",
@@ -60,7 +60,7 @@
       "visibility": "public",
       "span": {
         "start_line": 64,
-        "end_line": 241
+        "end_line": 229
       },
       "signature": "pub fn run(\n    path: &Path,\n    format: &str,\n    fail_if_stale: bool,\n    _verbose: bool,\n    quiet: bool,\n) -> Result<()>"
     },
@@ -69,8 +69,8 @@
       "kind": "function",
       "visibility": "private",
       "span": {
-        "start_line": 246,
-        "end_line": 265
+        "start_line": 234,
+        "end_line": 253
       },
       "signature": "fn count_commits_between(repo_root: &Path, from: &str, to: &str) -> Result<usize>",
       "doc_comment": "/// Count commits between two SHAs using `git rev-list --count`.\n"
@@ -80,8 +80,8 @@
       "kind": "function",
       "visibility": "private",
       "span": {
-        "start_line": 268,
-        "end_line": 270
+        "start_line": 256,
+        "end_line": 258
       },
       "signature": "fn has_supported_extension(path: &str) -> bool",
       "doc_comment": "/// Quick check if a file path has a supported extension (currently just .rs).\n"

@@ -1,0 +1,345 @@
+{
+  "sequence": 3,
+  "timestamp": "2026-03-28T13:20:49Z",
+  "source_commit": "9f22932d4b3cb65b99597122e4fd8cd66d8ca1d9",
+  "changed_files": [
+    ".codex-tree/deltas/1.json",
+    ".codex-tree/deltas/2.json",
+    ".codex-tree/modules/crates/codex-analyzer/src/analyzer.rs/index.json",
+    ".codex-tree/modules/crates/codex-analyzer/src/cache.rs/index.json",
+    ".codex-tree/modules/crates/codex-analyzer/src/claude_layer.rs/index.json",
+    ".codex-tree/modules/crates/codex-analyzer/src/client.rs/index.json",
+    ".codex-tree/modules/crates/codex-analyzer/src/error.rs/index.json",
+    ".codex-tree/modules/crates/codex-analyzer/src/lib.rs/index.json",
+    ".codex-tree/modules/crates/codex-analyzer/src/prompts.rs/index.json",
+    ".codex-tree/modules/crates/codex-analyzer/src/response.rs/index.json",
+    ".codex-tree/modules/crates/codex-analyzer/src/types.rs/index.json",
+    ".codex-tree/modules/crates/codex-cli/src/commands/check.rs/index.json",
+    ".codex-tree/modules/crates/codex-cli/src/commands/init.rs/index.json",
+    ".codex-tree/modules/crates/codex-cli/src/commands/mod.rs/index.json",
+    ".codex-tree/modules/crates/codex-cli/src/commands/regen.rs/index.json",
+    ".codex-tree/modules/crates/codex-cli/src/commands/report.rs/index.json",
+    ".codex-tree/modules/crates/codex-cli/src/commands/update.rs/index.json",
+    ".codex-tree/modules/crates/codex-cli/src/compaction.rs/index.json",
+    ".codex-tree/modules/crates/codex-cli/src/error.rs/index.json",
+    ".codex-tree/modules/crates/codex-cli/src/git.rs/index.json",
+    ".codex-tree/modules/crates/codex-cli/src/main.rs/index.json",
+    ".codex-tree/modules/crates/codex-cli/src/utils.rs/index.json",
+    ".codex-tree/modules/crates/codex-parser/src/diff.rs/index.json",
+    ".codex-tree/modules/crates/codex-parser/src/lib.rs/index.json",
+    ".codex-tree/modules/crates/codex-parser/src/types.rs/index.json",
+    ".codex-tree/tree.json",
+    ".codex-tree/version.json",
+    ".github/workflows/ci.yml",
+    ".github/workflows/dogfood.yml",
+    "Cargo.lock",
+    "crates/codex-analyzer/src/analyzer.rs",
+    "crates/codex-analyzer/src/cache.rs",
+    "crates/codex-analyzer/src/claude_layer.rs",
+    "crates/codex-analyzer/src/client.rs",
+    "crates/codex-analyzer/src/error.rs",
+    "crates/codex-analyzer/src/lib.rs",
+    "crates/codex-analyzer/src/prompts.rs",
+    "crates/codex-analyzer/src/response.rs",
+    "crates/codex-analyzer/src/types.rs",
+    "crates/codex-cli/Cargo.toml",
+    "crates/codex-cli/src/commands/check.rs",
+    "crates/codex-cli/src/commands/init.rs",
+    "crates/codex-cli/src/commands/mod.rs",
+    "crates/codex-cli/src/commands/regen.rs",
+    "crates/codex-cli/src/commands/report.rs",
+    "crates/codex-cli/src/commands/update.rs",
+    "crates/codex-cli/src/compaction.rs",
+    "crates/codex-cli/src/error.rs",
+    "crates/codex-cli/src/git.rs",
+    "crates/codex-cli/src/main.rs",
+    "crates/codex-cli/src/utils.rs",
+    "crates/codex-parser/src/diff.rs",
+    "crates/codex-parser/src/parser.rs",
+    "crates/codex-parser/src/types.rs",
+    "crates/codex-parser/tests/integration.rs",
+    "crates/codex-parser/tests/rust_parsing.rs"
+  ],
+  "operations": [
+    {
+      "op": "modify",
+      "path": "crates/codex-analyzer/src/analyzer.rs",
+      "symbols_added": [],
+      "symbols_removed": [],
+      "symbols_modified": [
+        "Analyzer",
+        "Analyzer"
+      ]
+    },
+    {
+      "op": "modify",
+      "path": "crates/codex-analyzer/src/cache.rs",
+      "symbols_added": [],
+      "symbols_removed": [],
+      "symbols_modified": [
+        "cache_path",
+        "save_to_cache"
+      ]
+    },
+    {
+      "op": "modify",
+      "path": "crates/codex-analyzer/src/claude_layer.rs",
+      "symbols_added": [],
+      "symbols_removed": [],
+      "symbols_modified": [
+        "collect_key_public_types",
+        "find_entry_points",
+        "first_sentence",
+        "first_sentence_extraction",
+        "generate_l1",
+        "generate_l2",
+        "generate_l3",
+        "generate_metadata_header",
+        "l1_contains_key_sections",
+        "l2_extends_l1",
+        "l3_extends_l2",
+        "make_modules",
+        "make_tree",
+        "make_version",
+        "metadata_header_format",
+        "project_name_from_root",
+        "tests",
+        "top_level_dirs",
+        "write_claude_layer",
+        "write_claude_layer_creates_files"
+      ]
+    },
+    {
+      "op": "modify",
+      "path": "crates/codex-analyzer/src/client.rs",
+      "symbols_added": [],
+      "symbols_removed": [],
+      "symbols_modified": [
+        "ClaudeClient",
+        "ClaudeClient",
+        "send_message"
+      ]
+    },
+    {
+      "op": "modify",
+      "path": "crates/codex-analyzer/src/error.rs",
+      "symbols_added": [],
+      "symbols_removed": [],
+      "symbols_modified": []
+    },
+    {
+      "op": "modify",
+      "path": "crates/codex-analyzer/src/lib.rs",
+      "symbols_added": [],
+      "symbols_removed": [],
+      "symbols_modified": [
+        "analyzer",
+        "cache",
+        "claude_layer",
+        "client",
+        "error",
+        "prompts",
+        "response",
+        "types"
+      ]
+    },
+    {
+      "op": "modify",
+      "path": "crates/codex-analyzer/src/prompts.rs",
+      "symbols_added": [],
+      "symbols_removed": [],
+      "symbols_modified": []
+    },
+    {
+      "op": "modify",
+      "path": "crates/codex-analyzer/src/response.rs",
+      "symbols_added": [],
+      "symbols_removed": [],
+      "symbols_modified": []
+    },
+    {
+      "op": "modify",
+      "path": "crates/codex-analyzer/src/types.rs",
+      "symbols_added": [],
+      "symbols_removed": [],
+      "symbols_modified": []
+    },
+    {
+      "op": "modify",
+      "path": "crates/codex-cli/src/commands/check.rs",
+      "symbols_added": [],
+      "symbols_removed": [],
+      "symbols_modified": [
+        "StaleReason",
+        "StaleReason",
+        "count_commits_between",
+        "has_supported_extension",
+        "run"
+      ]
+    },
+    {
+      "op": "modify",
+      "path": "crates/codex-cli/src/commands/init.rs",
+      "symbols_added": [],
+      "symbols_removed": [],
+      "symbols_modified": [
+        "generate_claude_layer",
+        "run",
+        "run_intent_analysis"
+      ]
+    },
+    {
+      "op": "modify",
+      "path": "crates/codex-cli/src/commands/mod.rs",
+      "symbols_added": [],
+      "symbols_removed": [],
+      "symbols_modified": []
+    },
+    {
+      "op": "modify",
+      "path": "crates/codex-cli/src/commands/regen.rs",
+      "symbols_added": [],
+      "symbols_removed": [],
+      "symbols_modified": [
+        "generate_claude_layer",
+        "run",
+        "run_intent_analysis"
+      ]
+    },
+    {
+      "op": "modify",
+      "path": "crates/codex-cli/src/commands/report.rs",
+      "symbols_added": [],
+      "symbols_removed": [],
+      "symbols_modified": [
+        "ContentKind",
+        "bytes_to_tokens",
+        "estimate_tokens",
+        "format_number",
+        "run"
+      ]
+    },
+    {
+      "op": "modify",
+      "path": "crates/codex-cli/src/commands/update.rs",
+      "symbols_added": [],
+      "symbols_removed": [],
+      "symbols_modified": [
+        "detect_changed_by_hash",
+        "generate_claude_layer",
+        "run",
+        "run_intent_analysis",
+        "update_module_on_disk"
+      ]
+    },
+    {
+      "op": "modify",
+      "path": "crates/codex-cli/src/compaction.rs",
+      "symbols_added": [],
+      "symbols_removed": [],
+      "symbols_modified": [
+        "apply_operation",
+        "compact",
+        "upsert_tree_entry"
+      ]
+    },
+    {
+      "op": "modify",
+      "path": "crates/codex-cli/src/error.rs",
+      "symbols_added": [],
+      "symbols_removed": [],
+      "symbols_modified": []
+    },
+    {
+      "op": "modify",
+      "path": "crates/codex-cli/src/git.rs",
+      "symbols_added": [],
+      "symbols_removed": [],
+      "symbols_modified": [
+        "get_commit_date",
+        "is_shallow_clone"
+      ]
+    },
+    {
+      "op": "modify",
+      "path": "crates/codex-cli/src/main.rs",
+      "symbols_added": [],
+      "symbols_removed": [],
+      "symbols_modified": []
+    },
+    {
+      "op": "modify",
+      "path": "crates/codex-cli/src/utils.rs",
+      "symbols_added": [],
+      "symbols_removed": [],
+      "symbols_modified": [
+        "KB",
+        "MB",
+        "calculate_dir_size",
+        "current_utc_iso8601",
+        "format_size",
+        "read_all_modules"
+      ]
+    },
+    {
+      "op": "modify",
+      "path": "crates/codex-parser/src/diff.rs",
+      "symbols_added": [],
+      "symbols_removed": [],
+      "symbols_modified": [
+        "diff_modules",
+        "make_module",
+        "make_symbol",
+        "test_no_changes",
+        "test_symbol_added",
+        "test_symbol_modified_signature",
+        "test_symbol_removed",
+        "tests"
+      ]
+    },
+    {
+      "op": "modify",
+      "path": "crates/codex-parser/src/parser.rs",
+      "symbols_added": [],
+      "symbols_removed": [],
+      "symbols_modified": [
+        "build_tree_structure",
+        "compute_hash",
+        "entry_path",
+        "parse_directory",
+        "parse_file"
+      ]
+    },
+    {
+      "op": "modify",
+      "path": "crates/codex-parser/src/types.rs",
+      "symbols_added": [],
+      "symbols_removed": [],
+      "symbols_modified": [
+        "TreeVersionNumber",
+        "TreeVersionNumber"
+      ]
+    },
+    {
+      "op": "modify",
+      "path": "crates/codex-parser/tests/integration.rs",
+      "symbols_added": [],
+      "symbols_removed": [],
+      "symbols_modified": [
+        "test_self_parse",
+        "test_self_parse_full_repo"
+      ]
+    },
+    {
+      "op": "modify",
+      "path": "crates/codex-parser/tests/rust_parsing.rs",
+      "symbols_added": [],
+      "symbols_removed": [],
+      "symbols_modified": [
+        "test_parse_imports",
+        "test_parse_multiple_items",
+        "test_parse_visibility_variants"
+      ]
+    }
+  ]
+}

@@ -1,14 +1,14 @@
 {
   "path": "crates/codex-analyzer/src/claude_layer.rs",
   "language": "rust",
-  "content_hash": "sha256:7da2e0c75bd486a422937cc53e68852ab32b6e84fb367df1b9950cdda1dd5a91",
+  "content_hash": "sha256:50c9c15d7590d14db02cca71bd83bdc2813f26fd0c2e4c51d091826ce0dd4926",
   "symbols": [
     {
       "name": "generate_metadata_header",
       "kind": "function",
       "visibility": "public",
       "span": {
-        "start_line": 42,
+        "start_line": 44,
         "end_line": 49
       },
       "signature": "pub fn generate_metadata_header(version: &TreeVersion) -> String",
@@ -20,9 +20,9 @@
       "visibility": "public",
       "span": {
         "start_line": 59,
-        "end_line": 150
+        "end_line": 160
       },
-      "signature": "pub fn generate_l1(\n    tree: &TreeStructure,\n    modules: &[ModuleIndex],\n    version: &TreeVersion,\n) -> String",
+      "signature": "pub fn generate_l1(tree: &TreeStructure, modules: &[ModuleIndex], version: &TreeVersion) -> String",
       "doc_comment": "/// Generates the L1 markdown: a concise project summary (~500 tokens).\n\n///\n\n/// Intended for Haiku-class models or any context where only the broad\n\n/// shape of the project matters — entry points, key public types, quick stats.\n\n///\n\n/// In Scala: `def generateL1(tree: TreeStructure, modules: Seq[ModuleIndex], version: TreeVersion): String`\n"
     },
     {
@@ -30,8 +30,8 @@
       "kind": "function",
       "visibility": "public",
       "span": {
-        "start_line": 160,
-        "end_line": 259
+        "start_line": 170,
+        "end_line": 272
       },
       "signature": "pub fn generate_l2(\n    tree: &TreeStructure,\n    modules: &[ModuleIndex],\n    version: &TreeVersion,\n    intent: Option<&IntentOutput>,\n) -> String",
       "doc_comment": "/// Generates the L2 markdown: module-level detail (~2,000 tokens).\n\n///\n\n/// Extends L1 with per-module symbol lists, the dependency graph, and\n\n/// any design patterns from the intent layer.\n\n///\n\n/// In Scala: `def generateL2(tree: TreeStructure, modules: Seq[ModuleIndex], version: TreeVersion, intent: Option[IntentOutput]): String`\n"
@@ -41,8 +41,8 @@
       "kind": "function",
       "visibility": "public",
       "span": {
-        "start_line": 269,
-        "end_line": 396
+        "start_line": 282,
+        "end_line": 408
       },
       "signature": "pub fn generate_l3(\n    tree: &TreeStructure,\n    modules: &[ModuleIndex],\n    version: &TreeVersion,\n    intent: Option<&IntentOutput>,\n) -> String",
       "doc_comment": "/// Generates the L3 markdown: complete repository detail for Opus-class models.\n\n///\n\n/// Extends L2 with every symbol (not just public), full design decisions with\n\n/// rationale + confidence, and the full import/export manifest per module.\n\n///\n\n/// In Scala: `def generateL3(tree: TreeStructure, modules: Seq[ModuleIndex], version: TreeVersion, intent: Option[IntentOutput]): String`\n"
@@ -52,10 +52,10 @@
       "kind": "function",
       "visibility": "public",
       "span": {
-        "start_line": 407,
-        "end_line": 419
+        "start_line": 419,
+        "end_line": 426
       },
-      "signature": "pub fn write_claude_layer(\n    output_dir: &Path,\n    l1: &str,\n    l2: &str,\n    l3: &str,\n) -> std::io::Result<()>",
+      "signature": "pub fn write_claude_layer(output_dir: &Path, l1: &str, l2: &str, l3: &str) -> std::io::Result<()>",
       "doc_comment": "/// Writes the three Claude layer files to `<output_dir>/claude/`.\n\n///\n\n/// Creates the `claude/` subdirectory if it does not exist, then writes\n\n/// `l1.md`, `l2.md`, and `l3.md`. This is the only function in this module\n\n/// with I/O side effects — everything else is pure string generation.\n\n///\n\n/// In Scala terms: analogous to `IO { Files.write(...) }` in cats-effect.\n"
     },
     {
@@ -63,8 +63,8 @@
       "kind": "function",
       "visibility": "private",
       "span": {
-        "start_line": 428,
-        "end_line": 430
+        "start_line": 435,
+        "end_line": 440
       },
       "signature": "fn project_name_from_root(root: &str) -> &str",
       "doc_comment": "/// Extracts the final path component of the repo root as the project name.\n\n///\n\n/// E.g. `/home/user/projects/codex-tree` → `\"codex-tree\"`.\n\n/// Falls back to the full path string if there is no final component\n\n/// (unlikely for any real repo root).\n"
@@ -74,8 +74,8 @@
       "kind": "function",
       "visibility": "private",
       "span": {
-        "start_line": 437,
-        "end_line": 444
+        "start_line": 447,
+        "end_line": 452
       },
       "signature": "fn top_level_dirs(tree: &TreeStructure) -> Vec<&TreeEntry>",
       "doc_comment": "/// Returns `TreeEntry::Directory` entries whose path contains no `/` separator\n\n/// after the root — i.e. direct children of the repo root.\n\n///\n\n/// Depth 1 is defined as: the path contains exactly one component (no `/`).\n\n/// For example `\"crates\"` is depth 1; `\"crates/codex-parser\"` is depth 2.\n"
@@ -85,8 +85,8 @@
       "kind": "function",
       "visibility": "private",
       "span": {
-        "start_line": 450,
-        "end_line": 460
+        "start_line": 458,
+        "end_line": 468
       },
       "signature": "fn find_entry_points(modules: &[ModuleIndex]) -> Vec<&str>",
       "doc_comment": "/// Collects file paths that define a `main` function.\n\n///\n\n/// A module is an entry point if it contains a symbol whose `kind` is\n\n/// `Function` and whose `name` is `\"main\"`.\n"
@@ -96,10 +96,10 @@
       "kind": "function",
       "visibility": "private",
       "span": {
-        "start_line": 469,
-        "end_line": 501
+        "start_line": 477,
+        "end_line": 512
       },
-      "signature": "fn collect_key_public_types<'a>(\n    modules: &'a [ModuleIndex],\n    limit: usize,\n) -> Vec<(&'a str, &'a str, Option<&'a str>)>",
+      "signature": "fn collect_key_public_types(\n    modules: &[ModuleIndex],\n    limit: usize,\n) -> Vec<(&str, &str, Option<&str>)>",
       "doc_comment": "/// Collects up to `limit` key public types (structs, traits, enums).\n\n///\n\n/// Sorting strategy mirrors the task spec:\n\n///   1. Symbols with a doc comment come first (more informative to the reader).\n\n///   2. Within each group the original order is preserved.\n\n///\n\n/// Returns `(module_path, signature, Option<doc_comment>)` tuples.\n"
     },
     {
@@ -107,8 +107,8 @@
       "kind": "function",
       "visibility": "private",
       "span": {
-        "start_line": 506,
-        "end_line": 514
+        "start_line": 517,
+        "end_line": 525
       },
       "signature": "fn first_sentence(doc: &str) -> &str",
       "doc_comment": "/// Extracts the first sentence from a doc comment (up to the first `.` or newline).\n\n///\n\n/// Strips leading `/// ` or `/** */` markers before extracting.\n"
@@ -118,8 +118,8 @@
       "kind": "module",
       "visibility": "private",
       "span": {
-        "start_line": 519,
-        "end_line": 680
+        "start_line": 530,
+        "end_line": 706
       },
       "signature": "mod tests"
     },
@@ -128,8 +128,8 @@
       "kind": "function",
       "visibility": "private",
       "span": {
-        "start_line": 526,
-        "end_line": 545
+        "start_line": 537,
+        "end_line": 556
       },
       "signature": "fn make_version() -> TreeVersion"
     },
@@ -138,8 +138,8 @@
       "kind": "function",
       "visibility": "private",
       "span": {
-        "start_line": 547,
-        "end_line": 573
+        "start_line": 558,
+        "end_line": 584
       },
       "signature": "fn make_tree() -> TreeStructure"
     },
@@ -148,8 +148,8 @@
       "kind": "function",
       "visibility": "private",
       "span": {
-        "start_line": 575,
-        "end_line": 609
+        "start_line": 586,
+        "end_line": 626
       },
       "signature": "fn make_modules() -> Vec<ModuleIndex>"
     },
@@ -158,8 +158,8 @@
       "kind": "function",
       "visibility": "private",
       "span": {
-        "start_line": 612,
-        "end_line": 619
+        "start_line": 629,
+        "end_line": 636
       },
       "signature": "fn metadata_header_format()"
     },
@@ -168,8 +168,8 @@
       "kind": "function",
       "visibility": "private",
       "span": {
-        "start_line": 622,
-        "end_line": 638
+        "start_line": 639,
+        "end_line": 655
       },
       "signature": "fn l1_contains_key_sections()"
     },
@@ -178,8 +178,8 @@
       "kind": "function",
       "visibility": "private",
       "span": {
-        "start_line": 641,
-        "end_line": 649
+        "start_line": 658,
+        "end_line": 666
       },
       "signature": "fn l2_extends_l1()"
     },
@@ -188,8 +188,8 @@
       "kind": "function",
       "visibility": "private",
       "span": {
-        "start_line": 652,
-        "end_line": 660
+        "start_line": 669,
+        "end_line": 677
       },
       "signature": "fn l3_extends_l2()"
     },
@@ -198,8 +198,8 @@
       "kind": "function",
       "visibility": "private",
       "span": {
-        "start_line": 663,
-        "end_line": 672
+        "start_line": 680,
+        "end_line": 698
       },
       "signature": "fn write_claude_layer_creates_files()"
     },
@@ -208,8 +208,8 @@
       "kind": "function",
       "visibility": "private",
       "span": {
-        "start_line": 675,
-        "end_line": 679
+        "start_line": 701,
+        "end_line": 705
       },
       "signature": "fn first_sentence_extraction()"
     }
@@ -228,7 +228,7 @@
       "kind": "use"
     },
     {
-      "source": "codex_parser::types::{ModuleIndex, SymbolKind, TreeEntry, TreeStructure, TreeVersion, Visibility}",
+      "source": "codex_parser::types::{\n    ModuleIndex, SymbolKind, TreeEntry, TreeStructure, TreeVersion, Visibility,\n}",
       "kind": "use"
     },
     {

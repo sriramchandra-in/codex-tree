@@ -1,7 +1,7 @@
 {
   "path": "crates/codex-parser/tests/integration.rs",
   "language": "rust",
-  "content_hash": "sha256:e726f52ce359a57e39d854f9d1d8bd54f1a5fcae853e3cd610df60c507a81a90",
+  "content_hash": "sha256:dc9f4cab32029164a2e36cdde284360384a0e3dfbb36b55faa4c17d19a1388b8",
   "symbols": [
     {
       "name": "test_self_parse",
@@ -9,7 +9,7 @@
       "visibility": "private",
       "span": {
         "start_line": 12,
-        "end_line": 69
+        "end_line": 66
       },
       "signature": "fn test_self_parse()"
     },
@@ -18,8 +18,8 @@
       "kind": "function",
       "visibility": "private",
       "span": {
-        "start_line": 76,
-        "end_line": 116
+        "start_line": 73,
+        "end_line": 113
       },
       "signature": "fn test_self_parse_full_repo()"
     }
