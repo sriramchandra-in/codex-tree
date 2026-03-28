@@ -64,6 +64,7 @@ pub fn run(path: &Path, options: InitOptions, _languages: Option<&str>) -> Resul
         "node_modules",
         "__pycache__",
         ".venv",
+        "venv",
         "vendor",
         "dist",
         "build",

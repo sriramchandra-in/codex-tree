@@ -63,6 +63,7 @@ pub fn run(
         "node_modules",
         "__pycache__",
         ".venv",
+        "venv",
         "vendor",
         "dist",
         "build",

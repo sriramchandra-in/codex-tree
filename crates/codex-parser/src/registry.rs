@@ -62,6 +62,7 @@ impl ParserRegistry {
     pub fn with_defaults() -> Self {
         let mut registry = Self::new();
         registry.register(Box::new(crate::languages::rust::RustAdapter));
+        registry.register(Box::new(crate::languages::python::PythonAdapter));
         registry
     }
 }
