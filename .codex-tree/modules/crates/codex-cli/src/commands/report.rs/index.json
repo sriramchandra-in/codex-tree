@@ -1,7 +1,7 @@
 {
   "path": "crates/codex-cli/src/commands/report.rs",
   "language": "rust",
-  "content_hash": "sha256:05f3b0005861874b4608cc08f7a23f680ffb6d47a4aed7f60b7441605eb05df1",
+  "content_hash": "sha256:7ede0a409bf9ae6005c831cdc40eca88bc0a27f795055615089a722451b17d4a",
   "symbols": [
     {
       "name": "Report",
@@ -29,7 +29,7 @@
       "visibility": "private",
       "span": {
         "start_line": 36,
-        "end_line": 45
+        "end_line": 55
       },
       "signature": "struct TokenEstimate"
     },
@@ -38,29 +38,50 @@
       "kind": "function",
       "visibility": "public",
       "span": {
-        "start_line": 49,
-        "end_line": 157
+        "start_line": 59,
+        "end_line": 199
       },
       "signature": "pub fn run(path: &Path, format: &str, _benchmark: bool, _verbose: bool, quiet: bool) -> Result<()>"
+    },
+    {
+      "name": "print_strategy_row",
+      "kind": "function",
+      "visibility": "private",
+      "span": {
+        "start_line": 201,
+        "end_line": 213
+      },
+      "signature": "fn print_strategy_row(label: &str, tokens: usize, raw_tokens: usize)"
     },
     {
       "name": "estimate_tokens",
       "kind": "function",
       "visibility": "private",
       "span": {
-        "start_line": 165,
-        "end_line": 211
+        "start_line": 221,
+        "end_line": 288
       },
       "signature": "fn estimate_tokens(\n    git_root: &Path,\n    codex_tree_dir: &Path,\n    modules: &[ModuleIndex],\n) -> Result<TokenEstimate>",
       "doc_comment": "/// Estimate token counts for raw source vs tree representations.\n\n///\n\n/// The scaffolding reads all file sizes and computes the byte totals.\n\n/// The core decision is how to convert bytes → tokens for each content type.\n"
+    },
+    {
+      "name": "cursor_digest_token_delta",
+      "kind": "function",
+      "visibility": "private",
+      "span": {
+        "start_line": 291,
+        "end_line": 303
+      },
+      "signature": "fn cursor_digest_token_delta(codex_tree_dir: &Path) -> (Option<String>, usize)",
+      "doc_comment": "/// Prefer `cursor/l2.md`, then `l1.md`; return (relative path for display, extra tokens).\n"
     },
     {
       "name": "ContentKind",
       "kind": "enum",
       "visibility": "private",
       "span": {
-        "start_line": 215,
-        "end_line": 218
+        "start_line": 307,
+        "end_line": 311
       },
       "signature": "enum ContentKind"
     },
@@ -69,19 +90,19 @@
       "kind": "function",
       "visibility": "private",
       "span": {
-        "start_line": 232,
-        "end_line": 238
+        "start_line": 327,
+        "end_line": 334
       },
       "signature": "fn bytes_to_tokens(bytes: usize, kind: ContentKind) -> usize",
-      "doc_comment": "/// Convert a byte count to an estimated token count using content-aware ratios.\n\n///\n\n/// BPE tokenizers (like Claude's) split text into subword units. The average\n\n/// bytes-per-token ratio varies by content type:\n\n///\n\n/// - **Code** (~3.5 bytes/token): identifiers get split at camelCase/snake_case\n\n///   boundaries, but keywords and operators are usually single tokens. Indentation\n\n///   whitespace compresses well (one token per indent level regardless of spaces).\n\n///\n\n/// - **JSON** (~3.0 bytes/token): more token-dense because of repeated structural\n\n///   characters (`\"`, `{`, `}`, `:`, `,`) that each consume a token, and quoted\n\n///   keys that tokenize less efficiently than bare identifiers.\n"
+      "doc_comment": "/// Convert a byte count to an estimated token count using content-aware ratios.\n\n///\n\n/// BPE tokenizers (like Claude's) split text into subword units. The average\n\n/// bytes-per-token ratio varies by content type:\n\n///\n\n/// - **Code** (~3.5 bytes/token): identifiers get split at camelCase/snake_case\n\n///   boundaries, but keywords and operators are usually single tokens. Indentation\n\n///   whitespace compresses well (one token per indent level regardless of spaces).\n\n///\n\n/// - **JSON** (~3.0 bytes/token): more token-dense because of repeated structural\n\n///   characters (`\"`, `{`, `}`, `:`, `,`) that each consume a token, and quoted\n\n///   keys that tokenize less efficiently than bare identifiers.\n\n///\n\n/// - **Markdown** (~3.3 bytes/token): mix of prose, headings, and code fences.\n"
     },
     {
       "name": "format_number",
       "kind": "function",
       "visibility": "private",
       "span": {
-        "start_line": 242,
-        "end_line": 250
+        "start_line": 338,
+        "end_line": 346
       },
       "signature": "fn format_number(n: usize) -> String"
     }

@@ -1,0 +1,38 @@
+{
+  "sequence": 3,
+  "timestamp": "2026-03-28T14:03:56Z",
+  "source_commit": "ed47d64478d0f1315c137772e5bc90239f4cde5b",
+  "changed_files": [
+    ".codex-tree/cursor/l1.md",
+    ".codex-tree/cursor/l2.md",
+    ".codex-tree/cursor/l3.md",
+    ".codex-tree/deltas/2.json",
+    ".codex-tree/modules/crates/codex-analyzer/src/cursor_layer.rs/index.json",
+    ".codex-tree/modules/crates/codex-analyzer/src/lib.rs/index.json",
+    ".codex-tree/modules/crates/codex-cli/src/commands/init.rs/index.json",
+    ".codex-tree/modules/crates/codex-cli/src/main.rs/index.json",
+    ".codex-tree/version.json",
+    ".cursor/rules/model-routing.mdc",
+    "crates/codex-cli/src/commands/report.rs",
+    "specs/cli-interface.md"
+  ],
+  "operations": [
+    {
+      "op": "modify",
+      "path": "crates/codex-cli/src/commands/report.rs",
+      "symbols_added": [
+        "cursor_digest_token_delta",
+        "print_strategy_row"
+      ],
+      "symbols_removed": [],
+      "symbols_modified": [
+        "ContentKind",
+        "TokenEstimate",
+        "bytes_to_tokens",
+        "estimate_tokens",
+        "format_number",
+        "run"
+      ]
+    }
+  ]
+}
