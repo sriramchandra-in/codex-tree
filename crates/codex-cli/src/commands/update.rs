@@ -22,7 +22,7 @@ use codex_parser::types::{Delta, DeltaOperation, ModuleIndex, TreeStructure, Tre
 use crate::compaction::{calculate_delta_size, compact, should_compact};
 use crate::error::{CliError, Result};
 use crate::git::{get_changed_files, get_commit_date, get_head_commit, get_uncommitted_changes};
-use crate::utils::{find_git_root, read_all_modules, current_utc_iso8601};
+use crate::utils::{current_utc_iso8601, find_git_root, read_all_modules};
 
 // ── Public entry point ────────────────────────────────────────────────────────
 
@@ -126,7 +126,10 @@ pub fn run(
         };
 
         // Check whether we have an old module index on disk.
-        let old_index_path = codex_tree_dir.join("modules").join(rel_path).join("index.json");
+        let old_index_path = codex_tree_dir
+            .join("modules")
+            .join(rel_path)
+            .join("index.json");
 
         if old_index_path.exists() {
             // Modified file: diff old vs new.
@@ -204,10 +207,7 @@ pub fn run(
     let intent_output = if !no_intent {
         // For update, read the full tree to pass to the analyzer.
         let all_modules = read_all_modules(&codex_tree_dir)?;
-        match run_intent_analysis(&codex_tree_dir, &all_modules, quiet) {
-            Ok(output) => Some(output),
-            Err(_) => None,
-        }
+        run_intent_analysis(&codex_tree_dir, &all_modules, quiet).ok()
     } else {
         None
     };
@@ -216,7 +216,14 @@ pub fn run(
     if !no_claude {
         if let Ok(tree_json) = fs::read_to_string(codex_tree_dir.join("tree.json")) {
             if let Ok(tree) = serde_json::from_str::<TreeStructure>(&tree_json) {
-                generate_claude_layer(&codex_tree_dir, &tree, &read_all_modules(&codex_tree_dir)?, &version, intent_output.as_ref(), quiet);
+                generate_claude_layer(
+                    &codex_tree_dir,
+                    &tree,
+                    &read_all_modules(&codex_tree_dir)?,
+                    &version,
+                    intent_output.as_ref(),
+                    quiet,
+                );
             }
         }
     }
@@ -240,13 +247,9 @@ pub fn run(
             "Files changed:".dimmed(),
             changed_files.len()
         );
-        println!(
-            "  {:<22} {}",
-            "Delta sequence:".dimmed(),
-            next_sequence
-        );
+        println!("  {:<22} {}", "Delta sequence:".dimmed(), next_sequence);
         if did_compact {
-            println!("  {:<22} {}", "Compaction:".dimmed(), "ran (thresholds met)");
+            println!("  {:<22} ran (thresholds met)", "Compaction:".dimmed());
         }
 
         if verbose {
@@ -288,9 +291,7 @@ fn detect_changed_by_hash(codex_tree_dir: &Path, git_root: &Path) -> Result<Vec<
     }
 
     for entry in walkdir::WalkDir::new(&modules_dir) {
-        let entry = entry.map_err(|e| {
-            std::io::Error::new(std::io::ErrorKind::Other, e.to_string())
-        })?;
+        let entry = entry.map_err(|e| std::io::Error::other(e.to_string()))?;
 
         if !entry.file_type().is_file() {
             continue;
@@ -393,4 +394,3 @@ fn generate_claude_layer(
         }
     }
 }
-

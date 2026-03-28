@@ -187,11 +187,7 @@ pub fn run(
             );
         }
         println!();
-        println!(
-            "  {:<22} {}",
-            "Tree version:".dimmed(),
-            report.tree_version
-        );
+        println!("  {:<22} {}", "Tree version:".dimmed(), report.tree_version);
         if let Some(ref sc) = report.source_commit {
             println!(
                 "  {:<22} {}",
@@ -205,17 +201,9 @@ pub fn run(
             &report.head_commit[..report.head_commit.len().min(12)]
         );
         if let Some(behind) = report.commits_behind {
-            println!(
-                "  {:<22} {}",
-                "Commits behind:".dimmed(),
-                behind
-            );
+            println!("  {:<22} {}", "Commits behind:".dimmed(), behind);
         }
-        println!(
-            "  {:<22} {}",
-            "Clean files:".dimmed(),
-            report.clean_files
-        );
+        println!("  {:<22} {}", "Clean files:".dimmed(), report.clean_files);
         println!(
             "  {:<22} {}",
             "Stale files:".dimmed(),

@@ -8,7 +8,7 @@ use codex_parser::serializer::{compute_stats, create_initial_version, write_tree
 
 use crate::error::{CliError, Result};
 use crate::git;
-use crate::utils::{find_git_root, format_size, calculate_dir_size};
+use crate::utils::{calculate_dir_size, find_git_root, format_size};
 
 // ── Public entry point ────────────────────────────────────────────────────────
 
@@ -105,17 +105,21 @@ pub fn run(
 
     // ── 10a. Intent layer ────────────────────────────────────────────────
     let intent_output = if !no_intent {
-        match run_intent_analysis(&output_dir, &modules, quiet) {
-            Ok(output) => Some(output),
-            Err(_) => None,
-        }
+        run_intent_analysis(&output_dir, &modules, quiet).ok()
     } else {
         None
     };
 
     // ── 10b. Claude optimization layer ───────────────────────────────────
     if !no_claude {
-        generate_claude_layer(&output_dir, &tree, &modules, &version, intent_output.as_ref(), quiet);
+        generate_claude_layer(
+            &output_dir,
+            &tree,
+            &modules,
+            &version,
+            intent_output.as_ref(),
+            quiet,
+        );
     }
 
     // ── 11. Compute on-disk size ──────────────────────────────────────────────
@@ -124,18 +128,18 @@ pub fn run(
     // ── 12. Summary output ────────────────────────────────────────────────────
     if !quiet {
         println!();
-        println!("  {} {}", "codex-tree init".green().bold(), "✓".green().bold());
+        println!(
+            "  {} {}",
+            "codex-tree init".green().bold(),
+            "✓".green().bold()
+        );
         println!();
         println!(
             "  {:<18} {}",
             "Tree version:".dimmed(),
             version.tree_version
         );
-        println!(
-            "  {:<18} {}",
-            "Files parsed:".dimmed(),
-            modules.len()
-        );
+        println!("  {:<18} {}", "Files parsed:".dimmed(), modules.len());
         println!(
             "  {:<18} {}",
             "Symbols found:".dimmed(),
@@ -146,16 +150,8 @@ pub fn run(
             "Languages:".dimmed(),
             stats.languages.join(", ")
         );
-        println!(
-            "  {:<18} {}",
-            "Tree size:".dimmed(),
-            format_size(tree_size)
-        );
-        println!(
-            "  {:<18} {}",
-            "Location:".dimmed(),
-            output_dir.display()
-        );
+        println!("  {:<18} {}", "Tree size:".dimmed(), format_size(tree_size));
+        println!("  {:<18} {}", "Location:".dimmed(), output_dir.display());
         println!();
 
         if verbose {
@@ -240,4 +236,3 @@ fn generate_claude_layer(
         }
     }
 }
-

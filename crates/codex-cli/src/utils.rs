@@ -30,9 +30,7 @@ pub fn read_all_modules(codex_tree_dir: &Path) -> Result<Vec<ModuleIndex>> {
     }
 
     for entry in walkdir::WalkDir::new(&modules_dir) {
-        let entry = entry.map_err(|e| {
-            std::io::Error::new(std::io::ErrorKind::Other, e.to_string())
-        })?;
+        let entry = entry.map_err(|e| std::io::Error::other(e.to_string()))?;
 
         if !entry.file_type().is_file() || entry.file_name() != "index.json" {
             continue;
@@ -64,9 +62,7 @@ pub fn format_size(bytes: u64) -> String {
 pub fn calculate_dir_size(path: &Path) -> std::io::Result<u64> {
     let mut total: u64 = 0;
     for entry in walkdir::WalkDir::new(path) {
-        let entry = entry.map_err(|e| {
-            std::io::Error::new(std::io::ErrorKind::Other, e.to_string())
-        })?;
+        let entry = entry.map_err(|e| std::io::Error::other(e.to_string()))?;
         if entry.file_type().is_file() {
             total += entry.metadata()?.len();
         }

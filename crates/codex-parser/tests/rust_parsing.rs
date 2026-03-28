@@ -156,7 +156,9 @@ fn test_parse_imports() {
     let sources: Vec<&str> = module.imports.iter().map(|i| i.source.as_str()).collect();
 
     assert!(
-        sources.iter().any(|s| s.contains("std::collections::HashMap")),
+        sources
+            .iter()
+            .any(|s| s.contains("std::collections::HashMap")),
         "expected 'std::collections::HashMap' import, got: {:?}",
         sources
     );

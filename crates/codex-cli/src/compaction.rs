@@ -107,12 +107,7 @@ pub fn compact(codex_tree_dir: &Path) -> Result<()> {
     let deltas_dir = codex_tree_dir.join("deltas");
     for entry in fs::read_dir(&deltas_dir)? {
         let entry = entry?;
-        if entry
-            .path()
-            .extension()
-            .and_then(|e| e.to_str())
-            == Some("json")
-        {
+        if entry.path().extension().and_then(|e| e.to_str()) == Some("json") {
             fs::remove_file(entry.path())?;
         }
     }

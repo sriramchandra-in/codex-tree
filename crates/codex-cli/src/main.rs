@@ -161,7 +161,7 @@ fn main() {
             *fail_if_stale,
             cli.verbose,
             cli.quiet,
-        )
+        ),
     };
 
     if let Err(e) = result {

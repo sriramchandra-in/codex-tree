@@ -144,10 +144,7 @@ pub fn intent_user_prompt(modules: &[ModuleIndex]) -> String {
 pub fn format_module_summary(module: &ModuleIndex) -> String {
     let mut out = String::new();
 
-    out.push_str(&format!(
-        "## {} [{}]\n",
-        module.path, module.language
-    ));
+    out.push_str(&format!("## {} [{}]\n", module.path, module.language));
 
     // ── Imports ───────────────────────────────────────────────────────────────
     if !module.imports.is_empty() {
@@ -173,7 +170,10 @@ pub fn format_module_summary(module: &ModuleIndex) -> String {
             let kind = format!("{:?}", sym.kind).to_lowercase();
 
             // Signature line.
-            out.push_str(&format!("  {}{} {}: {}\n", vis, kind, sym.name, sym.signature));
+            out.push_str(&format!(
+                "  {}{} {}: {}\n",
+                vis, kind, sym.name, sym.signature
+            ));
 
             // Doc comment (trimmed, one line max for brevity).
             if let Some(doc) = &sym.doc_comment {

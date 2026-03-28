@@ -20,10 +20,7 @@ use crate::types::{Export, ModuleIndex, TreeEntry, TreeStructure, Visibility};
 ///   5. Hash the raw bytes for change-detection.
 pub fn parse_file(path: &Path, source: &[u8], registry: &ParserRegistry) -> Result<ModuleIndex> {
     // ── 1. Extension lookup ──────────────────────────────────────────────────
-    let ext = path
-        .extension()
-        .and_then(|e| e.to_str())
-        .unwrap_or("");
+    let ext = path.extension().and_then(|e| e.to_str()).unwrap_or("");
 
     let adapter = registry
         .get_adapter(ext)
@@ -46,9 +43,7 @@ pub fn parse_file(path: &Path, source: &[u8], registry: &ParserRegistry) -> Resu
     // ── 4. Exports from public symbols ────────────────────────────────────────
     let exports: Vec<Export> = symbols
         .iter()
-        .filter(|s| {
-            matches!(s.visibility, Visibility::Public | Visibility::PublicCrate)
-        })
+        .filter(|s| matches!(s.visibility, Visibility::Public | Visibility::PublicCrate))
         .map(|s| Export {
             name: s.name.clone(),
             kind: s.kind.clone(),
@@ -59,9 +54,7 @@ pub fn parse_file(path: &Path, source: &[u8], registry: &ParserRegistry) -> Resu
     let content_hash = compute_hash(source);
 
     // ── 6. Normalise the stored path to forward slashes ──────────────────────
-    let path_str = path
-        .to_string_lossy()
-        .replace('\\', "/");
+    let path_str = path.to_string_lossy().replace('\\', "/");
 
     Ok(ModuleIndex {
         path: path_str,
@@ -90,9 +83,7 @@ pub fn parse_directory(
 
     // ── Walk the tree ────────────────────────────────────────────────────────
     for entry in WalkDir::new(root).sort_by_file_name() {
-        let entry = entry.map_err(|e| {
-            std::io::Error::new(std::io::ErrorKind::Other, e.to_string())
-        })?;
+        let entry = entry.map_err(|e| std::io::Error::other(e.to_string()))?;
 
         // Skip excluded directories.
         if entry.file_type().is_dir() {
@@ -192,12 +183,7 @@ fn build_tree_structure(root: &Path, modules: &[ModuleIndex]) -> TreeStructure {
             // Count lines by counting newlines in the source on disk; we don't
             // re-read the file here — use symbol span heuristic instead.
             // A simpler proxy: end line of the last symbol, or 0 if no symbols.
-            let line_count = m
-                .symbols
-                .iter()
-                .map(|s| s.span.end_line)
-                .max()
-                .unwrap_or(0);
+            let line_count = m.symbols.iter().map(|s| s.span.end_line).max().unwrap_or(0);
 
             TreeEntry::File {
                 path: m.path.clone(),
@@ -235,16 +221,9 @@ fn build_tree_structure(root: &Path, modules: &[ModuleIndex]) -> TreeStructure {
         // Aggregate totals across *all* files anywhere under this directory.
         let (total_symbol_count, total_line_count) = modules
             .iter()
-            .filter(|m| {
-                m.path.starts_with(&format!("{}/", dir)) || m.path == *dir
-            })
+            .filter(|m| m.path.starts_with(&format!("{}/", dir)) || m.path == *dir)
             .fold((0usize, 0usize), |(syms, lines), m| {
-                let file_lines = m
-                    .symbols
-                    .iter()
-                    .map(|s| s.span.end_line)
-                    .max()
-                    .unwrap_or(0);
+                let file_lines = m.symbols.iter().map(|s| s.span.end_line).max().unwrap_or(0);
                 (syms + m.symbols.len(), lines + file_lines)
             });
 

@@ -82,8 +82,8 @@ impl ClaudeClient {
     pub fn from_env() -> Result<Self> {
         let api_key = env::var("ANTHROPIC_API_KEY").map_err(|_| AnalyzerError::ApiKeyMissing)?;
 
-        let model = env::var("CODEX_TREE_MODEL")
-            .unwrap_or_else(|_| "claude-sonnet-4-20250514".to_string());
+        let model =
+            env::var("CODEX_TREE_MODEL").unwrap_or_else(|_| "claude-sonnet-4-20250514".to_string());
 
         let budget_limit = env::var("CODEX_TREE_BUDGET")
             .ok()
@@ -191,9 +191,7 @@ impl ClaudeClient {
             .find(|b| b.content_type == "text")
             .and_then(|b| b.text)
             .ok_or_else(|| {
-                AnalyzerError::ResponseParse(
-                    "API response contained no text block".to_string(),
-                )
+                AnalyzerError::ResponseParse("API response contained no text block".to_string())
             })?;
 
         Ok(text)

@@ -15,10 +15,8 @@ use crate::types::{DeltaOperation, ModuleIndex};
 /// - **Modified** — names present in both but with a different `signature`,
 ///   `span.start_line`, or `span.end_line`.
 pub fn diff_modules(old: &ModuleIndex, new: &ModuleIndex) -> DeltaOperation {
-    let old_symbol_names: HashSet<&str> =
-        old.symbols.iter().map(|s| s.name.as_str()).collect();
-    let new_symbol_names: HashSet<&str> =
-        new.symbols.iter().map(|s| s.name.as_str()).collect();
+    let old_symbol_names: HashSet<&str> = old.symbols.iter().map(|s| s.name.as_str()).collect();
+    let new_symbol_names: HashSet<&str> = new.symbols.iter().map(|s| s.name.as_str()).collect();
 
     let mut symbols_added: Vec<String> = new_symbol_names
         .difference(&old_symbol_names)
@@ -139,7 +137,9 @@ mod tests {
         let new = make_module("src/lib.rs", vec![make_symbol("foo", "pub fn foo()", 1, 5)]);
 
         match diff_modules(&old, &new) {
-            DeltaOperation::Modify { symbols_removed, .. } => {
+            DeltaOperation::Modify {
+                symbols_removed, ..
+            } => {
                 assert_eq!(symbols_removed, vec!["bar"]);
             }
             _ => panic!("expected Modify"),
@@ -148,10 +148,7 @@ mod tests {
 
     #[test]
     fn test_symbol_modified_signature() {
-        let old = make_module(
-            "src/lib.rs",
-            vec![make_symbol("foo", "pub fn foo()", 1, 5)],
-        );
+        let old = make_module("src/lib.rs", vec![make_symbol("foo", "pub fn foo()", 1, 5)]);
         let new = make_module(
             "src/lib.rs",
             vec![make_symbol("foo", "pub fn foo(x: i32) -> bool", 1, 5)],

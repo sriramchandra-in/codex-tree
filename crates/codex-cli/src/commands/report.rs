@@ -10,7 +10,7 @@ use colored::Colorize;
 use codex_parser::types::{ModuleIndex, TreeVersion};
 
 use crate::error::{CliError, Result};
-use crate::utils::{find_git_root, read_all_modules, format_size, calculate_dir_size};
+use crate::utils::{calculate_dir_size, find_git_root, format_size, read_all_modules};
 
 // ── Output types ─────────────────────────────────────────────────────────────
 
@@ -46,13 +46,7 @@ struct TokenEstimate {
 
 // ── Public entry point ───────────────────────────────────────────────────────
 
-pub fn run(
-    path: &Path,
-    format: &str,
-    _benchmark: bool,
-    _verbose: bool,
-    quiet: bool,
-) -> Result<()> {
+pub fn run(path: &Path, format: &str, _benchmark: bool, _verbose: bool, quiet: bool) -> Result<()> {
     let abs_path = fs::canonicalize(path).map_err(|e| {
         std::io::Error::new(
             e.kind(),
@@ -102,16 +96,8 @@ pub fn run(
         println!();
         println!("  {}", "codex-tree report".green().bold());
         println!();
-        println!(
-            "  {:<26} {}",
-            "Tree version:".dimmed(),
-            report.tree_version
-        );
-        println!(
-            "  {:<26} {}",
-            "Generated at:".dimmed(),
-            report.generated_at
-        );
+        println!("  {:<26} {}", "Tree version:".dimmed(), report.tree_version);
+        println!("  {:<26} {}", "Generated at:".dimmed(), report.generated_at);
         if let Some(ref sc) = report.source_commit {
             println!(
                 "  {:<26} {}",
@@ -121,11 +107,7 @@ pub fn run(
         }
         println!();
         println!("  {}", "Statistics".bold());
-        println!(
-            "  {:<26} {}",
-            "  Files:".dimmed(),
-            report.stats.total_files
-        );
+        println!("  {:<26} {}", "  Files:".dimmed(), report.stats.total_files);
         println!(
             "  {:<26} {}",
             "  Symbols:".dimmed(),

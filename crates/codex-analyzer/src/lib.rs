@@ -10,11 +10,11 @@
 //   analyzer     — Main orchestration engine
 //   claude_layer — Claude-optimised markdown layer generation (L1/L2/L3)
 
-pub mod error;
-pub mod types;
+pub mod analyzer;
+pub mod cache;
+pub mod claude_layer;
 pub mod client;
+pub mod error;
 pub mod prompts;
 pub mod response;
-pub mod cache;
-pub mod analyzer;
-pub mod claude_layer;
+pub mod types;

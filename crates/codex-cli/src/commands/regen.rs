@@ -16,7 +16,7 @@ use codex_parser::types::{TreeVersion, TreeVersionNumber};
 
 use crate::error::{CliError, Result};
 use crate::git;
-use crate::utils::{find_git_root, format_size, calculate_dir_size, current_utc_iso8601};
+use crate::utils::{calculate_dir_size, current_utc_iso8601, find_git_root, format_size};
 
 pub fn run(
     path: &Path,
@@ -105,17 +105,21 @@ pub fn run(
 
     // ── 6a. Intent layer ─────────────────────────────────────────────────
     let intent_output = if !no_intent {
-        match run_intent_analysis(&codex_tree_dir, &modules, quiet) {
-            Ok(output) => Some(output),
-            Err(_) => None,
-        }
+        run_intent_analysis(&codex_tree_dir, &modules, quiet).ok()
     } else {
         None
     };
 
     // ── 6b. Claude optimization layer ────────────────────────────────────
     if !no_claude {
-        generate_claude_layer(&codex_tree_dir, &tree, &modules, &version, intent_output.as_ref(), quiet);
+        generate_claude_layer(
+            &codex_tree_dir,
+            &tree,
+            &modules,
+            &version,
+            intent_output.as_ref(),
+            quiet,
+        );
     }
 
     // ── 7. Summary ────────────────────────────────────────────────────────────
@@ -134,11 +138,7 @@ pub fn run(
             version.tree_version,
             next_generation
         );
-        println!(
-            "  {:<18} {}",
-            "Files parsed:".dimmed(),
-            modules.len()
-        );
+        println!("  {:<18} {}", "Files parsed:".dimmed(), modules.len());
         println!(
             "  {:<18} {}",
             "Symbols found:".dimmed(),
@@ -149,11 +149,7 @@ pub fn run(
             "Languages:".dimmed(),
             version.stats.languages.join(", ")
         );
-        println!(
-            "  {:<18} {}",
-            "Tree size:".dimmed(),
-            format_size(tree_size)
-        );
+        println!("  {:<18} {}", "Tree size:".dimmed(), format_size(tree_size));
 
         if verbose {
             println!();
@@ -238,4 +234,3 @@ fn generate_claude_layer(
         }
     }
 }
-

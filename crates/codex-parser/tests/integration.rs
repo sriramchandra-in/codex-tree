@@ -62,10 +62,7 @@ fn test_self_parse() {
         modules.len(),
         total_symbols
     );
-    println!(
-        "[test_self_parse] tree entries: {}",
-        tree.entries.len()
-    );
+    println!("[test_self_parse] tree entries: {}", tree.entries.len());
 }
 
 /// Parse the full codex-tree workspace root.

@@ -67,7 +67,11 @@ pub fn load_cached(codex_tree_dir: &Path, key: &str) -> Option<IntentOutput> {
 /// cache write errors (a failed write just means next run is a cache miss).
 ///
 /// Path: `{codex_tree_dir}/intent/.cache/{key}.json`
-pub fn save_to_cache(codex_tree_dir: &Path, key: &str, output: &IntentOutput) -> std::io::Result<()> {
+pub fn save_to_cache(
+    codex_tree_dir: &Path,
+    key: &str,
+    output: &IntentOutput,
+) -> std::io::Result<()> {
     let path = cache_path(codex_tree_dir, key);
 
     // Ensure parent directory exists.
