@@ -141,38 +141,17 @@ Options:
 ```
 
 **Default output (text):**
-```
-codex-tree report
-═══════════════════════════════════════════════
+Prints tree statistics plus **context strategies** (estimated tokens vs reading all indexed raw source):
 
-  Tree version:          1.3
-  Format version:        0.1.0
-  Last updated:          2026-03-27T14:30:00Z
-  Source commit:         abc123d
+1. **Nothing (raw source only)** — token estimate for reading every parsed source file with no codex-tree context (baseline).
+2. **Just tree (JSON indexes)** — `tree.json` + all `modules/**/index.json` (structural AST layer only).
+3. **Tree + Cursor** — just tree plus `.codex-tree/cursor/l2.md` if present, else `cursor/l1.md`; if no cursor digest exists, matches “just tree”.
 
-  Codebase:
-    Files:               42
-    Lines of code:       8,420
-    Languages:           rust, python
+A **Detail** section still lists modules-only tokens, `tree.json`-only tokens, and legacy savings (modules JSON vs raw).
 
-  Tree:
-    Symbols indexed:     347
-    Tree size:           12.4 KB
-    Raw source size:     340 KB
-    Compression ratio:   27:1
+**JSON output (`--format json`):** `token_estimate` includes `raw_source_tokens`, `just_tree_tokens`, `tree_plus_cursor_tokens`, `cursor_digest_used` (path or null), `savings_just_tree`, `savings_tree_plus_cursor`, plus the existing `tree_tokens`, `tree_l1_tokens`, and `savings_ratio` fields.
 
-  Staleness:
-    Clean files:         40
-    Stale files:         2
-    Missing files:       0
-
-  Estimated savings:
-    Tokens (without):    ~22,000
-    Tokens (with L2):    ~4,000
-    Savings:             ~82%
-
-═══════════════════════════════════════════════
-```
+Token counts use byte-size heuristics (code vs JSON vs markdown bytes-per-token ratios); they are estimates, not tokenizer-exact.
 
 **Benchmark mode (`--benchmark`):**
 Runs an actual AI session comparing token usage with and without the tree:

@@ -34,13 +34,23 @@ struct ReportStats {
 
 #[derive(serde::Serialize)]
 struct TokenEstimate {
-    /// Estimated tokens to read all raw source files.
+    /// Estimated tokens to read all raw source files (no codex-tree).
     raw_source_tokens: usize,
-    /// Estimated tokens to read the full tree (all module indexes).
+    /// `tree.json` + all `modules/**/index.json` (structural tree only).
+    just_tree_tokens: usize,
+    /// Structural tree + `.codex-tree/cursor/l2.md` (typical Cursor attach).
+    tree_plus_cursor_tokens: usize,
+    /// Which digest file was added for `tree_plus_cursor_tokens`, if any.
+    cursor_digest_used: Option<String>,
+    /// Estimated tokens for all module indexes only (legacy / L3 indexes).
     tree_tokens: usize,
-    /// Estimated tokens for the L1 summary (tree.json only).
+    /// Estimated tokens for `tree.json` only (overview).
     tree_l1_tokens: usize,
-    /// Savings ratio: 1 - (tree_tokens / raw_source_tokens).
+    /// Savings: 1 - (just_tree_tokens / raw_source_tokens).
+    savings_just_tree: f64,
+    /// Savings: 1 - (tree_plus_cursor_tokens / raw_source_tokens).
+    savings_tree_plus_cursor: f64,
+    /// Legacy: modules-only vs raw (same as older `savings_ratio`).
     savings_ratio: f64,
 }
 
@@ -129,31 +139,77 @@ pub fn run(path: &Path, format: &str, _benchmark: bool, _verbose: bool, quiet: b
             format_size(report.stats.tree_size_bytes)
         );
         println!();
-        println!("  {}", "Token Savings Estimate".bold());
-        println!(
-            "  {:<26} {} tokens",
-            "  Raw source:".dimmed(),
-            format_number(report.token_estimate.raw_source_tokens)
+        println!("  {}", "Context strategies (estimated tokens)".bold());
+        let raw = report.token_estimate.raw_source_tokens.max(1);
+        print_strategy_row(
+            "  Nothing (raw source only)",
+            report.token_estimate.raw_source_tokens,
+            raw,
         );
+        print_strategy_row(
+            "  Just tree (JSON indexes)",
+            report.token_estimate.just_tree_tokens,
+            raw,
+        );
+        let tree_cursor_label = match &report.token_estimate.cursor_digest_used {
+            Some(p) => format!("  Tree + Cursor (JSON + {})", p),
+            None => "  Tree + Cursor (no digest on disk)".to_string(),
+        };
+        print_strategy_row(
+            &tree_cursor_label,
+            report.token_estimate.tree_plus_cursor_tokens,
+            raw,
+        );
+        if let Some(ref path) = report.token_estimate.cursor_digest_used {
+            println!(
+                "  {:<40} {}",
+                "".dimmed(),
+                format!("(digest: {})", path).dimmed()
+            );
+        } else if report.token_estimate.tree_plus_cursor_tokens
+            == report.token_estimate.just_tree_tokens
+        {
+            println!(
+                "  {:<40} {}",
+                "".dimmed(),
+                "(no cursor/l2.md — same as tree-only)".dimmed()
+            );
+        }
+        println!();
+        println!("  {}", "Detail (bytes→tokens heuristics)".bold());
         println!(
             "  {:<26} {} tokens",
-            "  Full tree (L3):".dimmed(),
+            "  Modules JSON only:".dimmed(),
             format_number(report.token_estimate.tree_tokens)
         );
         println!(
             "  {:<26} {} tokens",
-            "  Tree overview (L1):".dimmed(),
+            "  tree.json only:".dimmed(),
             format_number(report.token_estimate.tree_l1_tokens)
         );
         println!(
             "  {:<26} {:.0}%",
-            "  Savings (L3 vs raw):".dimmed(),
+            "  Savings (modules vs raw):".dimmed(),
             report.token_estimate.savings_ratio * 100.0
         );
         println!();
     }
 
     Ok(())
+}
+
+fn print_strategy_row(label: &str, tokens: usize, raw_tokens: usize) {
+    let pct = if raw_tokens > 0 {
+        (1.0 - (tokens as f64 / raw_tokens as f64)) * 100.0
+    } else {
+        0.0
+    };
+    println!(
+        "  {:<38} {:>8} tokens  {}",
+        label.dimmed(),
+        format_number(tokens),
+        format!("{:.0}% vs raw", pct).dimmed(),
+    );
 }
 
 // ── Token estimation ─────────────────────────────────────────────────────────
@@ -196,18 +252,54 @@ fn estimate_tokens(
     let tree_tokens = bytes_to_tokens(module_json_bytes, ContentKind::Json);
     let tree_l1_tokens = bytes_to_tokens(tree_json_size, ContentKind::Json);
 
+    let just_tree_bytes = tree_json_size.saturating_add(module_json_bytes);
+    let just_tree_tokens = bytes_to_tokens(just_tree_bytes, ContentKind::Json);
+
+    let (cursor_digest_used, cursor_extra_tokens) = cursor_digest_token_delta(codex_tree_dir);
+    let tree_plus_cursor_tokens = just_tree_tokens.saturating_add(cursor_extra_tokens);
+
     let savings_ratio = if raw_source_tokens > 0 {
         1.0 - (tree_tokens as f64 / raw_source_tokens as f64)
+    } else {
+        0.0
+    };
+    let savings_just_tree = if raw_source_tokens > 0 {
+        1.0 - (just_tree_tokens as f64 / raw_source_tokens as f64)
+    } else {
+        0.0
+    };
+    let savings_tree_plus_cursor = if raw_source_tokens > 0 {
+        1.0 - (tree_plus_cursor_tokens as f64 / raw_source_tokens as f64)
     } else {
         0.0
     };
 
     Ok(TokenEstimate {
         raw_source_tokens,
+        just_tree_tokens,
+        tree_plus_cursor_tokens,
+        cursor_digest_used,
         tree_tokens,
         tree_l1_tokens,
+        savings_just_tree,
+        savings_tree_plus_cursor,
         savings_ratio,
     })
+}
+
+/// Prefer `cursor/l2.md`, then `l1.md`; return (relative path for display, extra tokens).
+fn cursor_digest_token_delta(codex_tree_dir: &Path) -> (Option<String>, usize) {
+    for rel in ["cursor/l2.md", "cursor/l1.md"] {
+        let p = codex_tree_dir.join(rel);
+        if let Ok(meta) = fs::metadata(&p) {
+            let bytes = meta.len() as usize;
+            return (
+                Some(rel.to_string()),
+                bytes_to_tokens(bytes, ContentKind::Markdown),
+            );
+        }
+    }
+    (None, 0)
 }
 
 // ── Token estimation helpers ────────────────────────────────────────────────
@@ -215,6 +307,7 @@ fn estimate_tokens(
 enum ContentKind {
     Code,
     Json,
+    Markdown,
 }
 
 /// Convert a byte count to an estimated token count using content-aware ratios.
@@ -229,10 +322,13 @@ enum ContentKind {
 /// - **JSON** (~3.0 bytes/token): more token-dense because of repeated structural
 ///   characters (`"`, `{`, `}`, `:`, `,`) that each consume a token, and quoted
 ///   keys that tokenize less efficiently than bare identifiers.
+///
+/// - **Markdown** (~3.3 bytes/token): mix of prose, headings, and code fences.
 fn bytes_to_tokens(bytes: usize, kind: ContentKind) -> usize {
     let ratio = match kind {
         ContentKind::Code => 3.5,
         ContentKind::Json => 3.0,
+        ContentKind::Markdown => 3.3,
     };
     (bytes as f64 / ratio).round() as usize
 }

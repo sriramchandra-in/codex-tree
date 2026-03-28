@@ -1,0 +1,14 @@
+---
+description: Route Opus vs Sonnet vs Haiku for reasoning, coding, and routine tasks
+alwaysApply: true
+---
+
+# Model routing (Claude family)
+
+When picking a model or spawning a subagent, default to:
+
+- **Opus** — reasoning, design, planning, requirements, architecture, and tradeoff decisions before implementation.
+- **Sonnet** — coding, implementation, and writing or editing production code.
+- **Haiku** — repeated or low-risk tasks (run tests, lint, format, bulk edits, simple grep-driven changes).
+
+Do not use a heavier model than needed; escalate to Opus when the task is ambiguous, cross-cutting, or safety-critical.
