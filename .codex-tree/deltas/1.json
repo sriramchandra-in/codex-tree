@@ -1,0 +1,81 @@
+{
+  "sequence": 1,
+  "timestamp": "2026-03-28T02:57:08Z",
+  "source_commit": "3832c13a3124cca16eedd7243eb5ee9410ce0625",
+  "changed_files": [
+    "codex-tree/modules/crates/codex-cli/src/commands/init.rs/index.json",
+    ".codex-tree/modules/crates/codex-cli/src/commands/mod.rs/index.json",
+    ".codex-tree/modules/crates/codex-cli/src/error.rs/index.json",
+    ".codex-tree/modules/crates/codex-cli/src/main.rs/index.json",
+    ".codex-tree/modules/crates/codex-parser/src/lib.rs/index.json",
+    ".codex-tree/modules/crates/codex-parser/src/types.rs/index.json",
+    ".codex-tree/tree.json",
+    ".codex-tree/version.json",
+    "Cargo.lock",
+    "crates/codex-cli/Cargo.toml",
+    "crates/codex-cli/src/commands/init.rs",
+    "crates/codex-cli/src/commands/mod.rs",
+    "crates/codex-cli/src/main.rs",
+    ".codex-tree/modules/crates/codex-cli/src/commands/check.rs/",
+    ".codex-tree/modules/crates/codex-cli/src/commands/regen.rs/",
+    ".codex-tree/modules/crates/codex-cli/src/commands/report.rs/",
+    ".codex-tree/modules/crates/codex-cli/src/commands/update.rs/",
+    ".codex-tree/modules/crates/codex-cli/src/compaction.rs/",
+    ".codex-tree/modules/crates/codex-cli/src/git.rs/",
+    ".codex-tree/modules/crates/codex-parser/src/diff.rs/",
+    "crates/codex-cli/src/commands/check.rs",
+    "crates/codex-cli/src/commands/regen.rs",
+    "crates/codex-cli/src/commands/report.rs"
+  ],
+  "operations": [
+    {
+      "op": "remove",
+      "path": "codex-tree/modules/crates/codex-cli/src/commands/init.rs/index.json"
+    },
+    {
+      "op": "modify",
+      "path": "crates/codex-cli/src/commands/init.rs",
+      "symbols_added": [],
+      "symbols_removed": [],
+      "symbols_modified": []
+    },
+    {
+      "op": "modify",
+      "path": "crates/codex-cli/src/commands/mod.rs",
+      "symbols_added": [],
+      "symbols_removed": [],
+      "symbols_modified": []
+    },
+    {
+      "op": "modify",
+      "path": "crates/codex-cli/src/main.rs",
+      "symbols_added": [],
+      "symbols_removed": [],
+      "symbols_modified": []
+    },
+    {
+      "op": "modify",
+      "path": "crates/codex-cli/src/commands/check.rs",
+      "symbols_added": [],
+      "symbols_removed": [],
+      "symbols_modified": [
+        "StaleReason",
+        "StaleReason"
+      ]
+    },
+    {
+      "op": "modify",
+      "path": "crates/codex-cli/src/commands/regen.rs",
+      "symbols_added": [],
+      "symbols_removed": [],
+      "symbols_modified": []
+    },
+    {
+      "op": "modify",
+      "path": "crates/codex-cli/src/commands/report.rs",
+      "symbols_added": [],
+      "symbols_removed": [],
+      "symbols_modified": []
+    }
+  ]
+}

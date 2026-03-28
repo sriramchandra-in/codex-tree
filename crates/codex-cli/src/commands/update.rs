@@ -9,7 +9,7 @@
 /// 6. Update `version.json`.
 /// 7. Optionally compact if thresholds are exceeded.
 use std::fs;
-use std::path::{Path, PathBuf};
+use std::path::Path;
 
 use colored::Colorize;
 
@@ -22,13 +22,14 @@ use codex_parser::types::{Delta, DeltaOperation, ModuleIndex, TreeStructure, Tre
 use crate::compaction::{calculate_delta_size, compact, should_compact};
 use crate::error::{CliError, Result};
 use crate::git::{get_changed_files, get_commit_date, get_head_commit, get_uncommitted_changes};
+use crate::utils::{find_git_root, read_all_modules, current_utc_iso8601};
 
 // ── Public entry point ────────────────────────────────────────────────────────
 
 pub fn run(
     path: &Path,
-    _no_intent: bool,
-    _no_claude: bool,
+    no_intent: bool,
+    no_claude: bool,
     no_compact: bool,
     verbose: bool,
     quiet: bool,
@@ -199,6 +200,27 @@ pub fn run(
         false
     };
 
+    // ── 9a. Intent layer ─────────────────────────────────────────────────
+    let intent_output = if !no_intent {
+        // For update, read the full tree to pass to the analyzer.
+        let all_modules = read_all_modules(&codex_tree_dir)?;
+        match run_intent_analysis(&codex_tree_dir, &all_modules, quiet) {
+            Ok(output) => Some(output),
+            Err(_) => None,
+        }
+    } else {
+        None
+    };
+
+    // ── 9b. Claude optimization layer ────────────────────────────────────
+    if !no_claude {
+        if let Ok(tree_json) = fs::read_to_string(codex_tree_dir.join("tree.json")) {
+            if let Ok(tree) = serde_json::from_str::<TreeStructure>(&tree_json) {
+                generate_claude_layer(&codex_tree_dir, &tree, &read_all_modules(&codex_tree_dir)?, &version, intent_output.as_ref(), quiet);
+            }
+        }
+    }
+
     // ── 10. Print summary ─────────────────────────────────────────────────────
     if !quiet {
         println!();
@@ -241,20 +263,6 @@ pub fn run(
 }
 
 // ── Internal helpers ──────────────────────────────────────────────────────────
-
-/// Walk up from `start` to find the git root.
-fn find_git_root(start: &Path) -> Option<PathBuf> {
-    let mut current = start.to_path_buf();
-    loop {
-        if current.join(".git").exists() {
-            return Some(current);
-        }
-        match current.parent() {
-            Some(parent) => current = parent.to_path_buf(),
-            None => return None,
-        }
-    }
-}
 
 /// Write a `ModuleIndex` to `modules/{path}/index.json`.
 fn update_module_on_disk(codex_tree_dir: &Path, module: &ModuleIndex) -> Result<()> {
@@ -320,61 +328,69 @@ fn detect_changed_by_hash(codex_tree_dir: &Path, git_root: &Path) -> Result<Vec<
     Ok(changed)
 }
 
-/// Read all module indexes currently stored on disk.
-fn read_all_modules(codex_tree_dir: &Path) -> Result<Vec<ModuleIndex>> {
-    let modules_dir = codex_tree_dir.join("modules");
-    let mut modules = Vec::new();
+// ── Analyzer helpers ──────────────────────────────────────────────────────────
 
-    if !modules_dir.exists() {
-        return Ok(modules);
+/// Run intent analysis via Claude API. Returns None with a warning on failure.
+fn run_intent_analysis(
+    codex_tree_dir: &std::path::Path,
+    modules: &[codex_parser::types::ModuleIndex],
+    quiet: bool,
+) -> Result<codex_analyzer::types::IntentOutput> {
+    use codex_analyzer::analyzer::{write_intent, Analyzer};
+    use codex_analyzer::client::ClaudeClient;
+
+    let client = ClaudeClient::from_env().map_err(|e| {
+        if !quiet {
+            eprintln!(
+                "  {} ANTHROPIC_API_KEY not set. Skipping intent layer.",
+                "Warning:".yellow().bold()
+            );
+        }
+        CliError::Analyzer(e)
+    })?;
+
+    if !quiet {
+        println!("{}", "  Generating intent layer...".dimmed());
     }
 
-    for entry in walkdir::WalkDir::new(&modules_dir) {
-        let entry = entry.map_err(|e| {
-            std::io::Error::new(std::io::ErrorKind::Other, e.to_string())
-        })?;
+    let rt = tokio::runtime::Runtime::new()?;
+    let output = rt.block_on(async {
+        let mut analyzer = Analyzer::new(client);
+        analyzer.analyze(codex_tree_dir, modules).await
+    })?;
 
-        if !entry.file_type().is_file() || entry.file_name() != "index.json" {
-            continue;
-        }
+    write_intent(codex_tree_dir, &output)?;
 
-        let content = fs::read_to_string(entry.path())?;
-        if let Ok(module) = serde_json::from_str::<ModuleIndex>(&content) {
-            modules.push(module);
-        }
+    Ok(output)
+}
+
+/// Generate the Claude optimization layer (L1/L2/L3 markdown files).
+fn generate_claude_layer(
+    codex_tree_dir: &std::path::Path,
+    tree: &codex_parser::types::TreeStructure,
+    modules: &[codex_parser::types::ModuleIndex],
+    version: &codex_parser::types::TreeVersion,
+    intent: Option<&codex_analyzer::types::IntentOutput>,
+    quiet: bool,
+) {
+    use codex_analyzer::claude_layer;
+
+    if !quiet {
+        println!("{}", "  Generating Claude layer...".dimmed());
     }
 
-    Ok(modules)
+    let l1 = claude_layer::generate_l1(tree, modules, version);
+    let l2 = claude_layer::generate_l2(tree, modules, version, intent);
+    let l3 = claude_layer::generate_l3(tree, modules, version, intent);
+
+    if let Err(e) = claude_layer::write_claude_layer(codex_tree_dir, &l1, &l2, &l3) {
+        if !quiet {
+            eprintln!(
+                "  {} Failed to write Claude layer: {}",
+                "Warning:".yellow().bold(),
+                e
+            );
+        }
+    }
 }
 
-/// Current UTC time as ISO-8601 string (copied from serializer to avoid coupling).
-fn current_utc_iso8601() -> String {
-    use std::time::{SystemTime, UNIX_EPOCH};
-
-    let secs = SystemTime::now()
-        .duration_since(UNIX_EPOCH)
-        .unwrap_or_default()
-        .as_secs();
-
-    let second = secs % 60;
-    let minutes = secs / 60;
-    let minute = minutes % 60;
-    let hours = minutes / 60;
-    let hour = hours % 24;
-    let days = hours / 24;
-
-    let jd = days + 2_440_588;
-    let f = jd + 1401 + (((4 * jd + 274_277) / 146_097) * 3) / 4 - 38;
-    let e = 4 * f + 3;
-    let g = (e % 1461) / 4;
-    let h = 5 * g + 2;
-
-    let day = (h % 153) / 5 + 1;
-    let month = (h / 153 + 2) % 12 + 1;
-    let year = e / 1461 - 4716 + (14 - month) / 12;
-
-    format!(
-        "{:04}-{:02}-{:02}T{:02}:{:02}:{:02}Z",
-        year, month, day, hour, minute, second
-    )
-}

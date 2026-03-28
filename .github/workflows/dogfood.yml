@@ -1,0 +1,29 @@
+name: Dogfood
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  generate-tree:
+    name: Generate codex-tree for itself
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: Swatinem/rust-cache@v2
+
+      - name: Build
+        run: cargo build --release
+
+      - name: Check tree staleness
+        run: ./target/release/codex-tree check --fail-if-stale || echo "Tree is stale — will update"
+
+      - name: Update tree (AST only)
+        run: ./target/release/codex-tree update --no-intent --no-claude
+
+      - name: Report
+        run: ./target/release/codex-tree report

@@ -1,0 +1,71 @@
+{
+  "path": "crates/codex-analyzer/src/prompts.rs",
+  "language": "rust",
+  "content_hash": "sha256:8515bbcf19eb930a2c07fa36e6557b74597544955e207872b9342533ea6117d9",
+  "symbols": [
+    {
+      "name": "MAX_USER_PROMPT_CHARS",
+      "kind": "const",
+      "visibility": "private",
+      "span": {
+        "start_line": 16,
+        "end_line": 16
+      },
+      "signature": "const MAX_USER_PROMPT_CHARS: usize = 30_000",
+      "doc_comment": "/// Approximate character limit for the user prompt.\n\n///\n\n/// Claude's context window is far larger, but we cap at ~30 K characters to\n\n/// keep latency and cost predictable.  Characters ≈ tokens * 4 for English\n\n/// prose; code is denser, so 30 K chars ≈ 7–10 K tokens.\n"
+    },
+    {
+      "name": "intent_system_prompt",
+      "kind": "function",
+      "visibility": "public",
+      "span": {
+        "start_line": 25,
+        "end_line": 92
+      },
+      "signature": "pub fn intent_system_prompt() -> String",
+      "doc_comment": "/// Return the system prompt instructing Claude to produce intent JSON.\n\n///\n\n/// The prompt embeds the target JSON schema inline so Claude knows exactly\n\n/// what structure to emit — analogous to passing a Scala `Decoder` definition\n\n/// as documentation.\n"
+    },
+    {
+      "name": "intent_user_prompt",
+      "kind": "function",
+      "visibility": "public",
+      "span": {
+        "start_line": 102,
+        "end_line": 136
+      },
+      "signature": "pub fn intent_user_prompt(modules: &[ModuleIndex]) -> String",
+      "doc_comment": "/// Build the user message from a slice of `ModuleIndex` values.\n\n///\n\n/// Each module is rendered as a compact structured summary.  If the total\n\n/// content would exceed `MAX_USER_PROMPT_CHARS`, the least symbol-rich modules\n\n/// are dropped to stay within budget — analogous to a Scala `takeWhile` over a\n\n/// running character count.\n"
+    },
+    {
+      "name": "format_module_summary",
+      "kind": "function",
+      "visibility": "public",
+      "span": {
+        "start_line": 144,
+        "end_line": 190
+      },
+      "signature": "pub fn format_module_summary(module: &ModuleIndex) -> String",
+      "doc_comment": "/// Format a single `ModuleIndex` as a human-readable structured block.\n\n///\n\n/// The output is intentionally compact — no JSON, just indented text — so\n\n/// Claude can scan it quickly without paying the overhead of JSON delimiters.\n"
+    }
+  ],
+  "imports": [
+    {
+      "source": "codex_parser::types::ModuleIndex",
+      "kind": "use"
+    }
+  ],
+  "exports": [
+    {
+      "name": "intent_system_prompt",
+      "kind": "function"
+    },
+    {
+      "name": "intent_user_prompt",
+      "kind": "function"
+    },
+    {
+      "name": "format_module_summary",
+      "kind": "function"
+    }
+  ]
+}

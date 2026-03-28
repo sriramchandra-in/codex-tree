@@ -1,7 +1,7 @@
 {
   "path": "crates/codex-parser/src/types.rs",
   "language": "rust",
-  "content_hash": "sha256:b4d841ce7e3ef77f1c2e51915a78e0fbf2c0361572b9fd03b8ae11f6e058cc97",
+  "content_hash": "sha256:65a97c5f53cdcc7929e35b316b9ed2e70702b72cc43540cff79c4f54b7cca67e",
   "symbols": [
     {
       "name": "SymbolKind",
@@ -143,6 +143,26 @@
         "end_line": 202
       },
       "signature": "pub struct TreeStats"
+    },
+    {
+      "name": "DeltaOperation",
+      "kind": "enum",
+      "visibility": "public",
+      "span": {
+        "start_line": 212,
+        "end_line": 226
+      },
+      "signature": "pub enum DeltaOperation"
+    },
+    {
+      "name": "Delta",
+      "kind": "struct",
+      "visibility": "public",
+      "span": {
+        "start_line": 233,
+        "end_line": 239
+      },
+      "signature": "pub struct Delta"
     }
   ],
   "imports": [
@@ -198,6 +218,14 @@
     },
     {
       "name": "TreeStats",
+      "kind": "struct"
+    },
+    {
+      "name": "DeltaOperation",
+      "kind": "enum"
+    },
+    {
+      "name": "Delta",
       "kind": "struct"
     }
   ]

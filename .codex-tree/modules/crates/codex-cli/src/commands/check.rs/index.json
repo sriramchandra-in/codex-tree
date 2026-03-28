@@ -1,0 +1,130 @@
+{
+  "path": "crates/codex-cli/src/commands/check.rs",
+  "language": "rust",
+  "content_hash": "sha256:d31b31d4458bdcf1971847b104b0e48c49cf1c281150941c8f14e350cd21ea1f",
+  "symbols": [
+    {
+      "name": "CheckReport",
+      "kind": "struct",
+      "visibility": "private",
+      "span": {
+        "start_line": 25,
+        "end_line": 33
+      },
+      "signature": "struct CheckReport"
+    },
+    {
+      "name": "StaleFile",
+      "kind": "struct",
+      "visibility": "private",
+      "span": {
+        "start_line": 36,
+        "end_line": 39
+      },
+      "signature": "struct StaleFile"
+    },
+    {
+      "name": "StaleReason",
+      "kind": "enum",
+      "visibility": "private",
+      "span": {
+        "start_line": 43,
+        "end_line": 50
+      },
+      "signature": "enum StaleReason"
+    },
+    {
+      "name": "StaleReason",
+      "kind": "impl",
+      "visibility": "private",
+      "span": {
+        "start_line": 52,
+        "end_line": 60
+      },
+      "signature": "impl std::fmt::Display for StaleReason"
+    },
+    {
+      "name": "fmt",
+      "kind": "function",
+      "visibility": "private",
+      "span": {
+        "start_line": 53,
+        "end_line": 59
+      },
+      "signature": "fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result",
+      "parent": "StaleReason"
+    },
+    {
+      "name": "run",
+      "kind": "function",
+      "visibility": "public",
+      "span": {
+        "start_line": 64,
+        "end_line": 241
+      },
+      "signature": "pub fn run(\n    path: &Path,\n    format: &str,\n    fail_if_stale: bool,\n    _verbose: bool,\n    quiet: bool,\n) -> Result<()>"
+    },
+    {
+      "name": "count_commits_between",
+      "kind": "function",
+      "visibility": "private",
+      "span": {
+        "start_line": 246,
+        "end_line": 265
+      },
+      "signature": "fn count_commits_between(repo_root: &Path, from: &str, to: &str) -> Result<usize>",
+      "doc_comment": "/// Count commits between two SHAs using `git rev-list --count`.\n"
+    },
+    {
+      "name": "has_supported_extension",
+      "kind": "function",
+      "visibility": "private",
+      "span": {
+        "start_line": 268,
+        "end_line": 270
+      },
+      "signature": "fn has_supported_extension(path: &str) -> bool",
+      "doc_comment": "/// Quick check if a file path has a supported extension (currently just .rs).\n"
+    }
+  ],
+  "imports": [
+    {
+      "source": "std::fs",
+      "kind": "use"
+    },
+    {
+      "source": "std::path::Path",
+      "kind": "use"
+    },
+    {
+      "source": "colored::Colorize",
+      "kind": "use"
+    },
+    {
+      "source": "sha2::{Digest, Sha256}",
+      "kind": "use"
+    },
+    {
+      "source": "codex_parser::types::TreeVersion",
+      "kind": "use"
+    },
+    {
+      "source": "crate::error::{CliError, Result}",
+      "kind": "use"
+    },
+    {
+      "source": "crate::git",
+      "kind": "use"
+    },
+    {
+      "source": "crate::utils::{find_git_root, read_all_modules}",
+      "kind": "use"
+    }
+  ],
+  "exports": [
+    {
+      "name": "run",
+      "kind": "function"
+    }
+  ]
+}

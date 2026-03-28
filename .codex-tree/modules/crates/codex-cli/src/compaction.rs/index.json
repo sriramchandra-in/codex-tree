@@ -1,0 +1,129 @@
+{
+  "path": "crates/codex-cli/src/compaction.rs",
+  "language": "rust",
+  "content_hash": "sha256:a5e69acec2b1e15ff394338d5f060785eee510e638f26956df35c8c72fca3aa0",
+  "symbols": [
+    {
+      "name": "COMPACT_DELTA_COUNT",
+      "kind": "const",
+      "visibility": "private",
+      "span": {
+        "start_line": 17,
+        "end_line": 17
+      },
+      "signature": "const COMPACT_DELTA_COUNT: u32 = 10"
+    },
+    {
+      "name": "COMPACT_DELTA_SIZE_BYTES",
+      "kind": "const",
+      "visibility": "private",
+      "span": {
+        "start_line": 18,
+        "end_line": 18
+      },
+      "signature": "const COMPACT_DELTA_SIZE_BYTES: u64 = 102_400"
+    },
+    {
+      "name": "should_compact",
+      "kind": "function",
+      "visibility": "public",
+      "span": {
+        "start_line": 25,
+        "end_line": 28
+      },
+      "signature": "pub fn should_compact(version: &TreeVersion) -> bool",
+      "doc_comment": "/// Returns `true` if compaction should run.\n\n///\n\n/// Triggered when either threshold is exceeded (whichever comes first).\n"
+    },
+    {
+      "name": "read_deltas",
+      "kind": "function",
+      "visibility": "public",
+      "span": {
+        "start_line": 31,
+        "end_line": 54
+      },
+      "signature": "pub fn read_deltas(codex_tree_dir: &Path) -> Result<Vec<Delta>>",
+      "doc_comment": "/// Read and return all delta files in `deltas/`, sorted by sequence number.\n"
+    },
+    {
+      "name": "calculate_delta_size",
+      "kind": "function",
+      "visibility": "public",
+      "span": {
+        "start_line": 57,
+        "end_line": 72
+      },
+      "signature": "pub fn calculate_delta_size(codex_tree_dir: &Path) -> Result<u64>",
+      "doc_comment": "/// Sum the total file sizes of all JSON files inside `deltas/`.\n"
+    },
+    {
+      "name": "compact",
+      "kind": "function",
+      "visibility": "public",
+      "span": {
+        "start_line": 82,
+        "end_line": 129
+      },
+      "signature": "pub fn compact(codex_tree_dir: &Path) -> Result<()>",
+      "doc_comment": "/// Apply all pending deltas to the canonical tree and reset the delta state.\n\n///\n\n/// Steps:\n\n/// 1. Read `version.json`\n\n/// 2. Read all delta files from `deltas/` in sequence order\n\n/// 3. Apply each operation to `modules/` and `tree.json`\n\n/// 4. Delete all delta files\n\n/// 5. Reset `delta_count` and `delta_size_bytes` in `version.json`\n"
+    },
+    {
+      "name": "apply_operation",
+      "kind": "function",
+      "visibility": "private",
+      "span": {
+        "start_line": 134,
+        "end_line": 184
+      },
+      "signature": "fn apply_operation(\n    codex_tree_dir: &Path,\n    op: &DeltaOperation,\n    tree: &mut TreeStructure,\n) -> Result<()>",
+      "doc_comment": "/// Apply a single `DeltaOperation` to the on-disk tree state.\n"
+    },
+    {
+      "name": "upsert_tree_entry",
+      "kind": "function",
+      "visibility": "private",
+      "span": {
+        "start_line": 187,
+        "end_line": 215
+      },
+      "signature": "fn upsert_tree_entry(tree: &mut TreeStructure, module: &ModuleIndex)",
+      "doc_comment": "/// Insert or replace the `TreeEntry::File` for a given `ModuleIndex`.\n"
+    }
+  ],
+  "imports": [
+    {
+      "source": "std::fs",
+      "kind": "use"
+    },
+    {
+      "source": "std::path::Path",
+      "kind": "use"
+    },
+    {
+      "source": "codex_parser::types::{\n    Delta, DeltaOperation, ModuleIndex, TreeEntry, TreeStructure, TreeVersion,\n}",
+      "kind": "use"
+    },
+    {
+      "source": "crate::error::Result",
+      "kind": "use"
+    }
+  ],
+  "exports": [
+    {
+      "name": "should_compact",
+      "kind": "function"
+    },
+    {
+      "name": "read_deltas",
+      "kind": "function"
+    },
+    {
+      "name": "calculate_delta_size",
+      "kind": "function"
+    },
+    {
+      "name": "compact",
+      "kind": "function"
+    }
+  ]
+}

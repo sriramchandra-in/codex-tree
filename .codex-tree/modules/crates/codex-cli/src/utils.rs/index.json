@@ -1,0 +1,126 @@
+{
+  "path": "crates/codex-cli/src/utils.rs",
+  "language": "rust",
+  "content_hash": "sha256:c26ee63fe2aa828d108aeb2c824bcde0ef14682c729d1ca4c8b7b860727fb98e",
+  "symbols": [
+    {
+      "name": "find_git_root",
+      "kind": "function",
+      "visibility": "public",
+      "span": {
+        "start_line": 10,
+        "end_line": 21
+      },
+      "signature": "pub fn find_git_root(start: &Path) -> Option<PathBuf>",
+      "doc_comment": "/// Walk up the directory tree from `start` looking for a `.git` directory.\n\n/// Returns the directory that *contains* `.git` (i.e. the repo root).\n"
+    },
+    {
+      "name": "read_all_modules",
+      "kind": "function",
+      "visibility": "public",
+      "span": {
+        "start_line": 24,
+        "end_line": 48
+      },
+      "signature": "pub fn read_all_modules(codex_tree_dir: &Path) -> Result<Vec<ModuleIndex>>",
+      "doc_comment": "/// Read all module indexes currently stored on disk.\n"
+    },
+    {
+      "name": "format_size",
+      "kind": "function",
+      "visibility": "public",
+      "span": {
+        "start_line": 51,
+        "end_line": 61
+      },
+      "signature": "pub fn format_size(bytes: u64) -> String",
+      "doc_comment": "/// Format a byte count as a human-readable string: B, KB, or MB.\n"
+    },
+    {
+      "name": "KB",
+      "kind": "const",
+      "visibility": "private",
+      "span": {
+        "start_line": 52,
+        "end_line": 52
+      },
+      "signature": "const KB: u64 = 1_024"
+    },
+    {
+      "name": "MB",
+      "kind": "const",
+      "visibility": "private",
+      "span": {
+        "start_line": 53,
+        "end_line": 53
+      },
+      "signature": "const MB: u64 = 1_024 * KB"
+    },
+    {
+      "name": "calculate_dir_size",
+      "kind": "function",
+      "visibility": "public",
+      "span": {
+        "start_line": 64,
+        "end_line": 75
+      },
+      "signature": "pub fn calculate_dir_size(path: &Path) -> std::io::Result<u64>",
+      "doc_comment": "/// Recursively sum the sizes of every file under `path`.\n"
+    },
+    {
+      "name": "current_utc_iso8601",
+      "kind": "function",
+      "visibility": "public",
+      "span": {
+        "start_line": 78,
+        "end_line": 107
+      },
+      "signature": "pub fn current_utc_iso8601() -> String",
+      "doc_comment": "/// Current UTC time as ISO-8601 string.\n"
+    }
+  ],
+  "imports": [
+    {
+      "source": "std::fs",
+      "kind": "use"
+    },
+    {
+      "source": "std::path::{Path, PathBuf}",
+      "kind": "use"
+    },
+    {
+      "source": "codex_parser::types::ModuleIndex",
+      "kind": "use"
+    },
+    {
+      "source": "crate::error::Result",
+      "kind": "use"
+    },
+    {
+      "source": "std::time::{SystemTime, UNIX_EPOCH}",
+      "kind": "use"
+    }
+  ],
+  "exports": [
+    {
+      "name": "find_git_root",
+      "kind": "function"
+    },
+    {
+      "name": "read_all_modules",
+      "kind": "function"
+    },
+    {
+      "name": "format_size",
+      "kind": "function"
+    },
+    {
+      "name": "calculate_dir_size",
+      "kind": "function"
+    },
+    {
+      "name": "current_utc_iso8601",
+      "kind": "function"
+    }
+  ]
+}

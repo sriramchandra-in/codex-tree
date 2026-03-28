@@ -1,7 +1,7 @@
 {
   "path": "crates/codex-parser/src/lib.rs",
   "language": "rust",
-  "content_hash": "sha256:3e8bfca13953a0c252bb41ea9d8fa81d1f6f9421a8f264e21d58628b660373c5",
+  "content_hash": "sha256:529a9565e2b92730e3e74e1d241f61abdce91da9905f05d85d6c66132b69ecae",
   "symbols": [
     {
       "name": "error",
@@ -54,12 +54,22 @@
       "signature": "pub mod types"
     },
     {
-      "name": "parser",
+      "name": "diff",
       "kind": "module",
       "visibility": "public",
       "span": {
         "start_line": 16,
         "end_line": 16
+      },
+      "signature": "pub mod diff"
+    },
+    {
+      "name": "parser",
+      "kind": "module",
+      "visibility": "public",
+      "span": {
+        "start_line": 17,
+        "end_line": 17
       },
       "signature": "pub mod parser"
     },
@@ -68,8 +78,8 @@
       "kind": "module",
       "visibility": "public",
       "span": {
-        "start_line": 17,
-        "end_line": 17
+        "start_line": 18,
+        "end_line": 18
       },
       "signature": "pub mod serializer"
     }
@@ -94,6 +104,10 @@
     },
     {
       "name": "types",
+      "kind": "module"
+    },
+    {
+      "name": "diff",
       "kind": "module"
     },
     {

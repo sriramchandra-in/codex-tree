@@ -1,23 +1,79 @@
 {
   "path": "crates/codex-cli/src/commands/mod.rs",
   "language": "rust",
-  "content_hash": "sha256:48fedc35874adef5bd11f0750d4e5a6cf3f2c8ab9c4e5aa9fdc0333e536cd387",
+  "content_hash": "sha256:5e1dfb097da768de46f4da71f70e8dc71204fa288a0140ddb76ab1a9cc11e7bc",
   "symbols": [
     {
-      "name": "init",
+      "name": "check",
       "kind": "module",
       "visibility": "public",
       "span": {
         "start_line": 1,
         "end_line": 1
       },
+      "signature": "pub mod check"
+    },
+    {
+      "name": "init",
+      "kind": "module",
+      "visibility": "public",
+      "span": {
+        "start_line": 2,
+        "end_line": 2
+      },
       "signature": "pub mod init"
+    },
+    {
+      "name": "regen",
+      "kind": "module",
+      "visibility": "public",
+      "span": {
+        "start_line": 3,
+        "end_line": 3
+      },
+      "signature": "pub mod regen"
+    },
+    {
+      "name": "report",
+      "kind": "module",
+      "visibility": "public",
+      "span": {
+        "start_line": 4,
+        "end_line": 4
+      },
+      "signature": "pub mod report"
+    },
+    {
+      "name": "update",
+      "kind": "module",
+      "visibility": "public",
+      "span": {
+        "start_line": 5,
+        "end_line": 5
+      },
+      "signature": "pub mod update"
     }
   ],
   "imports": [],
   "exports": [
     {
+      "name": "check",
+      "kind": "module"
+    },
+    {
       "name": "init",
+      "kind": "module"
+    },
+    {
+      "name": "regen",
+      "kind": "module"
+    },
+    {
+      "name": "report",
+      "kind": "module"
+    },
+    {
+      "name": "update",
       "kind": "module"
     }
   ]

@@ -25,6 +25,9 @@ pub enum CliError {
 
     #[error("{0}")]
     Json(#[from] serde_json::Error),
+
+    #[error("{0}")]
+    Analyzer(#[from] codex_analyzer::error::AnalyzerError),
 }
 
 pub type Result<T> = std::result::Result<T, CliError>;

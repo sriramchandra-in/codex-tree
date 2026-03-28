@@ -110,6 +110,8 @@ pub fn get_uncommitted_changes(repo_root: &Path) -> Result<Vec<String>> {
 /// Returns `true` if the repository is a shallow clone.
 ///
 /// Git stores shallow-clone metadata in `.git/shallow`.
+/// Used by `update` command for shallow-clone fallback detection.
+#[allow(dead_code)]
 pub fn is_shallow_clone(repo_root: &Path) -> bool {
     repo_root.join(".git").join("shallow").exists()
 }

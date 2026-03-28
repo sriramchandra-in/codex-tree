@@ -1,0 +1,39 @@
+{
+  "path": "crates/codex-analyzer/src/error.rs",
+  "language": "rust",
+  "content_hash": "sha256:8eaf35c9288f10d09653e72fe980903943a61fd37230bf2b532e9a906f7dc3b7",
+  "symbols": [
+    {
+      "name": "AnalyzerError",
+      "kind": "enum",
+      "visibility": "public",
+      "span": {
+        "start_line": 12,
+        "end_line": 41
+      },
+      "signature": "pub enum AnalyzerError"
+    },
+    {
+      "name": "Result",
+      "kind": "type_alias",
+      "visibility": "public",
+      "span": {
+        "start_line": 46,
+        "end_line": 46
+      },
+      "signature": "pub type Result<T> = std::result::Result<T, AnalyzerError>",
+      "doc_comment": "/// Convenience alias — mirrors Scala's `type Result[A] = Either[AnalyzerError, A]`\n\n/// but using Rust's built-in `Result<T, E>`. Import this in every module so\n\n/// you can write `Result<Foo>` instead of `std::result::Result<Foo, AnalyzerError>`.\n"
+    }
+  ],
+  "imports": [],
+  "exports": [
+    {
+      "name": "AnalyzerError",
+      "kind": "enum"
+    },
+    {
+      "name": "Result",
+      "kind": "type_alias"
+    }
+  ]
+}

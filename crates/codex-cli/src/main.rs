@@ -4,7 +4,10 @@ use clap::{Parser, Subcommand};
 use colored::Colorize;
 
 mod commands;
+mod compaction;
 mod error;
+mod git;
+mod utils;
 
 /// codex-tree: Generate and maintain knowledge trees for AI codebase comprehension
 #[derive(Parser)]
@@ -118,10 +121,47 @@ fn main() {
             cli.verbose,
             cli.quiet,
         ),
-        _ => {
-            println!("Command not yet implemented");
-            Ok(())
-        }
+        Commands::Update {
+            no_intent,
+            no_claude,
+            no_compact,
+        } => commands::update::run(
+            Path::new(&cli.path),
+            *no_intent,
+            *no_claude,
+            *no_compact,
+            cli.verbose,
+            cli.quiet,
+        ),
+        Commands::Regen {
+            no_intent,
+            no_claude,
+            languages,
+        } => commands::regen::run(
+            Path::new(&cli.path),
+            *no_intent,
+            *no_claude,
+            languages.as_deref(),
+            cli.verbose,
+            cli.quiet,
+        ),
+        Commands::Report { format, benchmark } => commands::report::run(
+            Path::new(&cli.path),
+            format,
+            *benchmark,
+            cli.verbose,
+            cli.quiet,
+        ),
+        Commands::Check {
+            format,
+            fail_if_stale,
+        } => commands::check::run(
+            Path::new(&cli.path),
+            format,
+            *fail_if_stale,
+            cli.verbose,
+            cli.quiet,
+        )
     };
 
     if let Err(e) = result {

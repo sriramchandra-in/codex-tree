@@ -1,0 +1,269 @@
+{
+  "path": "crates/codex-analyzer/src/claude_layer.rs",
+  "language": "rust",
+  "content_hash": "sha256:7da2e0c75bd486a422937cc53e68852ab32b6e84fb367df1b9950cdda1dd5a91",
+  "symbols": [
+    {
+      "name": "generate_metadata_header",
+      "kind": "function",
+      "visibility": "public",
+      "span": {
+        "start_line": 42,
+        "end_line": 49
+      },
+      "signature": "pub fn generate_metadata_header(version: &TreeVersion) -> String",
+      "doc_comment": "/// Returns the standard metadata comment that starts every generated file.\n\n///\n\n/// Example output:\n\n/// ```text\n\n/// <!-- codex-tree: generation=3, delta_count=7, format_version=1.0.0 -->\n\n/// ```\n\n///\n\n/// In Scala: `def generateMetadataHeader(version: TreeVersion): String`\n"
+    },
+    {
+      "name": "generate_l1",
+      "kind": "function",
+      "visibility": "public",
+      "span": {
+        "start_line": 59,
+        "end_line": 150
+      },
+      "signature": "pub fn generate_l1(\n    tree: &TreeStructure,\n    modules: &[ModuleIndex],\n    version: &TreeVersion,\n) -> String",
+      "doc_comment": "/// Generates the L1 markdown: a concise project summary (~500 tokens).\n\n///\n\n/// Intended for Haiku-class models or any context where only the broad\n\n/// shape of the project matters — entry points, key public types, quick stats.\n\n///\n\n/// In Scala: `def generateL1(tree: TreeStructure, modules: Seq[ModuleIndex], version: TreeVersion): String`\n"
+    },
+    {
+      "name": "generate_l2",
+      "kind": "function",
+      "visibility": "public",
+      "span": {
+        "start_line": 160,
+        "end_line": 259
+      },
+      "signature": "pub fn generate_l2(\n    tree: &TreeStructure,\n    modules: &[ModuleIndex],\n    version: &TreeVersion,\n    intent: Option<&IntentOutput>,\n) -> String",
+      "doc_comment": "/// Generates the L2 markdown: module-level detail (~2,000 tokens).\n\n///\n\n/// Extends L1 with per-module symbol lists, the dependency graph, and\n\n/// any design patterns from the intent layer.\n\n///\n\n/// In Scala: `def generateL2(tree: TreeStructure, modules: Seq[ModuleIndex], version: TreeVersion, intent: Option[IntentOutput]): String`\n"
+    },
+    {
+      "name": "generate_l3",
+      "kind": "function",
+      "visibility": "public",
+      "span": {
+        "start_line": 269,
+        "end_line": 396
+      },
+      "signature": "pub fn generate_l3(\n    tree: &TreeStructure,\n    modules: &[ModuleIndex],\n    version: &TreeVersion,\n    intent: Option<&IntentOutput>,\n) -> String",
+      "doc_comment": "/// Generates the L3 markdown: complete repository detail for Opus-class models.\n\n///\n\n/// Extends L2 with every symbol (not just public), full design decisions with\n\n/// rationale + confidence, and the full import/export manifest per module.\n\n///\n\n/// In Scala: `def generateL3(tree: TreeStructure, modules: Seq[ModuleIndex], version: TreeVersion, intent: Option[IntentOutput]): String`\n"
+    },
+    {
+      "name": "write_claude_layer",
+      "kind": "function",
+      "visibility": "public",
+      "span": {
+        "start_line": 407,
+        "end_line": 419
+      },
+      "signature": "pub fn write_claude_layer(\n    output_dir: &Path,\n    l1: &str,\n    l2: &str,\n    l3: &str,\n) -> std::io::Result<()>",
+      "doc_comment": "/// Writes the three Claude layer files to `<output_dir>/claude/`.\n\n///\n\n/// Creates the `claude/` subdirectory if it does not exist, then writes\n\n/// `l1.md`, `l2.md`, and `l3.md`. This is the only function in this module\n\n/// with I/O side effects — everything else is pure string generation.\n\n///\n\n/// In Scala terms: analogous to `IO { Files.write(...) }` in cats-effect.\n"
+    },
+    {
+      "name": "project_name_from_root",
+      "kind": "function",
+      "visibility": "private",
+      "span": {
+        "start_line": 428,
+        "end_line": 430
+      },
+      "signature": "fn project_name_from_root(root: &str) -> &str",
+      "doc_comment": "/// Extracts the final path component of the repo root as the project name.\n\n///\n\n/// E.g. `/home/user/projects/codex-tree` → `\"codex-tree\"`.\n\n/// Falls back to the full path string if there is no final component\n\n/// (unlikely for any real repo root).\n"
+    },
+    {
+      "name": "top_level_dirs",
+      "kind": "function",
+      "visibility": "private",
+      "span": {
+        "start_line": 437,
+        "end_line": 444
+      },
+      "signature": "fn top_level_dirs(tree: &TreeStructure) -> Vec<&TreeEntry>",
+      "doc_comment": "/// Returns `TreeEntry::Directory` entries whose path contains no `/` separator\n\n/// after the root — i.e. direct children of the repo root.\n\n///\n\n/// Depth 1 is defined as: the path contains exactly one component (no `/`).\n\n/// For example `\"crates\"` is depth 1; `\"crates/codex-parser\"` is depth 2.\n"
+    },
+    {
+      "name": "find_entry_points",
+      "kind": "function",
+      "visibility": "private",
+      "span": {
+        "start_line": 450,
+        "end_line": 460
+      },
+      "signature": "fn find_entry_points(modules: &[ModuleIndex]) -> Vec<&str>",
+      "doc_comment": "/// Collects file paths that define a `main` function.\n\n///\n\n/// A module is an entry point if it contains a symbol whose `kind` is\n\n/// `Function` and whose `name` is `\"main\"`.\n"
+    },
+    {
+      "name": "collect_key_public_types",
+      "kind": "function",
+      "visibility": "private",
+      "span": {
+        "start_line": 469,
+        "end_line": 501
+      },
+      "signature": "fn collect_key_public_types<'a>(\n    modules: &'a [ModuleIndex],\n    limit: usize,\n) -> Vec<(&'a str, &'a str, Option<&'a str>)>",
+      "doc_comment": "/// Collects up to `limit` key public types (structs, traits, enums).\n\n///\n\n/// Sorting strategy mirrors the task spec:\n\n///   1. Symbols with a doc comment come first (more informative to the reader).\n\n///   2. Within each group the original order is preserved.\n\n///\n\n/// Returns `(module_path, signature, Option<doc_comment>)` tuples.\n"
+    },
+    {
+      "name": "first_sentence",
+      "kind": "function",
+      "visibility": "private",
+      "span": {
+        "start_line": 506,
+        "end_line": 514
+      },
+      "signature": "fn first_sentence(doc: &str) -> &str",
+      "doc_comment": "/// Extracts the first sentence from a doc comment (up to the first `.` or newline).\n\n///\n\n/// Strips leading `/// ` or `/** */` markers before extracting.\n"
+    },
+    {
+      "name": "tests",
+      "kind": "module",
+      "visibility": "private",
+      "span": {
+        "start_line": 519,
+        "end_line": 680
+      },
+      "signature": "mod tests"
+    },
+    {
+      "name": "make_version",
+      "kind": "function",
+      "visibility": "private",
+      "span": {
+        "start_line": 526,
+        "end_line": 545
+      },
+      "signature": "fn make_version() -> TreeVersion"
+    },
+    {
+      "name": "make_tree",
+      "kind": "function",
+      "visibility": "private",
+      "span": {
+        "start_line": 547,
+        "end_line": 573
+      },
+      "signature": "fn make_tree() -> TreeStructure"
+    },
+    {
+      "name": "make_modules",
+      "kind": "function",
+      "visibility": "private",
+      "span": {
+        "start_line": 575,
+        "end_line": 609
+      },
+      "signature": "fn make_modules() -> Vec<ModuleIndex>"
+    },
+    {
+      "name": "metadata_header_format",
+      "kind": "function",
+      "visibility": "private",
+      "span": {
+        "start_line": 612,
+        "end_line": 619
+      },
+      "signature": "fn metadata_header_format()"
+    },
+    {
+      "name": "l1_contains_key_sections",
+      "kind": "function",
+      "visibility": "private",
+      "span": {
+        "start_line": 622,
+        "end_line": 638
+      },
+      "signature": "fn l1_contains_key_sections()"
+    },
+    {
+      "name": "l2_extends_l1",
+      "kind": "function",
+      "visibility": "private",
+      "span": {
+        "start_line": 641,
+        "end_line": 649
+      },
+      "signature": "fn l2_extends_l1()"
+    },
+    {
+      "name": "l3_extends_l2",
+      "kind": "function",
+      "visibility": "private",
+      "span": {
+        "start_line": 652,
+        "end_line": 660
+      },
+      "signature": "fn l3_extends_l2()"
+    },
+    {
+      "name": "write_claude_layer_creates_files",
+      "kind": "function",
+      "visibility": "private",
+      "span": {
+        "start_line": 663,
+        "end_line": 672
+      },
+      "signature": "fn write_claude_layer_creates_files()"
+    },
+    {
+      "name": "first_sentence_extraction",
+      "kind": "function",
+      "visibility": "private",
+      "span": {
+        "start_line": 675,
+        "end_line": 679
+      },
+      "signature": "fn first_sentence_extraction()"
+    }
+  ],
+  "imports": [
+    {
+      "source": "std::fmt::Write as FmtWrite",
+      "kind": "use"
+    },
+    {
+      "source": "std::fs",
+      "kind": "use"
+    },
+    {
+      "source": "std::path::Path",
+      "kind": "use"
+    },
+    {
+      "source": "codex_parser::types::{ModuleIndex, SymbolKind, TreeEntry, TreeStructure, TreeVersion, Visibility}",
+      "kind": "use"
+    },
+    {
+      "source": "crate::types::IntentOutput",
+      "kind": "use"
+    },
+    {
+      "source": "super::*",
+      "kind": "use"
+    },
+    {
+      "source": "codex_parser::types::{\n        Export, Import, ModuleIndex, Span, Symbol, SymbolKind, TreeEntry, TreeStats, TreeStructure,\n        TreeVersion, TreeVersionNumber, Visibility,\n    }",
+      "kind": "use"
+    }
+  ],
+  "exports": [
+    {
+      "name": "generate_metadata_header",
+      "kind": "function"
+    },
+    {
+      "name": "generate_l1",
+      "kind": "function"
+    },
+    {
+      "name": "generate_l2",
+      "kind": "function"
+    },
+    {
+      "name": "generate_l3",
+      "kind": "function"
+    },
+    {
+      "name": "write_claude_layer",
+      "kind": "function"
+    }
+  ]
+}

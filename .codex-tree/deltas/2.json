@@ -1,0 +1,1345 @@
+{
+  "sequence": 2,
+  "timestamp": "2026-03-28T11:07:52Z",
+  "source_commit": "3832c13a3124cca16eedd7243eb5ee9410ce0625",
+  "changed_files": [
+    "codex-tree/modules/crates/codex-cli/src/commands/init.rs/index.json",
+    ".codex-tree/modules/crates/codex-cli/src/commands/mod.rs/index.json",
+    ".codex-tree/modules/crates/codex-cli/src/error.rs/index.json",
+    ".codex-tree/modules/crates/codex-cli/src/main.rs/index.json",
+    ".codex-tree/modules/crates/codex-parser/src/lib.rs/index.json",
+    ".codex-tree/modules/crates/codex-parser/src/types.rs/index.json",
+    ".codex-tree/tree.json",
+    ".codex-tree/version.json",
+    "Cargo.lock",
+    "crates/codex-analyzer/src/lib.rs",
+    "crates/codex-cli/Cargo.toml",
+    "crates/codex-cli/src/commands/init.rs",
+    "crates/codex-cli/src/commands/mod.rs",
+    "crates/codex-cli/src/commands/update.rs",
+    "crates/codex-cli/src/error.rs",
+    "crates/codex-cli/src/main.rs",
+    "crates/codex-parser/src/types.rs",
+    ".codex-tree/deltas/",
+    ".codex-tree/modules/crates/codex-cli/src/commands/check.rs/",
+    ".codex-tree/modules/crates/codex-cli/src/commands/regen.rs/",
+    ".codex-tree/modules/crates/codex-cli/src/commands/report.rs/",
+    ".codex-tree/modules/crates/codex-cli/src/commands/update.rs/",
+    ".codex-tree/modules/crates/codex-cli/src/compaction.rs/",
+    ".codex-tree/modules/crates/codex-cli/src/git.rs/",
+    ".codex-tree/modules/crates/codex-parser/src/diff.rs/",
+    ".github/",
+    "crates/codex-analyzer/src/analyzer.rs",
+    "crates/codex-analyzer/src/cache.rs",
+    "crates/codex-analyzer/src/claude_layer.rs",
+    "crates/codex-analyzer/src/client.rs",
+    "crates/codex-analyzer/src/error.rs",
+    "crates/codex-analyzer/src/prompts.rs",
+    "crates/codex-analyzer/src/response.rs",
+    "crates/codex-analyzer/src/types.rs",
+    "crates/codex-cli/src/commands/check.rs",
+    "crates/codex-cli/src/commands/regen.rs",
+    "crates/codex-cli/src/commands/report.rs",
+    "crates/codex-cli/src/utils.rs"
+  ],
+  "operations": [
+    {
+      "op": "remove",
+      "path": "codex-tree/modules/crates/codex-cli/src/commands/init.rs/index.json"
+    },
+    {
+      "op": "modify",
+      "path": "crates/codex-analyzer/src/lib.rs",
+      "symbols_added": [
+        "analyzer",
+        "cache",
+        "claude_layer",
+        "client",
+        "error",
+        "prompts",
+        "response",
+        "types"
+      ],
+      "symbols_removed": [],
+      "symbols_modified": []
+    },
+    {
+      "op": "modify",
+      "path": "crates/codex-cli/src/commands/init.rs",
+      "symbols_added": [
+        "generate_claude_layer",
+        "run_intent_analysis"
+      ],
+      "symbols_removed": [
+        "KB",
+        "MB",
+        "calculate_dir_size",
+        "find_git_root",
+        "format_size"
+      ],
+      "symbols_modified": [
+        "run"
+      ]
+    },
+    {
+      "op": "modify",
+      "path": "crates/codex-cli/src/commands/mod.rs",
+      "symbols_added": [],
+      "symbols_removed": [],
+      "symbols_modified": []
+    },
+    {
+      "op": "modify",
+      "path": "crates/codex-cli/src/commands/update.rs",
+      "symbols_added": [
+        "generate_claude_layer",
+        "run_intent_analysis"
+      ],
+      "symbols_removed": [
+        "current_utc_iso8601",
+        "find_git_root",
+        "read_all_modules"
+      ],
+      "symbols_modified": [
+        "detect_changed_by_hash",
+        "run",
+        "update_module_on_disk"
+      ]
+    },
+    {
+      "op": "modify",
+      "path": "crates/codex-cli/src/error.rs",
+      "symbols_added": [],
+      "symbols_removed": [],
+      "symbols_modified": [
+        "CliError",
+        "Result"
+      ]
+    },
+    {
+      "op": "modify",
+      "path": "crates/codex-cli/src/main.rs",
+      "symbols_added": [
+        "utils"
+      ],
+      "symbols_removed": [],
+      "symbols_modified": [
+        "Cli",
+        "Commands",
+        "main"
+      ]
+    },
+    {
+      "op": "modify",
+      "path": "crates/codex-parser/src/types.rs",
+      "symbols_added": [],
+      "symbols_removed": [],
+      "symbols_modified": [
+        "TreeVersionNumber",
+        "TreeVersionNumber"
+      ]
+    },
+    {
+      "op": "add",
+      "path": "crates/codex-analyzer/src/analyzer.rs",
+      "module_index": {
+        "path": "crates/codex-analyzer/src/analyzer.rs",
+        "language": "rust",
+        "content_hash": "sha256:0fac95e7db441d93e3f5f23618aa39c673ceb877a9ad5d80b6c4afae817f143f",
+        "symbols": [
+          {
+            "name": "Analyzer",
+            "kind": "struct",
+            "visibility": "public",
+            "span": {
+              "start_line": 25,
+              "end_line": 27
+            },
+            "signature": "pub struct Analyzer",
+            "doc_comment": "/// Orchestrates intent analysis: cache lookup → prompt build → API call →\n\n/// response parse → cache write.\n"
+          },
+          {
+            "name": "Analyzer",
+            "kind": "impl",
+            "visibility": "private",
+            "span": {
+              "start_line": 29,
+              "end_line": 73
+            },
+            "signature": "impl Analyzer"
+          },
+          {
+            "name": "new",
+            "kind": "function",
+            "visibility": "public",
+            "span": {
+              "start_line": 33,
+              "end_line": 35
+            },
+            "signature": "pub fn new(client: ClaudeClient) -> Self",
+            "parent": "Analyzer",
+            "doc_comment": "/// Construct an `Analyzer` from an already-configured `ClaudeClient`.\n\n///\n\n/// In Scala: `new Analyzer(client)` — straightforward constructor injection.\n"
+          },
+          {
+            "name": "analyze",
+            "kind": "function",
+            "visibility": "public",
+            "span": {
+              "start_line": 47,
+              "end_line": 72
+            },
+            "signature": "pub async fn analyze(\n        &mut self,\n        codex_tree_dir: &Path,\n        modules: &[ModuleIndex],\n    ) -> Result<IntentOutput>",
+            "parent": "Analyzer",
+            "doc_comment": "/// Run intent analysis on the given modules.\n\n///\n\n/// Checks the content-hash cache first; calls the Claude API only on a\n\n/// cache miss.  On a successful API call the result is cached before\n\n/// returning.\n\n///\n\n/// # Errors\n\n/// Propagates any error from the Claude client (network, budget, API key)\n\n/// or the response parser.  Cache misses and cache write failures are\n\n/// treated as non-fatal and silently ignored.\n"
+          },
+          {
+            "name": "write_intent",
+            "kind": "function",
+            "visibility": "public",
+            "span": {
+              "start_line": 84,
+              "end_line": 97
+            },
+            "signature": "pub fn write_intent(codex_tree_dir: &Path, output: &IntentOutput) -> Result<()>",
+            "doc_comment": "/// Write intent output to disk as `intent/decisions.json` and\n\n/// `intent/patterns.json` under `codex_tree_dir`.\n\n///\n\n/// Creates `intent/` if it doesn't exist.  Both JSON files are pretty-printed\n\n/// for human readability in the repository.\n\n///\n\n/// In Scala: `writeIntent(dir: Path, output: IntentOutput): IO[Unit]`\n"
+          }
+        ],
+        "imports": [
+          {
+            "source": "std::fs",
+            "kind": "use"
+          },
+          {
+            "source": "std::path::Path",
+            "kind": "use"
+          },
+          {
+            "source": "codex_parser::types::ModuleIndex",
+            "kind": "use"
+          },
+          {
+            "source": "crate::cache",
+            "kind": "use"
+          },
+          {
+            "source": "crate::client::ClaudeClient",
+            "kind": "use"
+          },
+          {
+            "source": "crate::error::Result",
+            "kind": "use"
+          },
+          {
+            "source": "crate::prompts",
+            "kind": "use"
+          },
+          {
+            "source": "crate::response",
+            "kind": "use"
+          },
+          {
+            "source": "crate::types::IntentOutput",
+            "kind": "use"
+          }
+        ],
+        "exports": [
+          {
+            "name": "Analyzer",
+            "kind": "struct"
+          },
+          {
+            "name": "new",
+            "kind": "function"
+          },
+          {
+            "name": "analyze",
+            "kind": "function"
+          },
+          {
+            "name": "write_intent",
+            "kind": "function"
+          }
+        ]
+      }
+    },
+    {
+      "op": "add",
+      "path": "crates/codex-analyzer/src/cache.rs",
+      "module_index": {
+        "path": "crates/codex-analyzer/src/cache.rs",
+        "language": "rust",
+        "content_hash": "sha256:35c479065cd5837b5b44c28a84fd5bee085cb5e572ff87fd2a2a15b4e7154a79",
+        "symbols": [
+          {
+            "name": "cache_key",
+            "kind": "function",
+            "visibility": "public",
+            "span": {
+              "start_line": 31,
+              "end_line": 43
+            },
+            "signature": "pub fn cache_key(modules: &[ModuleIndex]) -> String",
+            "doc_comment": "/// Compute a deterministic cache key for a set of modules.\n\n///\n\n/// Algorithm:\n\n/// 1. Collect all `content_hash` values.\n\n/// 2. Sort them (so key is order-independent — module order may vary).\n\n/// 3. Join with `|` as a separator.\n\n/// 4. SHA-256 hash the joined string.\n\n/// 5. Return lowercase hex.\n\n///\n\n/// In Scala: `modules.map(_.contentHash).sorted.mkString(\"|\")` then hash.\n"
+          },
+          {
+            "name": "load_cached",
+            "kind": "function",
+            "visibility": "public",
+            "span": {
+              "start_line": 53,
+              "end_line": 57
+            },
+            "signature": "pub fn load_cached(codex_tree_dir: &Path, key: &str) -> Option<IntentOutput>",
+            "doc_comment": "/// Try to load a cached `IntentOutput` for the given key.\n\n///\n\n/// Returns `Some(output)` on a cache hit, `None` on any failure (miss, corrupt\n\n/// JSON, missing file) — the caller always has a safe fallback.\n\n///\n\n/// Path: `{codex_tree_dir}/intent/.cache/{key}.json`\n"
+          },
+          {
+            "name": "save_to_cache",
+            "kind": "function",
+            "visibility": "public",
+            "span": {
+              "start_line": 70,
+              "end_line": 83
+            },
+            "signature": "pub fn save_to_cache(codex_tree_dir: &Path, key: &str, output: &IntentOutput) -> std::io::Result<()>",
+            "doc_comment": "/// Persist an `IntentOutput` to the cache.\n\n///\n\n/// Creates parent directories if they don't exist — analogous to\n\n/// `Files.createDirectories` in Scala's `java.nio`.\n\n///\n\n/// Failures are propagated as `std::io::Error`; the caller typically ignores\n\n/// cache write errors (a failed write just means next run is a cache miss).\n\n///\n\n/// Path: `{codex_tree_dir}/intent/.cache/{key}.json`\n"
+          },
+          {
+            "name": "cache_path",
+            "kind": "function",
+            "visibility": "private",
+            "span": {
+              "start_line": 88,
+              "end_line": 93
+            },
+            "signature": "fn cache_path(codex_tree_dir: &Path, key: &str) -> std::path::PathBuf",
+            "doc_comment": "/// Resolve the full filesystem path for a cache entry.\n"
+          }
+        ],
+        "imports": [
+          {
+            "source": "std::fs",
+            "kind": "use"
+          },
+          {
+            "source": "std::path::Path",
+            "kind": "use"
+          },
+          {
+            "source": "sha2::{Digest, Sha256}",
+            "kind": "use"
+          },
+          {
+            "source": "codex_parser::types::ModuleIndex",
+            "kind": "use"
+          },
+          {
+            "source": "crate::types::IntentOutput",
+            "kind": "use"
+          }
+        ],
+        "exports": [
+          {
+            "name": "cache_key",
+            "kind": "function"
+          },
+          {
+            "name": "load_cached",
+            "kind": "function"
+          },
+          {
+            "name": "save_to_cache",
+            "kind": "function"
+          }
+        ]
+      }
+    },
+    {
+      "op": "add",
+      "path": "crates/codex-analyzer/src/claude_layer.rs",
+      "module_index": {
+        "path": "crates/codex-analyzer/src/claude_layer.rs",
+        "language": "rust",
+        "content_hash": "sha256:7da2e0c75bd486a422937cc53e68852ab32b6e84fb367df1b9950cdda1dd5a91",
+        "symbols": [
+          {
+            "name": "generate_metadata_header",
+            "kind": "function",
+            "visibility": "public",
+            "span": {
+              "start_line": 42,
+              "end_line": 49
+            },
+            "signature": "pub fn generate_metadata_header(version: &TreeVersion) -> String",
+            "doc_comment": "/// Returns the standard metadata comment that starts every generated file.\n\n///\n\n/// Example output:\n\n/// ```text\n\n/// <!-- codex-tree: generation=3, delta_count=7, format_version=1.0.0 -->\n\n/// ```\n\n///\n\n/// In Scala: `def generateMetadataHeader(version: TreeVersion): String`\n"
+          },
+          {
+            "name": "generate_l1",
+            "kind": "function",
+            "visibility": "public",
+            "span": {
+              "start_line": 59,
+              "end_line": 150
+            },
+            "signature": "pub fn generate_l1(\n    tree: &TreeStructure,\n    modules: &[ModuleIndex],\n    version: &TreeVersion,\n) -> String",
+            "doc_comment": "/// Generates the L1 markdown: a concise project summary (~500 tokens).\n\n///\n\n/// Intended for Haiku-class models or any context where only the broad\n\n/// shape of the project matters — entry points, key public types, quick stats.\n\n///\n\n/// In Scala: `def generateL1(tree: TreeStructure, modules: Seq[ModuleIndex], version: TreeVersion): String`\n"
+          },
+          {
+            "name": "generate_l2",
+            "kind": "function",
+            "visibility": "public",
+            "span": {
+              "start_line": 160,
+              "end_line": 259
+            },
+            "signature": "pub fn generate_l2(\n    tree: &TreeStructure,\n    modules: &[ModuleIndex],\n    version: &TreeVersion,\n    intent: Option<&IntentOutput>,\n) -> String",
+            "doc_comment": "/// Generates the L2 markdown: module-level detail (~2,000 tokens).\n\n///\n\n/// Extends L1 with per-module symbol lists, the dependency graph, and\n\n/// any design patterns from the intent layer.\n\n///\n\n/// In Scala: `def generateL2(tree: TreeStructure, modules: Seq[ModuleIndex], version: TreeVersion, intent: Option[IntentOutput]): String`\n"
+          },
+          {
+            "name": "generate_l3",
+            "kind": "function",
+            "visibility": "public",
+            "span": {
+              "start_line": 269,
+              "end_line": 396
+            },
+            "signature": "pub fn generate_l3(\n    tree: &TreeStructure,\n    modules: &[ModuleIndex],\n    version: &TreeVersion,\n    intent: Option<&IntentOutput>,\n) -> String",
+            "doc_comment": "/// Generates the L3 markdown: complete repository detail for Opus-class models.\n\n///\n\n/// Extends L2 with every symbol (not just public), full design decisions with\n\n/// rationale + confidence, and the full import/export manifest per module.\n\n///\n\n/// In Scala: `def generateL3(tree: TreeStructure, modules: Seq[ModuleIndex], version: TreeVersion, intent: Option[IntentOutput]): String`\n"
+          },
+          {
+            "name": "write_claude_layer",
+            "kind": "function",
+            "visibility": "public",
+            "span": {
+              "start_line": 407,
+              "end_line": 419
+            },
+            "signature": "pub fn write_claude_layer(\n    output_dir: &Path,\n    l1: &str,\n    l2: &str,\n    l3: &str,\n) -> std::io::Result<()>",
+            "doc_comment": "/// Writes the three Claude layer files to `<output_dir>/claude/`.\n\n///\n\n/// Creates the `claude/` subdirectory if it does not exist, then writes\n\n/// `l1.md`, `l2.md`, and `l3.md`. This is the only function in this module\n\n/// with I/O side effects — everything else is pure string generation.\n\n///\n\n/// In Scala terms: analogous to `IO { Files.write(...) }` in cats-effect.\n"
+          },
+          {
+            "name": "project_name_from_root",
+            "kind": "function",
+            "visibility": "private",
+            "span": {
+              "start_line": 428,
+              "end_line": 430
+            },
+            "signature": "fn project_name_from_root(root: &str) -> &str",
+            "doc_comment": "/// Extracts the final path component of the repo root as the project name.\n\n///\n\n/// E.g. `/home/user/projects/codex-tree` → `\"codex-tree\"`.\n\n/// Falls back to the full path string if there is no final component\n\n/// (unlikely for any real repo root).\n"
+          },
+          {
+            "name": "top_level_dirs",
+            "kind": "function",
+            "visibility": "private",
+            "span": {
+              "start_line": 437,
+              "end_line": 444
+            },
+            "signature": "fn top_level_dirs(tree: &TreeStructure) -> Vec<&TreeEntry>",
+            "doc_comment": "/// Returns `TreeEntry::Directory` entries whose path contains no `/` separator\n\n/// after the root — i.e. direct children of the repo root.\n\n///\n\n/// Depth 1 is defined as: the path contains exactly one component (no `/`).\n\n/// For example `\"crates\"` is depth 1; `\"crates/codex-parser\"` is depth 2.\n"
+          },
+          {
+            "name": "find_entry_points",
+            "kind": "function",
+            "visibility": "private",
+            "span": {
+              "start_line": 450,
+              "end_line": 460
+            },
+            "signature": "fn find_entry_points(modules: &[ModuleIndex]) -> Vec<&str>",
+            "doc_comment": "/// Collects file paths that define a `main` function.\n\n///\n\n/// A module is an entry point if it contains a symbol whose `kind` is\n\n/// `Function` and whose `name` is `\"main\"`.\n"
+          },
+          {
+            "name": "collect_key_public_types",
+            "kind": "function",
+            "visibility": "private",
+            "span": {
+              "start_line": 469,
+              "end_line": 501
+            },
+            "signature": "fn collect_key_public_types<'a>(\n    modules: &'a [ModuleIndex],\n    limit: usize,\n) -> Vec<(&'a str, &'a str, Option<&'a str>)>",
+            "doc_comment": "/// Collects up to `limit` key public types (structs, traits, enums).\n\n///\n\n/// Sorting strategy mirrors the task spec:\n\n///   1. Symbols with a doc comment come first (more informative to the reader).\n\n///   2. Within each group the original order is preserved.\n\n///\n\n/// Returns `(module_path, signature, Option<doc_comment>)` tuples.\n"
+          },
+          {
+            "name": "first_sentence",
+            "kind": "function",
+            "visibility": "private",
+            "span": {
+              "start_line": 506,
+              "end_line": 514
+            },
+            "signature": "fn first_sentence(doc: &str) -> &str",
+            "doc_comment": "/// Extracts the first sentence from a doc comment (up to the first `.` or newline).\n\n///\n\n/// Strips leading `/// ` or `/** */` markers before extracting.\n"
+          },
+          {
+            "name": "tests",
+            "kind": "module",
+            "visibility": "private",
+            "span": {
+              "start_line": 519,
+              "end_line": 680
+            },
+            "signature": "mod tests"
+          },
+          {
+            "name": "make_version",
+            "kind": "function",
+            "visibility": "private",
+            "span": {
+              "start_line": 526,
+              "end_line": 545
+            },
+            "signature": "fn make_version() -> TreeVersion"
+          },
+          {
+            "name": "make_tree",
+            "kind": "function",
+            "visibility": "private",
+            "span": {
+              "start_line": 547,
+              "end_line": 573
+            },
+            "signature": "fn make_tree() -> TreeStructure"
+          },
+          {
+            "name": "make_modules",
+            "kind": "function",
+            "visibility": "private",
+            "span": {
+              "start_line": 575,
+              "end_line": 609
+            },
+            "signature": "fn make_modules() -> Vec<ModuleIndex>"
+          },
+          {
+            "name": "metadata_header_format",
+            "kind": "function",
+            "visibility": "private",
+            "span": {
+              "start_line": 612,
+              "end_line": 619
+            },
+            "signature": "fn metadata_header_format()"
+          },
+          {
+            "name": "l1_contains_key_sections",
+            "kind": "function",
+            "visibility": "private",
+            "span": {
+              "start_line": 622,
+              "end_line": 638
+            },
+            "signature": "fn l1_contains_key_sections()"
+          },
+          {
+            "name": "l2_extends_l1",
+            "kind": "function",
+            "visibility": "private",
+            "span": {
+              "start_line": 641,
+              "end_line": 649
+            },
+            "signature": "fn l2_extends_l1()"
+          },
+          {
+            "name": "l3_extends_l2",
+            "kind": "function",
+            "visibility": "private",
+            "span": {
+              "start_line": 652,
+              "end_line": 660
+            },
+            "signature": "fn l3_extends_l2()"
+          },
+          {
+            "name": "write_claude_layer_creates_files",
+            "kind": "function",
+            "visibility": "private",
+            "span": {
+              "start_line": 663,
+              "end_line": 672
+            },
+            "signature": "fn write_claude_layer_creates_files()"
+          },
+          {
+            "name": "first_sentence_extraction",
+            "kind": "function",
+            "visibility": "private",
+            "span": {
+              "start_line": 675,
+              "end_line": 679
+            },
+            "signature": "fn first_sentence_extraction()"
+          }
+        ],
+        "imports": [
+          {
+            "source": "std::fmt::Write as FmtWrite",
+            "kind": "use"
+          },
+          {
+            "source": "std::fs",
+            "kind": "use"
+          },
+          {
+            "source": "std::path::Path",
+            "kind": "use"
+          },
+          {
+            "source": "codex_parser::types::{ModuleIndex, SymbolKind, TreeEntry, TreeStructure, TreeVersion, Visibility}",
+            "kind": "use"
+          },
+          {
+            "source": "crate::types::IntentOutput",
+            "kind": "use"
+          },
+          {
+            "source": "super::*",
+            "kind": "use"
+          },
+          {
+            "source": "codex_parser::types::{\n        Export, Import, ModuleIndex, Span, Symbol, SymbolKind, TreeEntry, TreeStats, TreeStructure,\n        TreeVersion, TreeVersionNumber, Visibility,\n    }",
+            "kind": "use"
+          }
+        ],
+        "exports": [
+          {
+            "name": "generate_metadata_header",
+            "kind": "function"
+          },
+          {
+            "name": "generate_l1",
+            "kind": "function"
+          },
+          {
+            "name": "generate_l2",
+            "kind": "function"
+          },
+          {
+            "name": "generate_l3",
+            "kind": "function"
+          },
+          {
+            "name": "write_claude_layer",
+            "kind": "function"
+          }
+        ]
+      }
+    },
+    {
+      "op": "add",
+      "path": "crates/codex-analyzer/src/client.rs",
+      "module_index": {
+        "path": "crates/codex-analyzer/src/client.rs",
+        "language": "rust",
+        "content_hash": "sha256:694ba982b96a49e99b0cd04324a4f30fe289ab3dbf0ebf24df8a907324f62549",
+        "symbols": [
+          {
+            "name": "MessageRequest",
+            "kind": "struct",
+            "visibility": "private",
+            "span": {
+              "start_line": 20,
+              "end_line": 25
+            },
+            "signature": "struct MessageRequest"
+          },
+          {
+            "name": "Message",
+            "kind": "struct",
+            "visibility": "private",
+            "span": {
+              "start_line": 29,
+              "end_line": 32
+            },
+            "signature": "struct Message"
+          },
+          {
+            "name": "MessageResponse",
+            "kind": "struct",
+            "visibility": "private",
+            "span": {
+              "start_line": 36,
+              "end_line": 39
+            },
+            "signature": "struct MessageResponse"
+          },
+          {
+            "name": "ContentBlock",
+            "kind": "struct",
+            "visibility": "private",
+            "span": {
+              "start_line": 45,
+              "end_line": 49
+            },
+            "signature": "struct ContentBlock"
+          },
+          {
+            "name": "Usage",
+            "kind": "struct",
+            "visibility": "private",
+            "span": {
+              "start_line": 53,
+              "end_line": 56
+            },
+            "signature": "struct Usage"
+          },
+          {
+            "name": "ClaudeClient",
+            "kind": "struct",
+            "visibility": "public",
+            "span": {
+              "start_line": 64,
+              "end_line": 70
+            },
+            "signature": "pub struct ClaudeClient",
+            "doc_comment": "/// Stateful Claude API client.\n\n///\n\n/// `tokens_used` accumulates across calls so the caller can enforce a\n\n/// session-level token budget — analogous to a `Ref[IO, Int]` in Scala.\n"
+          },
+          {
+            "name": "ClaudeClient",
+            "kind": "impl",
+            "visibility": "private",
+            "span": {
+              "start_line": 72,
+              "end_line": 201
+            },
+            "signature": "impl ClaudeClient"
+          },
+          {
+            "name": "from_env",
+            "kind": "function",
+            "visibility": "public",
+            "span": {
+              "start_line": 82,
+              "end_line": 101
+            },
+            "signature": "pub fn from_env() -> Result<Self>",
+            "parent": "ClaudeClient",
+            "doc_comment": "/// Construct a client from environment variables.\n\n///\n\n/// | Variable               | Required | Default                           |\n\n/// |------------------------|----------|-----------------------------------|\n\n/// | `ANTHROPIC_API_KEY`    | yes      | —                                 |\n\n/// | `CODEX_TREE_MODEL`     | no       | `claude-sonnet-4-20250514`        |\n\n/// | `CODEX_TREE_BUDGET`    | no       | unlimited                         |\n\n///\n\n/// Returns `AnalyzerError::ApiKeyMissing` if the API key env-var is absent.\n"
+          },
+          {
+            "name": "model",
+            "kind": "function",
+            "visibility": "public",
+            "span": {
+              "start_line": 104,
+              "end_line": 106
+            },
+            "signature": "pub fn model(&self) -> &str",
+            "parent": "ClaudeClient",
+            "doc_comment": "/// The model ID in use, e.g. `\"claude-sonnet-4-20250514\"`.\n"
+          },
+          {
+            "name": "send_message",
+            "kind": "function",
+            "visibility": "public",
+            "span": {
+              "start_line": 121,
+              "end_line": 200
+            },
+            "signature": "pub async fn send_message(\n        &mut self,\n        system: &str,\n        user_content: &str,\n        max_tokens: usize,\n    ) -> Result<String>",
+            "parent": "ClaudeClient",
+            "doc_comment": "/// Send a single-turn message to Claude and return the text response.\n\n///\n\n/// POSTs to `https://api.anthropic.com/v1/messages` with the required\n\n/// `x-api-key` and `anthropic-version` headers.\n\n///\n\n/// Token usage is accumulated internally; if a `budget_limit` was set,\n\n/// returns `AnalyzerError::BudgetExceeded` rather than making the call.\n\n///\n\n/// # Errors\n\n/// - `AnalyzerError::BudgetExceeded` — pre-call budget check failed\n\n/// - `AnalyzerError::Http`           — network or transport error\n\n/// - `AnalyzerError::ApiError`       — non-2xx HTTP status from the API\n\n/// - `AnalyzerError::ResponseParse`  — response JSON doesn't contain text\n"
+          }
+        ],
+        "imports": [
+          {
+            "source": "std::env",
+            "kind": "use"
+          },
+          {
+            "source": "reqwest::Client",
+            "kind": "use"
+          },
+          {
+            "source": "serde::{Deserialize, Serialize}",
+            "kind": "use"
+          },
+          {
+            "source": "crate::error::{AnalyzerError, Result}",
+            "kind": "use"
+          }
+        ],
+        "exports": [
+          {
+            "name": "ClaudeClient",
+            "kind": "struct"
+          },
+          {
+            "name": "from_env",
+            "kind": "function"
+          },
+          {
+            "name": "model",
+            "kind": "function"
+          },
+          {
+            "name": "send_message",
+            "kind": "function"
+          }
+        ]
+      }
+    },
+    {
+      "op": "add",
+      "path": "crates/codex-analyzer/src/error.rs",
+      "module_index": {
+        "path": "crates/codex-analyzer/src/error.rs",
+        "language": "rust",
+        "content_hash": "sha256:8eaf35c9288f10d09653e72fe980903943a61fd37230bf2b532e9a906f7dc3b7",
+        "symbols": [
+          {
+            "name": "AnalyzerError",
+            "kind": "enum",
+            "visibility": "public",
+            "span": {
+              "start_line": 12,
+              "end_line": 41
+            },
+            "signature": "pub enum AnalyzerError"
+          },
+          {
+            "name": "Result",
+            "kind": "type_alias",
+            "visibility": "public",
+            "span": {
+              "start_line": 46,
+              "end_line": 46
+            },
+            "signature": "pub type Result<T> = std::result::Result<T, AnalyzerError>",
+            "doc_comment": "/// Convenience alias — mirrors Scala's `type Result[A] = Either[AnalyzerError, A]`\n\n/// but using Rust's built-in `Result<T, E>`. Import this in every module so\n\n/// you can write `Result<Foo>` instead of `std::result::Result<Foo, AnalyzerError>`.\n"
+          }
+        ],
+        "imports": [],
+        "exports": [
+          {
+            "name": "AnalyzerError",
+            "kind": "enum"
+          },
+          {
+            "name": "Result",
+            "kind": "type_alias"
+          }
+        ]
+      }
+    },
+    {
+      "op": "add",
+      "path": "crates/codex-analyzer/src/prompts.rs",
+      "module_index": {
+        "path": "crates/codex-analyzer/src/prompts.rs",
+        "language": "rust",
+        "content_hash": "sha256:8515bbcf19eb930a2c07fa36e6557b74597544955e207872b9342533ea6117d9",
+        "symbols": [
+          {
+            "name": "MAX_USER_PROMPT_CHARS",
+            "kind": "const",
+            "visibility": "private",
+            "span": {
+              "start_line": 16,
+              "end_line": 16
+            },
+            "signature": "const MAX_USER_PROMPT_CHARS: usize = 30_000",
+            "doc_comment": "/// Approximate character limit for the user prompt.\n\n///\n\n/// Claude's context window is far larger, but we cap at ~30 K characters to\n\n/// keep latency and cost predictable.  Characters ≈ tokens * 4 for English\n\n/// prose; code is denser, so 30 K chars ≈ 7–10 K tokens.\n"
+          },
+          {
+            "name": "intent_system_prompt",
+            "kind": "function",
+            "visibility": "public",
+            "span": {
+              "start_line": 25,
+              "end_line": 92
+            },
+            "signature": "pub fn intent_system_prompt() -> String",
+            "doc_comment": "/// Return the system prompt instructing Claude to produce intent JSON.\n\n///\n\n/// The prompt embeds the target JSON schema inline so Claude knows exactly\n\n/// what structure to emit — analogous to passing a Scala `Decoder` definition\n\n/// as documentation.\n"
+          },
+          {
+            "name": "intent_user_prompt",
+            "kind": "function",
+            "visibility": "public",
+            "span": {
+              "start_line": 102,
+              "end_line": 136
+            },
+            "signature": "pub fn intent_user_prompt(modules: &[ModuleIndex]) -> String",
+            "doc_comment": "/// Build the user message from a slice of `ModuleIndex` values.\n\n///\n\n/// Each module is rendered as a compact structured summary.  If the total\n\n/// content would exceed `MAX_USER_PROMPT_CHARS`, the least symbol-rich modules\n\n/// are dropped to stay within budget — analogous to a Scala `takeWhile` over a\n\n/// running character count.\n"
+          },
+          {
+            "name": "format_module_summary",
+            "kind": "function",
+            "visibility": "public",
+            "span": {
+              "start_line": 144,
+              "end_line": 190
+            },
+            "signature": "pub fn format_module_summary(module: &ModuleIndex) -> String",
+            "doc_comment": "/// Format a single `ModuleIndex` as a human-readable structured block.\n\n///\n\n/// The output is intentionally compact — no JSON, just indented text — so\n\n/// Claude can scan it quickly without paying the overhead of JSON delimiters.\n"
+          }
+        ],
+        "imports": [
+          {
+            "source": "codex_parser::types::ModuleIndex",
+            "kind": "use"
+          }
+        ],
+        "exports": [
+          {
+            "name": "intent_system_prompt",
+            "kind": "function"
+          },
+          {
+            "name": "intent_user_prompt",
+            "kind": "function"
+          },
+          {
+            "name": "format_module_summary",
+            "kind": "function"
+          }
+        ]
+      }
+    },
+    {
+      "op": "add",
+      "path": "crates/codex-analyzer/src/response.rs",
+      "module_index": {
+        "path": "crates/codex-analyzer/src/response.rs",
+        "language": "rust",
+        "content_hash": "sha256:98cc7fe30963d8c17db23bddf8844a5b9b8576878e9b831f9643c4500192d2cc",
+        "symbols": [
+          {
+            "name": "RawIntentOutput",
+            "kind": "struct",
+            "visibility": "private",
+            "span": {
+              "start_line": 20,
+              "end_line": 23
+            },
+            "signature": "struct RawIntentOutput"
+          },
+          {
+            "name": "RawDecision",
+            "kind": "struct",
+            "visibility": "private",
+            "span": {
+              "start_line": 26,
+              "end_line": 34
+            },
+            "signature": "struct RawDecision"
+          },
+          {
+            "name": "RawAnchor",
+            "kind": "struct",
+            "visibility": "private",
+            "span": {
+              "start_line": 37,
+              "end_line": 40
+            },
+            "signature": "struct RawAnchor"
+          },
+          {
+            "name": "RawPattern",
+            "kind": "struct",
+            "visibility": "private",
+            "span": {
+              "start_line": 43,
+              "end_line": 51
+            },
+            "signature": "struct RawPattern"
+          },
+          {
+            "name": "parse_intent_response",
+            "kind": "function",
+            "visibility": "public",
+            "span": {
+              "start_line": 65,
+              "end_line": 139
+            },
+            "signature": "pub fn parse_intent_response(raw: &str, model: &str) -> Result<IntentOutput>",
+            "doc_comment": "/// Parse a raw Claude response string into `IntentOutput`.\n\n///\n\n/// Steps:\n\n/// 1. Extract JSON from the response (strips markdown code fences if present).\n\n/// 2. Deserialise into intermediate types.\n\n/// 3. Clamp confidence values to `[0.0, 1.0]`.\n\n/// 4. Assign sequential IDs to any item whose `id` field was empty.\n\n/// 5. Wrap into the canonical output types with timestamp + model metadata.\n\n///\n\n/// Returns `AnalyzerError::ResponseParse` on any failure.\n"
+          },
+          {
+            "name": "extract_json",
+            "kind": "function",
+            "visibility": "private",
+            "span": {
+              "start_line": 150,
+              "end_line": 178
+            },
+            "signature": "fn extract_json(raw: &str) -> Option<&str>",
+            "doc_comment": "/// Try to isolate a JSON object from `raw`.\n\n///\n\n/// Strategy (in order):\n\n/// 1. Look for a ` ```json ` code fence and extract its contents.\n\n/// 2. Look for any ` ``` ` code fence.\n\n/// 3. Find the first `{` and last `}` in the string.\n\n/// 4. Return `None` if none of the above succeed.\n"
+          },
+          {
+            "name": "current_utc_iso8601",
+            "kind": "function",
+            "visibility": "private",
+            "span": {
+              "start_line": 184,
+              "end_line": 196
+            },
+            "signature": "fn current_utc_iso8601() -> String",
+            "doc_comment": "/// Return the current UTC time as an ISO-8601 string, e.g. `\"2026-03-28T12:00:00Z\"`.\n\n///\n\n/// Reimplemented inline (same algorithm as `codex-parser::serializer`) to avoid\n\n/// a cross-crate dependency on a trivial utility.\n"
+          },
+          {
+            "name": "unix_secs_to_datetime",
+            "kind": "function",
+            "visibility": "private",
+            "span": {
+              "start_line": 201,
+              "end_line": 221
+            },
+            "signature": "fn unix_secs_to_datetime(secs: u64) -> (u64, u64, u64, u64, u64, u64)",
+            "doc_comment": "/// Convert a Unix timestamp to `(year, month, day, hour, min, sec)`.\n\n///\n\n/// Uses the proleptic Gregorian calendar (Richards' algorithm) — works past 2038.\n"
+          }
+        ],
+        "imports": [
+          {
+            "source": "serde::Deserialize",
+            "kind": "use"
+          },
+          {
+            "source": "std::time::{SystemTime, UNIX_EPOCH}",
+            "kind": "use"
+          },
+          {
+            "source": "crate::error::{AnalyzerError, Result}",
+            "kind": "use"
+          },
+          {
+            "source": "crate::types::{\n    Anchor, Decision, DecisionsDocument, IntentOutput, Pattern, PatternsDocument, Provenance,\n}",
+            "kind": "use"
+          }
+        ],
+        "exports": [
+          {
+            "name": "parse_intent_response",
+            "kind": "function"
+          }
+        ]
+      }
+    },
+    {
+      "op": "add",
+      "path": "crates/codex-analyzer/src/types.rs",
+      "module_index": {
+        "path": "crates/codex-analyzer/src/types.rs",
+        "language": "rust",
+        "content_hash": "sha256:fd68060d15e720ad6fc40cc993822869530ff015e9d229f128987c7d4f9959d8",
+        "symbols": [
+          {
+            "name": "Provenance",
+            "kind": "enum",
+            "visibility": "public",
+            "span": {
+              "start_line": 17,
+              "end_line": 26
+            },
+            "signature": "pub enum Provenance"
+          },
+          {
+            "name": "Anchor",
+            "kind": "struct",
+            "visibility": "public",
+            "span": {
+              "start_line": 35,
+              "end_line": 41
+            },
+            "signature": "pub struct Anchor"
+          },
+          {
+            "name": "Decision",
+            "kind": "struct",
+            "visibility": "public",
+            "span": {
+              "start_line": 57,
+              "end_line": 65
+            },
+            "signature": "pub struct Decision"
+          },
+          {
+            "name": "Pattern",
+            "kind": "struct",
+            "visibility": "public",
+            "span": {
+              "start_line": 74,
+              "end_line": 82
+            },
+            "signature": "pub struct Pattern"
+          },
+          {
+            "name": "DecisionsDocument",
+            "kind": "struct",
+            "visibility": "public",
+            "span": {
+              "start_line": 88,
+              "end_line": 92
+            },
+            "signature": "pub struct DecisionsDocument"
+          },
+          {
+            "name": "PatternsDocument",
+            "kind": "struct",
+            "visibility": "public",
+            "span": {
+              "start_line": 96,
+              "end_line": 100
+            },
+            "signature": "pub struct PatternsDocument"
+          },
+          {
+            "name": "IntentOutput",
+            "kind": "struct",
+            "visibility": "public",
+            "span": {
+              "start_line": 106,
+              "end_line": 109
+            },
+            "signature": "pub struct IntentOutput"
+          },
+          {
+            "name": "ClaudeLayerOutput",
+            "kind": "struct",
+            "visibility": "public",
+            "span": {
+              "start_line": 117,
+              "end_line": 124
+            },
+            "signature": "pub struct ClaudeLayerOutput",
+            "doc_comment": "/// The three progressive-detail markdown documents for `.codex-tree/claude/`.\n\n///\n\n/// These are generated locally from tree data + intent, no API call needed.\n\n/// In Scala: `case class ClaudeLayerOutput(l1: String, l2: String, l3: String)`\n"
+          }
+        ],
+        "imports": [
+          {
+            "source": "serde::{Deserialize, Serialize}",
+            "kind": "use"
+          }
+        ],
+        "exports": [
+          {
+            "name": "Provenance",
+            "kind": "enum"
+          },
+          {
+            "name": "Anchor",
+            "kind": "struct"
+          },
+          {
+            "name": "Decision",
+            "kind": "struct"
+          },
+          {
+            "name": "Pattern",
+            "kind": "struct"
+          },
+          {
+            "name": "DecisionsDocument",
+            "kind": "struct"
+          },
+          {
+            "name": "PatternsDocument",
+            "kind": "struct"
+          },
+          {
+            "name": "IntentOutput",
+            "kind": "struct"
+          },
+          {
+            "name": "ClaudeLayerOutput",
+            "kind": "struct"
+          }
+        ]
+      }
+    },
+    {
+      "op": "modify",
+      "path": "crates/codex-cli/src/commands/check.rs",
+      "symbols_added": [],
+      "symbols_removed": [
+        "find_git_root",
+        "read_all_modules"
+      ],
+      "symbols_modified": [
+        "CheckReport",
+        "StaleFile",
+        "StaleReason",
+        "StaleReason",
+        "count_commits_between",
+        "fmt",
+        "has_supported_extension",
+        "run"
+      ]
+    },
+    {
+      "op": "modify",
+      "path": "crates/codex-cli/src/commands/regen.rs",
+      "symbols_added": [
+        "generate_claude_layer",
+        "run_intent_analysis"
+      ],
+      "symbols_removed": [
+        "KB",
+        "MB",
+        "calculate_dir_size",
+        "current_utc_iso8601",
+        "find_git_root",
+        "format_size"
+      ],
+      "symbols_modified": [
+        "run"
+      ]
+    },
+    {
+      "op": "modify",
+      "path": "crates/codex-cli/src/commands/report.rs",
+      "symbols_added": [
+        "ContentKind",
+        "bytes_to_tokens"
+      ],
+      "symbols_removed": [
+        "KB",
+        "MB",
+        "calculate_dir_size",
+        "find_git_root",
+        "format_size",
+        "read_all_modules"
+      ],
+      "symbols_modified": [
+        "Report",
+        "ReportStats",
+        "TokenEstimate",
+        "estimate_tokens",
+        "format_number",
+        "run"
+      ]
+    },
+    {
+      "op": "add",
+      "path": "crates/codex-cli/src/utils.rs",
+      "module_index": {
+        "path": "crates/codex-cli/src/utils.rs",
+        "language": "rust",
+        "content_hash": "sha256:c26ee63fe2aa828d108aeb2c824bcde0ef14682c729d1ca4c8b7b860727fb98e",
+        "symbols": [
+          {
+            "name": "find_git_root",
+            "kind": "function",
+            "visibility": "public",
+            "span": {
+              "start_line": 10,
+              "end_line": 21
+            },
+            "signature": "pub fn find_git_root(start: &Path) -> Option<PathBuf>",
+            "doc_comment": "/// Walk up the directory tree from `start` looking for a `.git` directory.\n\n/// Returns the directory that *contains* `.git` (i.e. the repo root).\n"
+          },
+          {
+            "name": "read_all_modules",
+            "kind": "function",
+            "visibility": "public",
+            "span": {
+              "start_line": 24,
+              "end_line": 48
+            },
+            "signature": "pub fn read_all_modules(codex_tree_dir: &Path) -> Result<Vec<ModuleIndex>>",
+            "doc_comment": "/// Read all module indexes currently stored on disk.\n"
+          },
+          {
+            "name": "format_size",
+            "kind": "function",
+            "visibility": "public",
+            "span": {
+              "start_line": 51,
+              "end_line": 61
+            },
+            "signature": "pub fn format_size(bytes: u64) -> String",
+            "doc_comment": "/// Format a byte count as a human-readable string: B, KB, or MB.\n"
+          },
+          {
+            "name": "KB",
+            "kind": "const",
+            "visibility": "private",
+            "span": {
+              "start_line": 52,
+              "end_line": 52
+            },
+            "signature": "const KB: u64 = 1_024"
+          },
+          {
+            "name": "MB",
+            "kind": "const",
+            "visibility": "private",
+            "span": {
+              "start_line": 53,
+              "end_line": 53
+            },
+            "signature": "const MB: u64 = 1_024 * KB"
+          },
+          {
+            "name": "calculate_dir_size",
+            "kind": "function",
+            "visibility": "public",
+            "span": {
+              "start_line": 64,
+              "end_line": 75
+            },
+            "signature": "pub fn calculate_dir_size(path: &Path) -> std::io::Result<u64>",
+            "doc_comment": "/// Recursively sum the sizes of every file under `path`.\n"
+          },
+          {
+            "name": "current_utc_iso8601",
+            "kind": "function",
+            "visibility": "public",
+            "span": {
+              "start_line": 78,
+              "end_line": 107
+            },
+            "signature": "pub fn current_utc_iso8601() -> String",
+            "doc_comment": "/// Current UTC time as ISO-8601 string.\n"
+          }
+        ],
+        "imports": [
+          {
+            "source": "std::fs",
+            "kind": "use"
+          },
+          {
+            "source": "std::path::{Path, PathBuf}",
+            "kind": "use"
+          },
+          {
+            "source": "codex_parser::types::ModuleIndex",
+            "kind": "use"
+          },
+          {
+            "source": "crate::error::Result",
+            "kind": "use"
+          },
+          {
+            "source": "std::time::{SystemTime, UNIX_EPOCH}",
+            "kind": "use"
+          }
+        ],
+        "exports": [
+          {
+            "name": "find_git_root",
+            "kind": "function"
+          },
+          {
+            "name": "read_all_modules",
+            "kind": "function"
+          },
+          {
+            "name": "format_size",
+            "kind": "function"
+          },
+          {
+            "name": "calculate_dir_size",
+            "kind": "function"
+          },
+          {
+            "name": "current_utc_iso8601",
+            "kind": "function"
+          }
+        ]
+      }
+    }
+  ]
+}

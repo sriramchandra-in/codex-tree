@@ -1,4 +1,4 @@
-use std::path::{Path, PathBuf};
+use std::path::Path;
 
 use colored::Colorize;
 
@@ -7,13 +7,15 @@ use codex_parser::registry::ParserRegistry;
 use codex_parser::serializer::{compute_stats, create_initial_version, write_tree};
 
 use crate::error::{CliError, Result};
+use crate::git;
+use crate::utils::{find_git_root, format_size, calculate_dir_size};
 
 // ── Public entry point ────────────────────────────────────────────────────────
 
 pub fn run(
     path: &Path,
-    _no_intent: bool,
-    _no_claude: bool,
+    no_intent: bool,
+    no_claude: bool,
     _languages: Option<&str>,
     dry_run: bool,
     verbose: bool,
@@ -74,7 +76,13 @@ pub fn run(
 
     // ── 8. Stats + version ───────────────────────────────────────────────────
     let stats = compute_stats(&tree, &modules);
-    let version = create_initial_version(&stats);
+    let mut version = create_initial_version(&stats);
+
+    // Fill in the git commit so `update` can diff against it.
+    if let Ok(head) = git::get_head_commit(&git_root) {
+        version.source_commit_date = git::get_commit_date(&git_root, &head).ok();
+        version.source_commit = Some(head);
+    }
 
     // ── 9. Dry-run early exit ─────────────────────────────────────────────────
     if dry_run {
@@ -94,6 +102,21 @@ pub fn run(
 
     // ── 10. Write tree ────────────────────────────────────────────────────────
     write_tree(&output_dir, &tree, &modules, &version)?;
+
+    // ── 10a. Intent layer ────────────────────────────────────────────────
+    let intent_output = if !no_intent {
+        match run_intent_analysis(&output_dir, &modules, quiet) {
+            Ok(output) => Some(output),
+            Err(_) => None,
+        }
+    } else {
+        None
+    };
+
+    // ── 10b. Claude optimization layer ───────────────────────────────────
+    if !no_claude {
+        generate_claude_layer(&output_dir, &tree, &modules, &version, intent_output.as_ref(), quiet);
+    }
 
     // ── 11. Compute on-disk size ──────────────────────────────────────────────
     let tree_size = calculate_dir_size(&output_dir).unwrap_or(0);
@@ -152,46 +175,69 @@ pub fn run(
     Ok(())
 }
 
-// ── Helpers ───────────────────────────────────────────────────────────────────
+// ── Analyzer helpers ──────────────────────────────────────────────────────────
 
-/// Walk up the directory tree from `start` looking for a `.git` directory.
-/// Returns the directory that *contains* `.git` (i.e. the repo root).
-fn find_git_root(start: &Path) -> Option<PathBuf> {
-    let mut current = start.to_path_buf();
-    loop {
-        if current.join(".git").exists() {
-            return Some(current);
+/// Run intent analysis via Claude API. Returns None with a warning on failure.
+fn run_intent_analysis(
+    codex_tree_dir: &std::path::Path,
+    modules: &[codex_parser::types::ModuleIndex],
+    quiet: bool,
+) -> Result<codex_analyzer::types::IntentOutput> {
+    use codex_analyzer::analyzer::{write_intent, Analyzer};
+    use codex_analyzer::client::ClaudeClient;
+
+    let client = ClaudeClient::from_env().map_err(|e| {
+        if !quiet {
+            eprintln!(
+                "  {} ANTHROPIC_API_KEY not set. Skipping intent layer.",
+                "Warning:".yellow().bold()
+            );
         }
-        match current.parent() {
-            Some(parent) => current = parent.to_path_buf(),
-            None => return None,
+        crate::error::CliError::Analyzer(e)
+    })?;
+
+    if !quiet {
+        println!("{}", "  Generating intent layer...".dimmed());
+    }
+
+    let rt = tokio::runtime::Runtime::new()?;
+    let output = rt.block_on(async {
+        let mut analyzer = Analyzer::new(client);
+        analyzer.analyze(codex_tree_dir, modules).await
+    })?;
+
+    write_intent(codex_tree_dir, &output)?;
+
+    Ok(output)
+}
+
+/// Generate the Claude optimization layer (L1/L2/L3 markdown files).
+fn generate_claude_layer(
+    codex_tree_dir: &std::path::Path,
+    tree: &codex_parser::types::TreeStructure,
+    modules: &[codex_parser::types::ModuleIndex],
+    version: &codex_parser::types::TreeVersion,
+    intent: Option<&codex_analyzer::types::IntentOutput>,
+    quiet: bool,
+) {
+    use codex_analyzer::claude_layer;
+
+    if !quiet {
+        println!("{}", "  Generating Claude layer...".dimmed());
+    }
+
+    let l1 = claude_layer::generate_l1(tree, modules, version);
+    let l2 = claude_layer::generate_l2(tree, modules, version, intent);
+    let l3 = claude_layer::generate_l3(tree, modules, version, intent);
+
+    if let Err(e) = claude_layer::write_claude_layer(codex_tree_dir, &l1, &l2, &l3) {
+        if !quiet {
+            eprintln!(
+                "  {} Failed to write Claude layer: {}",
+                "Warning:".yellow().bold(),
+                e
+            );
         }
     }
 }
 
-/// Format a byte count as a human-readable string: B, KB, or MB.
-fn format_size(bytes: u64) -> String {
-    const KB: u64 = 1_024;
-    const MB: u64 = 1_024 * KB;
-    if bytes >= MB {
-        format!("{:.1} MB", bytes as f64 / MB as f64)
-    } else if bytes >= KB {
-        format!("{:.1} KB", bytes as f64 / KB as f64)
-    } else {
-        format!("{} B", bytes)
-    }
-}
-
-/// Recursively sum the sizes of every file under `path`.
-fn calculate_dir_size(path: &Path) -> std::io::Result<u64> {
-    let mut total: u64 = 0;
-    for entry in walkdir::WalkDir::new(path) {
-        let entry = entry.map_err(|e| {
-            std::io::Error::new(std::io::ErrorKind::Other, e.to_string())
-        })?;
-        if entry.file_type().is_file() {
-            total += entry.metadata()?.len();
-        }
-    }
-    Ok(total)
-}

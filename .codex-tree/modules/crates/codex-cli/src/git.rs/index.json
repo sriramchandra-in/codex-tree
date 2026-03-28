@@ -1,0 +1,109 @@
+{
+  "path": "crates/codex-cli/src/git.rs",
+  "language": "rust",
+  "content_hash": "sha256:f52605ca4f488a7e79800ff6d3cb0041dfa4252ebe81caa1ffd31bea4ff4604d",
+  "symbols": [
+    {
+      "name": "run_git",
+      "kind": "function",
+      "visibility": "private",
+      "span": {
+        "start_line": 17,
+        "end_line": 36
+      },
+      "signature": "fn run_git(repo_root: &Path, args: &[&str], hint: &str) -> Result<String>",
+      "doc_comment": "/// Run a git subcommand, return its trimmed stdout as a `String`.\n\n///\n\n/// Returns `Err(CliError::Git)` if the process fails or exits non-zero.\n"
+    },
+    {
+      "name": "get_head_commit",
+      "kind": "function",
+      "visibility": "public",
+      "span": {
+        "start_line": 41,
+        "end_line": 47
+      },
+      "signature": "pub fn get_head_commit(repo_root: &Path) -> Result<String>",
+      "doc_comment": "/// Return the full SHA-1 of the current HEAD commit.\n"
+    },
+    {
+      "name": "get_changed_files",
+      "kind": "function",
+      "visibility": "public",
+      "span": {
+        "start_line": 52,
+        "end_line": 65
+      },
+      "signature": "pub fn get_changed_files(repo_root: &Path, since_commit: &str) -> Result<Vec<String>>",
+      "doc_comment": "/// Return the list of files changed between `since_commit` and HEAD.\n\n///\n\n/// Paths are repo-relative and use forward slashes.\n"
+    },
+    {
+      "name": "get_uncommitted_changes",
+      "kind": "function",
+      "visibility": "public",
+      "span": {
+        "start_line": 72,
+        "end_line": 108
+      },
+      "signature": "pub fn get_uncommitted_changes(repo_root: &Path) -> Result<Vec<String>>",
+      "doc_comment": "/// Return the list of files with uncommitted changes (modified or added).\n\n///\n\n/// Uses `git status --porcelain`; each output line starts with two-char status\n\n/// codes.  We collect any file that appears as modified (`M`), added (`A`),\n\n/// renamed (`R`), copied (`C`), or untracked (`?`).\n"
+    },
+    {
+      "name": "is_shallow_clone",
+      "kind": "function",
+      "visibility": "public",
+      "span": {
+        "start_line": 113,
+        "end_line": 115
+      },
+      "signature": "pub fn is_shallow_clone(repo_root: &Path) -> bool",
+      "doc_comment": "/// Returns `true` if the repository is a shallow clone.\n\n///\n\n/// Git stores shallow-clone metadata in `.git/shallow`.\n"
+    },
+    {
+      "name": "get_commit_date",
+      "kind": "function",
+      "visibility": "public",
+      "span": {
+        "start_line": 118,
+        "end_line": 124
+      },
+      "signature": "pub fn get_commit_date(repo_root: &Path, commit: &str) -> Result<String>",
+      "doc_comment": "/// Return the ISO-8601 commit date for the given commit SHA.\n"
+    }
+  ],
+  "imports": [
+    {
+      "source": "std::path::Path",
+      "kind": "use"
+    },
+    {
+      "source": "std::process::Command",
+      "kind": "use"
+    },
+    {
+      "source": "crate::error::{CliError, Result}",
+      "kind": "use"
+    }
+  ],
+  "exports": [
+    {
+      "name": "get_head_commit",
+      "kind": "function"
+    },
+    {
+      "name": "get_changed_files",
+      "kind": "function"
+    },
+    {
+      "name": "get_uncommitted_changes",
+      "kind": "function"
+    },
+    {
+      "name": "is_shallow_clone",
+      "kind": "function"
+    },
+    {
+      "name": "get_commit_date",
+      "kind": "function"
+    }
+  ]
+}

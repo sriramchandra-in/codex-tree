@@ -1,0 +1,87 @@
+{
+  "path": "crates/codex-analyzer/src/cache.rs",
+  "language": "rust",
+  "content_hash": "sha256:35c479065cd5837b5b44c28a84fd5bee085cb5e572ff87fd2a2a15b4e7154a79",
+  "symbols": [
+    {
+      "name": "cache_key",
+      "kind": "function",
+      "visibility": "public",
+      "span": {
+        "start_line": 31,
+        "end_line": 43
+      },
+      "signature": "pub fn cache_key(modules: &[ModuleIndex]) -> String",
+      "doc_comment": "/// Compute a deterministic cache key for a set of modules.\n\n///\n\n/// Algorithm:\n\n/// 1. Collect all `content_hash` values.\n\n/// 2. Sort them (so key is order-independent — module order may vary).\n\n/// 3. Join with `|` as a separator.\n\n/// 4. SHA-256 hash the joined string.\n\n/// 5. Return lowercase hex.\n\n///\n\n/// In Scala: `modules.map(_.contentHash).sorted.mkString(\"|\")` then hash.\n"
+    },
+    {
+      "name": "load_cached",
+      "kind": "function",
+      "visibility": "public",
+      "span": {
+        "start_line": 53,
+        "end_line": 57
+      },
+      "signature": "pub fn load_cached(codex_tree_dir: &Path, key: &str) -> Option<IntentOutput>",
+      "doc_comment": "/// Try to load a cached `IntentOutput` for the given key.\n\n///\n\n/// Returns `Some(output)` on a cache hit, `None` on any failure (miss, corrupt\n\n/// JSON, missing file) — the caller always has a safe fallback.\n\n///\n\n/// Path: `{codex_tree_dir}/intent/.cache/{key}.json`\n"
+    },
+    {
+      "name": "save_to_cache",
+      "kind": "function",
+      "visibility": "public",
+      "span": {
+        "start_line": 70,
+        "end_line": 83
+      },
+      "signature": "pub fn save_to_cache(codex_tree_dir: &Path, key: &str, output: &IntentOutput) -> std::io::Result<()>",
+      "doc_comment": "/// Persist an `IntentOutput` to the cache.\n\n///\n\n/// Creates parent directories if they don't exist — analogous to\n\n/// `Files.createDirectories` in Scala's `java.nio`.\n\n///\n\n/// Failures are propagated as `std::io::Error`; the caller typically ignores\n\n/// cache write errors (a failed write just means next run is a cache miss).\n\n///\n\n/// Path: `{codex_tree_dir}/intent/.cache/{key}.json`\n"
+    },
+    {
+      "name": "cache_path",
+      "kind": "function",
+      "visibility": "private",
+      "span": {
+        "start_line": 88,
+        "end_line": 93
+      },
+      "signature": "fn cache_path(codex_tree_dir: &Path, key: &str) -> std::path::PathBuf",
+      "doc_comment": "/// Resolve the full filesystem path for a cache entry.\n"
+    }
+  ],
+  "imports": [
+    {
+      "source": "std::fs",
+      "kind": "use"
+    },
+    {
+      "source": "std::path::Path",
+      "kind": "use"
+    },
+    {
+      "source": "sha2::{Digest, Sha256}",
+      "kind": "use"
+    },
+    {
+      "source": "codex_parser::types::ModuleIndex",
+      "kind": "use"
+    },
+    {
+      "source": "crate::types::IntentOutput",
+      "kind": "use"
+    }
+  ],
+  "exports": [
+    {
+      "name": "cache_key",
+      "kind": "function"
+    },
+    {
+      "name": "load_cached",
+      "kind": "function"
+    },
+    {
+      "name": "save_to_cache",
+      "kind": "function"
+    }
+  ]
+}

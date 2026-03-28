@@ -55,7 +55,7 @@ pub enum Visibility {
 // ── Source location ───────────────────────────────────────────────────────────
 
 /// A half-open line range `[start_line, end_line)` within a source file.
-/// Lines are 0-indexed to match tree-sitter's convention.
+/// Lines are 1-indexed (the first line of a file is line 1).
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Span {
     pub start_line: usize,

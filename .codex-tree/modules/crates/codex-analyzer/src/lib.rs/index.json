@@ -1,8 +1,122 @@
 {
   "path": "crates/codex-analyzer/src/lib.rs",
   "language": "rust",
-  "content_hash": "sha256:1005652d54ae862785e77163bb3f0060f596f25cd47a93ba3a09cf9c1591a374",
-  "symbols": [],
+  "content_hash": "sha256:f04b8e263649413dc5252214df154c31f6ccc84d0138b0713ba5f412f2a23db0",
+  "symbols": [
+    {
+      "name": "error",
+      "kind": "module",
+      "visibility": "public",
+      "span": {
+        "start_line": 13,
+        "end_line": 13
+      },
+      "signature": "pub mod error"
+    },
+    {
+      "name": "types",
+      "kind": "module",
+      "visibility": "public",
+      "span": {
+        "start_line": 14,
+        "end_line": 14
+      },
+      "signature": "pub mod types"
+    },
+    {
+      "name": "client",
+      "kind": "module",
+      "visibility": "public",
+      "span": {
+        "start_line": 15,
+        "end_line": 15
+      },
+      "signature": "pub mod client"
+    },
+    {
+      "name": "prompts",
+      "kind": "module",
+      "visibility": "public",
+      "span": {
+        "start_line": 16,
+        "end_line": 16
+      },
+      "signature": "pub mod prompts"
+    },
+    {
+      "name": "response",
+      "kind": "module",
+      "visibility": "public",
+      "span": {
+        "start_line": 17,
+        "end_line": 17
+      },
+      "signature": "pub mod response"
+    },
+    {
+      "name": "cache",
+      "kind": "module",
+      "visibility": "public",
+      "span": {
+        "start_line": 18,
+        "end_line": 18
+      },
+      "signature": "pub mod cache"
+    },
+    {
+      "name": "analyzer",
+      "kind": "module",
+      "visibility": "public",
+      "span": {
+        "start_line": 19,
+        "end_line": 19
+      },
+      "signature": "pub mod analyzer"
+    },
+    {
+      "name": "claude_layer",
+      "kind": "module",
+      "visibility": "public",
+      "span": {
+        "start_line": 20,
+        "end_line": 20
+      },
+      "signature": "pub mod claude_layer"
+    }
+  ],
   "imports": [],
-  "exports": []
+  "exports": [
+    {
+      "name": "error",
+      "kind": "module"
+    },
+    {
+      "name": "types",
+      "kind": "module"
+    },
+    {
+      "name": "client",
+      "kind": "module"
+    },
+    {
+      "name": "prompts",
+      "kind": "module"
+    },
+    {
+      "name": "response",
+      "kind": "module"
+    },
+    {
+      "name": "cache",
+      "kind": "module"
+    },
+    {
+      "name": "analyzer",
+      "kind": "module"
+    },
+    {
+      "name": "claude_layer",
+      "kind": "module"
+    }
+  ]
 }

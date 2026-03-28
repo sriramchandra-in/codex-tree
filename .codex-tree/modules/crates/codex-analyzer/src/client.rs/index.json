@@ -1,0 +1,150 @@
+{
+  "path": "crates/codex-analyzer/src/client.rs",
+  "language": "rust",
+  "content_hash": "sha256:694ba982b96a49e99b0cd04324a4f30fe289ab3dbf0ebf24df8a907324f62549",
+  "symbols": [
+    {
+      "name": "MessageRequest",
+      "kind": "struct",
+      "visibility": "private",
+      "span": {
+        "start_line": 20,
+        "end_line": 25
+      },
+      "signature": "struct MessageRequest"
+    },
+    {
+      "name": "Message",
+      "kind": "struct",
+      "visibility": "private",
+      "span": {
+        "start_line": 29,
+        "end_line": 32
+      },
+      "signature": "struct Message"
+    },
+    {
+      "name": "MessageResponse",
+      "kind": "struct",
+      "visibility": "private",
+      "span": {
+        "start_line": 36,
+        "end_line": 39
+      },
+      "signature": "struct MessageResponse"
+    },
+    {
+      "name": "ContentBlock",
+      "kind": "struct",
+      "visibility": "private",
+      "span": {
+        "start_line": 45,
+        "end_line": 49
+      },
+      "signature": "struct ContentBlock"
+    },
+    {
+      "name": "Usage",
+      "kind": "struct",
+      "visibility": "private",
+      "span": {
+        "start_line": 53,
+        "end_line": 56
+      },
+      "signature": "struct Usage"
+    },
+    {
+      "name": "ClaudeClient",
+      "kind": "struct",
+      "visibility": "public",
+      "span": {
+        "start_line": 64,
+        "end_line": 70
+      },
+      "signature": "pub struct ClaudeClient",
+      "doc_comment": "/// Stateful Claude API client.\n\n///\n\n/// `tokens_used` accumulates across calls so the caller can enforce a\n\n/// session-level token budget — analogous to a `Ref[IO, Int]` in Scala.\n"
+    },
+    {
+      "name": "ClaudeClient",
+      "kind": "impl",
+      "visibility": "private",
+      "span": {
+        "start_line": 72,
+        "end_line": 201
+      },
+      "signature": "impl ClaudeClient"
+    },
+    {
+      "name": "from_env",
+      "kind": "function",
+      "visibility": "public",
+      "span": {
+        "start_line": 82,
+        "end_line": 101
+      },
+      "signature": "pub fn from_env() -> Result<Self>",
+      "parent": "ClaudeClient",
+      "doc_comment": "/// Construct a client from environment variables.\n\n///\n\n/// | Variable               | Required | Default                           |\n\n/// |------------------------|----------|-----------------------------------|\n\n/// | `ANTHROPIC_API_KEY`    | yes      | —                                 |\n\n/// | `CODEX_TREE_MODEL`     | no       | `claude-sonnet-4-20250514`        |\n\n/// | `CODEX_TREE_BUDGET`    | no       | unlimited                         |\n\n///\n\n/// Returns `AnalyzerError::ApiKeyMissing` if the API key env-var is absent.\n"
+    },
+    {
+      "name": "model",
+      "kind": "function",
+      "visibility": "public",
+      "span": {
+        "start_line": 104,
+        "end_line": 106
+      },
+      "signature": "pub fn model(&self) -> &str",
+      "parent": "ClaudeClient",
+      "doc_comment": "/// The model ID in use, e.g. `\"claude-sonnet-4-20250514\"`.\n"
+    },
+    {
+      "name": "send_message",
+      "kind": "function",
+      "visibility": "public",
+      "span": {
+        "start_line": 121,
+        "end_line": 200
+      },
+      "signature": "pub async fn send_message(\n        &mut self,\n        system: &str,\n        user_content: &str,\n        max_tokens: usize,\n    ) -> Result<String>",
+      "parent": "ClaudeClient",
+      "doc_comment": "/// Send a single-turn message to Claude and return the text response.\n\n///\n\n/// POSTs to `https://api.anthropic.com/v1/messages` with the required\n\n/// `x-api-key` and `anthropic-version` headers.\n\n///\n\n/// Token usage is accumulated internally; if a `budget_limit` was set,\n\n/// returns `AnalyzerError::BudgetExceeded` rather than making the call.\n\n///\n\n/// # Errors\n\n/// - `AnalyzerError::BudgetExceeded` — pre-call budget check failed\n\n/// - `AnalyzerError::Http`           — network or transport error\n\n/// - `AnalyzerError::ApiError`       — non-2xx HTTP status from the API\n\n/// - `AnalyzerError::ResponseParse`  — response JSON doesn't contain text\n"
+    }
+  ],
+  "imports": [
+    {
+      "source": "std::env",
+      "kind": "use"
+    },
+    {
+      "source": "reqwest::Client",
+      "kind": "use"
+    },
+    {
+      "source": "serde::{Deserialize, Serialize}",
+      "kind": "use"
+    },
+    {
+      "source": "crate::error::{AnalyzerError, Result}",
+      "kind": "use"
+    }
+  ],
+  "exports": [
+    {
+      "name": "ClaudeClient",
+      "kind": "struct"
+    },
+    {
+      "name": "from_env",
+      "kind": "function"
+    },
+    {
+      "name": "model",
+      "kind": "function"
+    },
+    {
+      "name": "send_message",
+      "kind": "function"
+    }
+  ]
+}

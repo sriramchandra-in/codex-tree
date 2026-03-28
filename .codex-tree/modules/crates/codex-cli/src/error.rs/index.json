@@ -1,7 +1,7 @@
 {
   "path": "crates/codex-cli/src/error.rs",
   "language": "rust",
-  "content_hash": "sha256:414c97d2dbbee3ff154946e047dc67295e9edb89e37accd0d3514c1ca7874312",
+  "content_hash": "sha256:18f30c7ce6fee621df88eea7eaabad2bade15f03034edf24626539e456a16cbf",
   "symbols": [
     {
       "name": "CliError",
@@ -9,7 +9,7 @@
       "visibility": "public",
       "span": {
         "start_line": 4,
-        "end_line": 19
+        "end_line": 31
       },
       "signature": "pub enum CliError"
     },
@@ -18,8 +18,8 @@
       "kind": "type_alias",
       "visibility": "public",
       "span": {
-        "start_line": 21,
-        "end_line": 21
+        "start_line": 33,
+        "end_line": 33
       },
       "signature": "pub type Result<T> = std::result::Result<T, CliError>"
     }

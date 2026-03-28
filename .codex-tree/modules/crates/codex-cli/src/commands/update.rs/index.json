@@ -1,0 +1,133 @@
+{
+  "path": "crates/codex-cli/src/commands/update.rs",
+  "language": "rust",
+  "content_hash": "sha256:1e46f6607205effa3b7c97a40947fee14f8f6bd8f81a3b1f37963cf16045dea1",
+  "symbols": [
+    {
+      "name": "run",
+      "kind": "function",
+      "visibility": "public",
+      "span": {
+        "start_line": 29,
+        "end_line": 263
+      },
+      "signature": "pub fn run(\n    path: &Path,\n    no_intent: bool,\n    no_claude: bool,\n    no_compact: bool,\n    verbose: bool,\n    quiet: bool,\n) -> Result<()>"
+    },
+    {
+      "name": "update_module_on_disk",
+      "kind": "function",
+      "visibility": "private",
+      "span": {
+        "start_line": 268,
+        "end_line": 276
+      },
+      "signature": "fn update_module_on_disk(codex_tree_dir: &Path, module: &ModuleIndex) -> Result<()>",
+      "doc_comment": "/// Write a `ModuleIndex` to `modules/{path}/index.json`.\n"
+    },
+    {
+      "name": "detect_changed_by_hash",
+      "kind": "function",
+      "visibility": "private",
+      "span": {
+        "start_line": 280,
+        "end_line": 329
+      },
+      "signature": "fn detect_changed_by_hash(codex_tree_dir: &Path, git_root: &Path) -> Result<Vec<String>>",
+      "doc_comment": "/// When there is no `source_commit` in version.json, detect changed files by\n\n/// comparing the `content_hash` in each module index against the current file.\n"
+    },
+    {
+      "name": "run_intent_analysis",
+      "kind": "function",
+      "visibility": "private",
+      "span": {
+        "start_line": 334,
+        "end_line": 365
+      },
+      "signature": "fn run_intent_analysis(\n    codex_tree_dir: &std::path::Path,\n    modules: &[codex_parser::types::ModuleIndex],\n    quiet: bool,\n) -> Result<codex_analyzer::types::IntentOutput>",
+      "doc_comment": "/// Run intent analysis via Claude API. Returns None with a warning on failure.\n"
+    },
+    {
+      "name": "generate_claude_layer",
+      "kind": "function",
+      "visibility": "private",
+      "span": {
+        "start_line": 368,
+        "end_line": 395
+      },
+      "signature": "fn generate_claude_layer(\n    codex_tree_dir: &std::path::Path,\n    tree: &codex_parser::types::TreeStructure,\n    modules: &[codex_parser::types::ModuleIndex],\n    version: &codex_parser::types::TreeVersion,\n    intent: Option<&codex_analyzer::types::IntentOutput>,\n    quiet: bool,\n)",
+      "doc_comment": "/// Generate the Claude optimization layer (L1/L2/L3 markdown files).\n"
+    }
+  ],
+  "imports": [
+    {
+      "source": "std::fs",
+      "kind": "use"
+    },
+    {
+      "source": "std::path::Path",
+      "kind": "use"
+    },
+    {
+      "source": "colored::Colorize",
+      "kind": "use"
+    },
+    {
+      "source": "codex_parser::diff::diff_modules",
+      "kind": "use"
+    },
+    {
+      "source": "codex_parser::parser::parse_file",
+      "kind": "use"
+    },
+    {
+      "source": "codex_parser::registry::ParserRegistry",
+      "kind": "use"
+    },
+    {
+      "source": "codex_parser::serializer::compute_stats",
+      "kind": "use"
+    },
+    {
+      "source": "codex_parser::types::{Delta, DeltaOperation, ModuleIndex, TreeStructure, TreeVersion}",
+      "kind": "use"
+    },
+    {
+      "source": "crate::compaction::{calculate_delta_size, compact, should_compact}",
+      "kind": "use"
+    },
+    {
+      "source": "crate::error::{CliError, Result}",
+      "kind": "use"
+    },
+    {
+      "source": "crate::git::{get_changed_files, get_commit_date, get_head_commit, get_uncommitted_changes}",
+      "kind": "use"
+    },
+    {
+      "source": "crate::utils::{find_git_root, read_all_modules, current_utc_iso8601}",
+      "kind": "use"
+    },
+    {
+      "source": "sha2::{Digest, Sha256}",
+      "kind": "use"
+    },
+    {
+      "source": "codex_analyzer::analyzer::{write_intent, Analyzer}",
+      "kind": "use"
+    },
+    {
+      "source": "codex_analyzer::client::ClaudeClient",
+      "kind": "use"
+    },
+    {
+      "source": "codex_analyzer::claude_layer",
+      "kind": "use"
+    }
+  ],
+  "exports": [
+    {
+      "name": "run",
+      "kind": "function"
+    }
+  ]
+}

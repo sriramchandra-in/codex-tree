@@ -1,0 +1,115 @@
+{
+  "path": "crates/codex-analyzer/src/response.rs",
+  "language": "rust",
+  "content_hash": "sha256:98cc7fe30963d8c17db23bddf8844a5b9b8576878e9b831f9643c4500192d2cc",
+  "symbols": [
+    {
+      "name": "RawIntentOutput",
+      "kind": "struct",
+      "visibility": "private",
+      "span": {
+        "start_line": 20,
+        "end_line": 23
+      },
+      "signature": "struct RawIntentOutput"
+    },
+    {
+      "name": "RawDecision",
+      "kind": "struct",
+      "visibility": "private",
+      "span": {
+        "start_line": 26,
+        "end_line": 34
+      },
+      "signature": "struct RawDecision"
+    },
+    {
+      "name": "RawAnchor",
+      "kind": "struct",
+      "visibility": "private",
+      "span": {
+        "start_line": 37,
+        "end_line": 40
+      },
+      "signature": "struct RawAnchor"
+    },
+    {
+      "name": "RawPattern",
+      "kind": "struct",
+      "visibility": "private",
+      "span": {
+        "start_line": 43,
+        "end_line": 51
+      },
+      "signature": "struct RawPattern"
+    },
+    {
+      "name": "parse_intent_response",
+      "kind": "function",
+      "visibility": "public",
+      "span": {
+        "start_line": 65,
+        "end_line": 139
+      },
+      "signature": "pub fn parse_intent_response(raw: &str, model: &str) -> Result<IntentOutput>",
+      "doc_comment": "/// Parse a raw Claude response string into `IntentOutput`.\n\n///\n\n/// Steps:\n\n/// 1. Extract JSON from the response (strips markdown code fences if present).\n\n/// 2. Deserialise into intermediate types.\n\n/// 3. Clamp confidence values to `[0.0, 1.0]`.\n\n/// 4. Assign sequential IDs to any item whose `id` field was empty.\n\n/// 5. Wrap into the canonical output types with timestamp + model metadata.\n\n///\n\n/// Returns `AnalyzerError::ResponseParse` on any failure.\n"
+    },
+    {
+      "name": "extract_json",
+      "kind": "function",
+      "visibility": "private",
+      "span": {
+        "start_line": 150,
+        "end_line": 178
+      },
+      "signature": "fn extract_json(raw: &str) -> Option<&str>",
+      "doc_comment": "/// Try to isolate a JSON object from `raw`.\n\n///\n\n/// Strategy (in order):\n\n/// 1. Look for a ` ```json ` code fence and extract its contents.\n\n/// 2. Look for any ` ``` ` code fence.\n\n/// 3. Find the first `{` and last `}` in the string.\n\n/// 4. Return `None` if none of the above succeed.\n"
+    },
+    {
+      "name": "current_utc_iso8601",
+      "kind": "function",
+      "visibility": "private",
+      "span": {
+        "start_line": 184,
+        "end_line": 196
+      },
+      "signature": "fn current_utc_iso8601() -> String",
+      "doc_comment": "/// Return the current UTC time as an ISO-8601 string, e.g. `\"2026-03-28T12:00:00Z\"`.\n\n///\n\n/// Reimplemented inline (same algorithm as `codex-parser::serializer`) to avoid\n\n/// a cross-crate dependency on a trivial utility.\n"
+    },
+    {
+      "name": "unix_secs_to_datetime",
+      "kind": "function",
+      "visibility": "private",
+      "span": {
+        "start_line": 201,
+        "end_line": 221
+      },
+      "signature": "fn unix_secs_to_datetime(secs: u64) -> (u64, u64, u64, u64, u64, u64)",
+      "doc_comment": "/// Convert a Unix timestamp to `(year, month, day, hour, min, sec)`.\n\n///\n\n/// Uses the proleptic Gregorian calendar (Richards' algorithm) — works past 2038.\n"
+    }
+  ],
+  "imports": [
+    {
+      "source": "serde::Deserialize",
+      "kind": "use"
+    },
+    {
+      "source": "std::time::{SystemTime, UNIX_EPOCH}",
+      "kind": "use"
+    },
+    {
+      "source": "crate::error::{AnalyzerError, Result}",
+      "kind": "use"
+    },
+    {
+      "source": "crate::types::{\n    Anchor, Decision, DecisionsDocument, IntentOutput, Pattern, PatternsDocument, Provenance,\n}",
+      "kind": "use"
+    }
+  ],
+  "exports": [
+    {
+      "name": "parse_intent_response",
+      "kind": "function"
+    }
+  ]
+}

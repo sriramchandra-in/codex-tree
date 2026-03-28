@@ -1,7 +1,7 @@
 {
   "path": "crates/codex-cli/src/main.rs",
   "language": "rust",
-  "content_hash": "sha256:0b545d9d5b53fa3bfacac880f769492eeb1f85b99b9a43fa7faedefd7618fb99",
+  "content_hash": "sha256:0954378ad809f34550a25939f4e4f34354ae785719db4c85f6639138c41e1534",
   "symbols": [
     {
       "name": "commands",
@@ -14,22 +14,52 @@
       "signature": "mod commands"
     },
     {
-      "name": "error",
+      "name": "compaction",
       "kind": "module",
       "visibility": "private",
       "span": {
         "start_line": 7,
         "end_line": 7
       },
+      "signature": "mod compaction"
+    },
+    {
+      "name": "error",
+      "kind": "module",
+      "visibility": "private",
+      "span": {
+        "start_line": 8,
+        "end_line": 8
+      },
       "signature": "mod error"
+    },
+    {
+      "name": "git",
+      "kind": "module",
+      "visibility": "private",
+      "span": {
+        "start_line": 9,
+        "end_line": 9
+      },
+      "signature": "mod git"
+    },
+    {
+      "name": "utils",
+      "kind": "module",
+      "visibility": "private",
+      "span": {
+        "start_line": 10,
+        "end_line": 10
+      },
+      "signature": "mod utils"
     },
     {
       "name": "Cli",
       "kind": "struct",
       "visibility": "private",
       "span": {
-        "start_line": 12,
-        "end_line": 27
+        "start_line": 15,
+        "end_line": 30
       },
       "signature": "struct Cli"
     },
@@ -38,8 +68,8 @@
       "kind": "enum",
       "visibility": "private",
       "span": {
-        "start_line": 30,
-        "end_line": 101
+        "start_line": 33,
+        "end_line": 104
       },
       "signature": "enum Commands"
     },
@@ -48,8 +78,8 @@
       "kind": "function",
       "visibility": "private",
       "span": {
-        "start_line": 103,
-        "end_line": 131
+        "start_line": 106,
+        "end_line": 171
       },
       "signature": "fn main()"
     }

@@ -1,0 +1,119 @@
+{
+  "path": "crates/codex-analyzer/src/analyzer.rs",
+  "language": "rust",
+  "content_hash": "sha256:0fac95e7db441d93e3f5f23618aa39c673ceb877a9ad5d80b6c4afae817f143f",
+  "symbols": [
+    {
+      "name": "Analyzer",
+      "kind": "struct",
+      "visibility": "public",
+      "span": {
+        "start_line": 25,
+        "end_line": 27
+      },
+      "signature": "pub struct Analyzer",
+      "doc_comment": "/// Orchestrates intent analysis: cache lookup → prompt build → API call →\n\n/// response parse → cache write.\n"
+    },
+    {
+      "name": "Analyzer",
+      "kind": "impl",
+      "visibility": "private",
+      "span": {
+        "start_line": 29,
+        "end_line": 73
+      },
+      "signature": "impl Analyzer"
+    },
+    {
+      "name": "new",
+      "kind": "function",
+      "visibility": "public",
+      "span": {
+        "start_line": 33,
+        "end_line": 35
+      },
+      "signature": "pub fn new(client: ClaudeClient) -> Self",
+      "parent": "Analyzer",
+      "doc_comment": "/// Construct an `Analyzer` from an already-configured `ClaudeClient`.\n\n///\n\n/// In Scala: `new Analyzer(client)` — straightforward constructor injection.\n"
+    },
+    {
+      "name": "analyze",
+      "kind": "function",
+      "visibility": "public",
+      "span": {
+        "start_line": 47,
+        "end_line": 72
+      },
+      "signature": "pub async fn analyze(\n        &mut self,\n        codex_tree_dir: &Path,\n        modules: &[ModuleIndex],\n    ) -> Result<IntentOutput>",
+      "parent": "Analyzer",
+      "doc_comment": "/// Run intent analysis on the given modules.\n\n///\n\n/// Checks the content-hash cache first; calls the Claude API only on a\n\n/// cache miss.  On a successful API call the result is cached before\n\n/// returning.\n\n///\n\n/// # Errors\n\n/// Propagates any error from the Claude client (network, budget, API key)\n\n/// or the response parser.  Cache misses and cache write failures are\n\n/// treated as non-fatal and silently ignored.\n"
+    },
+    {
+      "name": "write_intent",
+      "kind": "function",
+      "visibility": "public",
+      "span": {
+        "start_line": 84,
+        "end_line": 97
+      },
+      "signature": "pub fn write_intent(codex_tree_dir: &Path, output: &IntentOutput) -> Result<()>",
+      "doc_comment": "/// Write intent output to disk as `intent/decisions.json` and\n\n/// `intent/patterns.json` under `codex_tree_dir`.\n\n///\n\n/// Creates `intent/` if it doesn't exist.  Both JSON files are pretty-printed\n\n/// for human readability in the repository.\n\n///\n\n/// In Scala: `writeIntent(dir: Path, output: IntentOutput): IO[Unit]`\n"
+    }
+  ],
+  "imports": [
+    {
+      "source": "std::fs",
+      "kind": "use"
+    },
+    {
+      "source": "std::path::Path",
+      "kind": "use"
+    },
+    {
+      "source": "codex_parser::types::ModuleIndex",
+      "kind": "use"
+    },
+    {
+      "source": "crate::cache",
+      "kind": "use"
+    },
+    {
+      "source": "crate::client::ClaudeClient",
+      "kind": "use"
+    },
+    {
+      "source": "crate::error::Result",
+      "kind": "use"
+    },
+    {
+      "source": "crate::prompts",
+      "kind": "use"
+    },
+    {
+      "source": "crate::response",
+      "kind": "use"
+    },
+    {
+      "source": "crate::types::IntentOutput",
+      "kind": "use"
+    }
+  ],
+  "exports": [
+    {
+      "name": "Analyzer",
+      "kind": "struct"
+    },
+    {
+      "name": "new",
+      "kind": "function"
+    },
+    {
+      "name": "analyze",
+      "kind": "function"
+    },
+    {
+      "name": "write_intent",
+      "kind": "function"
+    }
+  ]
+}

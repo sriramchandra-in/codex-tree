@@ -1,0 +1,121 @@
+{
+  "path": "crates/codex-cli/src/commands/report.rs",
+  "language": "rust",
+  "content_hash": "sha256:af5beab2e29e66f3014f3da3cf6fd20814e3b34daba0f6279a310f042107f8e3",
+  "symbols": [
+    {
+      "name": "Report",
+      "kind": "struct",
+      "visibility": "private",
+      "span": {
+        "start_line": 18,
+        "end_line": 24
+      },
+      "signature": "struct Report"
+    },
+    {
+      "name": "ReportStats",
+      "kind": "struct",
+      "visibility": "private",
+      "span": {
+        "start_line": 27,
+        "end_line": 33
+      },
+      "signature": "struct ReportStats"
+    },
+    {
+      "name": "TokenEstimate",
+      "kind": "struct",
+      "visibility": "private",
+      "span": {
+        "start_line": 36,
+        "end_line": 45
+      },
+      "signature": "struct TokenEstimate"
+    },
+    {
+      "name": "run",
+      "kind": "function",
+      "visibility": "public",
+      "span": {
+        "start_line": 49,
+        "end_line": 175
+      },
+      "signature": "pub fn run(\n    path: &Path,\n    format: &str,\n    _benchmark: bool,\n    _verbose: bool,\n    quiet: bool,\n) -> Result<()>"
+    },
+    {
+      "name": "estimate_tokens",
+      "kind": "function",
+      "visibility": "private",
+      "span": {
+        "start_line": 183,
+        "end_line": 229
+      },
+      "signature": "fn estimate_tokens(\n    git_root: &Path,\n    codex_tree_dir: &Path,\n    modules: &[ModuleIndex],\n) -> Result<TokenEstimate>",
+      "doc_comment": "/// Estimate token counts for raw source vs tree representations.\n\n///\n\n/// The scaffolding reads all file sizes and computes the byte totals.\n\n/// The core decision is how to convert bytes → tokens for each content type.\n"
+    },
+    {
+      "name": "ContentKind",
+      "kind": "enum",
+      "visibility": "private",
+      "span": {
+        "start_line": 233,
+        "end_line": 236
+      },
+      "signature": "enum ContentKind"
+    },
+    {
+      "name": "bytes_to_tokens",
+      "kind": "function",
+      "visibility": "private",
+      "span": {
+        "start_line": 250,
+        "end_line": 256
+      },
+      "signature": "fn bytes_to_tokens(bytes: usize, kind: ContentKind) -> usize",
+      "doc_comment": "/// Convert a byte count to an estimated token count using content-aware ratios.\n\n///\n\n/// BPE tokenizers (like Claude's) split text into subword units. The average\n\n/// bytes-per-token ratio varies by content type:\n\n///\n\n/// - **Code** (~3.5 bytes/token): identifiers get split at camelCase/snake_case\n\n///   boundaries, but keywords and operators are usually single tokens. Indentation\n\n///   whitespace compresses well (one token per indent level regardless of spaces).\n\n///\n\n/// - **JSON** (~3.0 bytes/token): more token-dense because of repeated structural\n\n///   characters (`\"`, `{`, `}`, `:`, `,`) that each consume a token, and quoted\n\n///   keys that tokenize less efficiently than bare identifiers.\n"
+    },
+    {
+      "name": "format_number",
+      "kind": "function",
+      "visibility": "private",
+      "span": {
+        "start_line": 260,
+        "end_line": 268
+      },
+      "signature": "fn format_number(n: usize) -> String"
+    }
+  ],
+  "imports": [
+    {
+      "source": "std::fs",
+      "kind": "use"
+    },
+    {
+      "source": "std::path::Path",
+      "kind": "use"
+    },
+    {
+      "source": "colored::Colorize",
+      "kind": "use"
+    },
+    {
+      "source": "codex_parser::types::{ModuleIndex, TreeVersion}",
+      "kind": "use"
+    },
+    {
+      "source": "crate::error::{CliError, Result}",
+      "kind": "use"
+    },
+    {
+      "source": "crate::utils::{find_git_root, read_all_modules, format_size, calculate_dir_size}",
+      "kind": "use"
+    }
+  ],
+  "exports": [
+    {
+      "name": "run",
+      "kind": "function"
+    }
+  ]
+}

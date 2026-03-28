@@ -1,10 +1,20 @@
-// codex-analyzer: AI-powered intent analysis for codex-tree knowledge trees
+// codex-analyzer: AI-powered intent analysis for codex-tree knowledge trees.
+//
+// Module layout:
+//   error        — AnalyzerError enum + Result<T> alias
+//   types        — Intent layer data model (Decision, Pattern, Provenance, etc.)
+//   client       — Claude API HTTP client (reqwest + Anthropic Messages API)
+//   prompts      — Prompt templates for intent analysis
+//   response     — Parse/validate Claude API responses
+//   cache        — Content-hash-based analysis caching
+//   analyzer     — Main orchestration engine
+//   claude_layer — Claude-optimised markdown layer generation (L1/L2/L3)
 
-// TODO: Phase 4 modules
-// pub mod client;
-// pub mod prompts;
-// pub mod types;
-// pub mod analyzer;
-// pub mod response;
-// pub mod cache;
-// pub mod error;
+pub mod error;
+pub mod types;
+pub mod client;
+pub mod prompts;
+pub mod response;
+pub mod cache;
+pub mod analyzer;
+pub mod claude_layer;

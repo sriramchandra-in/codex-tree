@@ -1,0 +1,112 @@
+{
+  "path": "crates/codex-parser/src/diff.rs",
+  "language": "rust",
+  "content_hash": "sha256:4e25ccda7b57c96ea5f0486d3035cba67a5dfb95d8387044f2c1e202e4b4adff",
+  "symbols": [
+    {
+      "name": "diff_modules",
+      "kind": "function",
+      "visibility": "public",
+      "span": {
+        "start_line": 17,
+        "end_line": 57
+      },
+      "signature": "pub fn diff_modules(old: &ModuleIndex, new: &ModuleIndex) -> DeltaOperation",
+      "doc_comment": "/// Compare an old and new `ModuleIndex` and return a `DeltaOperation::Modify`\n\n/// that describes what changed at the symbol level.\n\n///\n\n/// - **Added** — names present in `new` but absent in `old`.\n\n/// - **Removed** — names present in `old` but absent in `new`.\n\n/// - **Modified** — names present in both but with a different `signature`,\n\n///   `span.start_line`, or `span.end_line`.\n"
+    },
+    {
+      "name": "tests",
+      "kind": "module",
+      "visibility": "private",
+      "span": {
+        "start_line": 60,
+        "end_line": 169
+      },
+      "signature": "mod tests"
+    },
+    {
+      "name": "make_symbol",
+      "kind": "function",
+      "visibility": "private",
+      "span": {
+        "start_line": 64,
+        "end_line": 77
+      },
+      "signature": "fn make_symbol(name: &str, sig: &str, start: usize, end: usize) -> Symbol"
+    },
+    {
+      "name": "make_module",
+      "kind": "function",
+      "visibility": "private",
+      "span": {
+        "start_line": 79,
+        "end_line": 88
+      },
+      "signature": "fn make_module(path: &str, symbols: Vec<Symbol>) -> ModuleIndex"
+    },
+    {
+      "name": "test_no_changes",
+      "kind": "function",
+      "visibility": "private",
+      "span": {
+        "start_line": 91,
+        "end_line": 109
+      },
+      "signature": "fn test_no_changes()"
+    },
+    {
+      "name": "test_symbol_added",
+      "kind": "function",
+      "visibility": "private",
+      "span": {
+        "start_line": 112,
+        "end_line": 128
+      },
+      "signature": "fn test_symbol_added()"
+    },
+    {
+      "name": "test_symbol_removed",
+      "kind": "function",
+      "visibility": "private",
+      "span": {
+        "start_line": 131,
+        "end_line": 147
+      },
+      "signature": "fn test_symbol_removed()"
+    },
+    {
+      "name": "test_symbol_modified_signature",
+      "kind": "function",
+      "visibility": "private",
+      "span": {
+        "start_line": 150,
+        "end_line": 168
+      },
+      "signature": "fn test_symbol_modified_signature()"
+    }
+  ],
+  "imports": [
+    {
+      "source": "std::collections::HashSet",
+      "kind": "use"
+    },
+    {
+      "source": "crate::types::{DeltaOperation, ModuleIndex}",
+      "kind": "use"
+    },
+    {
+      "source": "super::*",
+      "kind": "use"
+    },
+    {
+      "source": "crate::types::{Export, Import, ModuleIndex, Span, Symbol, SymbolKind, Visibility}",
+      "kind": "use"
+    }
+  ],
+  "exports": [
+    {
+      "name": "diff_modules",
+      "kind": "function"
+    }
+  ]
+}

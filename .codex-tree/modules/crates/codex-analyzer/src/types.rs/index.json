@@ -1,0 +1,128 @@
+{
+  "path": "crates/codex-analyzer/src/types.rs",
+  "language": "rust",
+  "content_hash": "sha256:fd68060d15e720ad6fc40cc993822869530ff015e9d229f128987c7d4f9959d8",
+  "symbols": [
+    {
+      "name": "Provenance",
+      "kind": "enum",
+      "visibility": "public",
+      "span": {
+        "start_line": 17,
+        "end_line": 26
+      },
+      "signature": "pub enum Provenance"
+    },
+    {
+      "name": "Anchor",
+      "kind": "struct",
+      "visibility": "public",
+      "span": {
+        "start_line": 35,
+        "end_line": 41
+      },
+      "signature": "pub struct Anchor"
+    },
+    {
+      "name": "Decision",
+      "kind": "struct",
+      "visibility": "public",
+      "span": {
+        "start_line": 57,
+        "end_line": 65
+      },
+      "signature": "pub struct Decision"
+    },
+    {
+      "name": "Pattern",
+      "kind": "struct",
+      "visibility": "public",
+      "span": {
+        "start_line": 74,
+        "end_line": 82
+      },
+      "signature": "pub struct Pattern"
+    },
+    {
+      "name": "DecisionsDocument",
+      "kind": "struct",
+      "visibility": "public",
+      "span": {
+        "start_line": 88,
+        "end_line": 92
+      },
+      "signature": "pub struct DecisionsDocument"
+    },
+    {
+      "name": "PatternsDocument",
+      "kind": "struct",
+      "visibility": "public",
+      "span": {
+        "start_line": 96,
+        "end_line": 100
+      },
+      "signature": "pub struct PatternsDocument"
+    },
+    {
+      "name": "IntentOutput",
+      "kind": "struct",
+      "visibility": "public",
+      "span": {
+        "start_line": 106,
+        "end_line": 109
+      },
+      "signature": "pub struct IntentOutput"
+    },
+    {
+      "name": "ClaudeLayerOutput",
+      "kind": "struct",
+      "visibility": "public",
+      "span": {
+        "start_line": 117,
+        "end_line": 124
+      },
+      "signature": "pub struct ClaudeLayerOutput",
+      "doc_comment": "/// The three progressive-detail markdown documents for `.codex-tree/claude/`.\n\n///\n\n/// These are generated locally from tree data + intent, no API call needed.\n\n/// In Scala: `case class ClaudeLayerOutput(l1: String, l2: String, l3: String)`\n"
+    }
+  ],
+  "imports": [
+    {
+      "source": "serde::{Deserialize, Serialize}",
+      "kind": "use"
+    }
+  ],
+  "exports": [
+    {
+      "name": "Provenance",
+      "kind": "enum"
+    },
+    {
+      "name": "Anchor",
+      "kind": "struct"
+    },
+    {
+      "name": "Decision",
+      "kind": "struct"
+    },
+    {
+      "name": "Pattern",
+      "kind": "struct"
+    },
+    {
+      "name": "DecisionsDocument",
+      "kind": "struct"
+    },
+    {
+      "name": "PatternsDocument",
+      "kind": "struct"
+    },
+    {
+      "name": "IntentOutput",
+      "kind": "struct"
+    },
+    {
+      "name": "ClaudeLayerOutput",
+      "kind": "struct"
+    }
+  ]
+}
