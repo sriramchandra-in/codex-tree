@@ -1,4 +1,4 @@
-/// Types for the AI intent layer and Claude optimization layer.
+/// Types for the AI intent layer and AI-facing optimization layers (Claude, Cursor).
 ///
 /// These types model the non-deterministic, AI-generated portion of the
 /// codex-tree. While the AST layer (in `codex-parser`) captures "what exists",
@@ -120,5 +120,17 @@ pub struct ClaudeLayerOutput {
     /// ~2,000 tokens — module detail for Sonnet / implementation.
     pub l2: String,
     /// Full detail for Opus / architecture decisions.
+    pub l3: String,
+}
+
+// ── Cursor layer output ───────────────────────────────────────────────────────
+
+/// The three progressive-detail markdown documents for `.codex-tree/cursor/`.
+///
+/// Same underlying content as [`ClaudeLayerOutput`], plus a Cursor usage preamble.
+/// Generated locally from tree data + intent, no API call.
+pub struct CursorLayerOutput {
+    pub l1: String,
+    pub l2: String,
     pub l3: String,
 }

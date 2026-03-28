@@ -1,15 +1,15 @@
 {
   "path": "crates/codex-analyzer/src/lib.rs",
   "language": "rust",
-  "content_hash": "sha256:c7a629f4f85e771e35aa5583d0b95038e552bba2d790db883c8fd3b0905de7a2",
+  "content_hash": "sha256:e757af9d6dc40e4b273e6c2147720e6e8eef97522acb346732548e6bca3892f3",
   "symbols": [
     {
       "name": "analyzer",
       "kind": "module",
       "visibility": "public",
       "span": {
-        "start_line": 13,
-        "end_line": 13
+        "start_line": 14,
+        "end_line": 14
       },
       "signature": "pub mod analyzer"
     },
@@ -18,8 +18,8 @@
       "kind": "module",
       "visibility": "public",
       "span": {
-        "start_line": 14,
-        "end_line": 14
+        "start_line": 15,
+        "end_line": 15
       },
       "signature": "pub mod cache"
     },
@@ -28,18 +28,28 @@
       "kind": "module",
       "visibility": "public",
       "span": {
-        "start_line": 15,
-        "end_line": 15
+        "start_line": 16,
+        "end_line": 16
       },
       "signature": "pub mod claude_layer"
+    },
+    {
+      "name": "cursor_layer",
+      "kind": "module",
+      "visibility": "public",
+      "span": {
+        "start_line": 17,
+        "end_line": 17
+      },
+      "signature": "pub mod cursor_layer"
     },
     {
       "name": "client",
       "kind": "module",
       "visibility": "public",
       "span": {
-        "start_line": 16,
-        "end_line": 16
+        "start_line": 18,
+        "end_line": 18
       },
       "signature": "pub mod client"
     },
@@ -48,8 +58,8 @@
       "kind": "module",
       "visibility": "public",
       "span": {
-        "start_line": 17,
-        "end_line": 17
+        "start_line": 19,
+        "end_line": 19
       },
       "signature": "pub mod error"
     },
@@ -58,8 +68,8 @@
       "kind": "module",
       "visibility": "public",
       "span": {
-        "start_line": 18,
-        "end_line": 18
+        "start_line": 20,
+        "end_line": 20
       },
       "signature": "pub mod prompts"
     },
@@ -68,8 +78,8 @@
       "kind": "module",
       "visibility": "public",
       "span": {
-        "start_line": 19,
-        "end_line": 19
+        "start_line": 21,
+        "end_line": 21
       },
       "signature": "pub mod response"
     },
@@ -78,8 +88,8 @@
       "kind": "module",
       "visibility": "public",
       "span": {
-        "start_line": 20,
-        "end_line": 20
+        "start_line": 22,
+        "end_line": 22
       },
       "signature": "pub mod types"
     }
@@ -96,6 +106,10 @@
     },
     {
       "name": "claude_layer",
+      "kind": "module"
+    },
+    {
+      "name": "cursor_layer",
       "kind": "module"
     },
     {

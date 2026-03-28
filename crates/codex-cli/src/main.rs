@@ -41,6 +41,10 @@ enum Commands {
         #[arg(long)]
         no_claude: bool,
 
+        /// Skip Cursor optimization layer generation
+        #[arg(long)]
+        no_cursor: bool,
+
         /// Comma-separated list of languages to parse
         #[arg(long)]
         languages: Option<String>,
@@ -60,6 +64,10 @@ enum Commands {
         #[arg(long)]
         no_claude: bool,
 
+        /// Skip Cursor layer regeneration
+        #[arg(long)]
+        no_cursor: bool,
+
         /// Skip auto-compaction even if thresholds are met
         #[arg(long)]
         no_compact: bool,
@@ -74,6 +82,10 @@ enum Commands {
         /// Skip Claude optimization layer generation
         #[arg(long)]
         no_claude: bool,
+
+        /// Skip Cursor optimization layer generation
+        #[arg(long)]
+        no_cursor: bool,
 
         /// Comma-separated list of languages to parse
         #[arg(long)]
@@ -110,12 +122,14 @@ fn main() {
         Commands::Init {
             no_intent,
             no_claude,
+            no_cursor,
             languages,
             dry_run,
         } => commands::init::run(
             Path::new(&cli.path),
             *no_intent,
             *no_claude,
+            *no_cursor,
             languages.as_deref(),
             *dry_run,
             cli.verbose,
@@ -124,11 +138,13 @@ fn main() {
         Commands::Update {
             no_intent,
             no_claude,
+            no_cursor,
             no_compact,
         } => commands::update::run(
             Path::new(&cli.path),
             *no_intent,
             *no_claude,
+            *no_cursor,
             *no_compact,
             cli.verbose,
             cli.quiet,
@@ -136,11 +152,13 @@ fn main() {
         Commands::Regen {
             no_intent,
             no_claude,
+            no_cursor,
             languages,
         } => commands::regen::run(
             Path::new(&cli.path),
             *no_intent,
             *no_claude,
+            *no_cursor,
             languages.as_deref(),
             cli.verbose,
             cli.quiet,

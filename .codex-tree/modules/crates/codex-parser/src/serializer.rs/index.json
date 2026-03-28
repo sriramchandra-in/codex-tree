@@ -1,26 +1,26 @@
 {
   "path": "crates/codex-parser/src/serializer.rs",
   "language": "rust",
-  "content_hash": "sha256:8c36db73053afb062686afd34f324d259dcb0483ad974a9d741bb20d9b208d30",
+  "content_hash": "sha256:4274511c9729085970e065d727ced5e4b316c21548f7647b66d201028128ffee",
   "symbols": [
     {
       "name": "write_tree",
       "kind": "function",
       "visibility": "public",
       "span": {
-        "start_line": 23,
-        "end_line": 55
+        "start_line": 24,
+        "end_line": 57
       },
       "signature": "pub fn write_tree(\n    output_dir: &Path,\n    tree: &TreeStructure,\n    modules: &[ModuleIndex],\n    version: &TreeVersion,\n) -> Result<()>",
-      "doc_comment": "/// Write the full codex-tree output layout under `output_dir`.\n\n///\n\n/// Directory layout created:\n\n/// ```text\n\n/// {output_dir}/\n\n///   version.json\n\n///   tree.json\n\n///   modules/{relative/path}/index.json   (one per ModuleIndex)\n\n///   deltas/          (empty, reserved for future incremental deltas)\n\n///   intent/          (empty, reserved for intent declarations)\n\n///   claude/          (empty, reserved for Claude-specific metadata)\n\n/// ```\n"
+      "doc_comment": "/// Write the full codex-tree output layout under `output_dir`.\n\n///\n\n/// Directory layout created:\n\n/// ```text\n\n/// {output_dir}/\n\n///   version.json\n\n///   tree.json\n\n///   modules/{relative/path}/index.json   (one per ModuleIndex)\n\n///   deltas/          (empty, reserved for future incremental deltas)\n\n///   intent/          (empty, reserved for intent declarations)\n\n///   claude/          (empty, reserved for Claude-specific digest)\n\n///   cursor/          (empty, reserved for Cursor-specific digest)\n\n/// ```\n"
     },
     {
       "name": "create_initial_version",
       "kind": "function",
       "visibility": "public",
       "span": {
-        "start_line": 62,
-        "end_line": 75
+        "start_line": 64,
+        "end_line": 77
       },
       "signature": "pub fn create_initial_version(stats: &TreeStats) -> TreeVersion",
       "doc_comment": "/// Construct the initial `TreeVersion` document for a fresh `codex-tree init`.\n\n///\n\n/// `generated_at` is set to the current UTC time formatted as ISO-8601.\n\n/// `source_commit` is `None` — the CLI layer fills this in after resolving\n\n/// the git HEAD commit.\n"
@@ -30,8 +30,8 @@
       "kind": "function",
       "visibility": "public",
       "span": {
-        "start_line": 81,
-        "end_line": 109
+        "start_line": 83,
+        "end_line": 111
       },
       "signature": "pub fn compute_stats(tree: &TreeStructure, modules: &[ModuleIndex]) -> TreeStats",
       "doc_comment": "/// Derive aggregate `TreeStats` from an already-built tree + module list.\n\n///\n\n/// `delta_size_bytes` is set to `0`; the CLI layer can update this after\n\n/// writing the output directory if it wants an accurate on-disk size.\n"
@@ -41,8 +41,8 @@
       "kind": "function",
       "visibility": "private",
       "span": {
-        "start_line": 117,
-        "end_line": 130
+        "start_line": 119,
+        "end_line": 132
       },
       "signature": "fn current_utc_iso8601() -> String",
       "doc_comment": "/// Return the current UTC time as an ISO-8601 string, e.g. `\"2026-03-27T14:00:00Z\"`.\n\n///\n\n/// We derive this from `std::time::SystemTime` to avoid adding a `chrono`\n\n/// dependency to this crate.\n"
@@ -52,8 +52,8 @@
       "kind": "function",
       "visibility": "private",
       "span": {
-        "start_line": 136,
-        "end_line": 158
+        "start_line": 138,
+        "end_line": 160
       },
       "signature": "fn unix_secs_to_datetime(secs: u64) -> (u64, u64, u64, u64, u64, u64)",
       "doc_comment": "/// Convert a Unix timestamp (seconds) to `(year, month, day, hour, min, sec)`.\n\n///\n\n/// Uses the proleptic Gregorian calendar algorithm so it works beyond 2038\n\n/// without 32-bit overflow.\n"

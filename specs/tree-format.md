@@ -23,10 +23,14 @@ The format is model-independent, IDE-independent, and language-independent.
   intent/                         # AI-generated semantic layer
     decisions.json
     patterns.json
-  claude/                         # Claude-specific optimization layer
+  claude/                         # Claude-oriented digest (L1/L2/L3)
     l1.md                         # ~500 tokens — project summary
     l2.md                         # ~2,000 tokens — module detail
     l3.md                         # Full detail
+  cursor/                         # Same digest + Cursor usage guidance
+    l1.md
+    l2.md
+    l3.md
 ```
 
 ## Schemas
@@ -278,6 +282,16 @@ Each file begins with a metadata header:
 - Sonnet / implementation → load L2
 - Opus / architecture decisions → load L3
 
+### cursor/ — Cursor Optimization Layer
+
+**Alignment policy:** The markdown body of each level is identical to `claude/` (same generator, same tree + intent data). Only the **Cursor-specific preamble** after the metadata header differs — when to attach each file, `@` file context, optional `.cursor/rules`, pointers to `modules/**/index.json`. New structural content belongs in the shared generator so both layers stay in sync; Cursor-only prose stays in the preamble.
+
+**Staleness rule:** Identical to `claude/` — compare the HTML comment’s `generation` and `delta_count` to `version.json`.
+
+**Consumption guidance:**
+- Chat / Composer / Agent → attach `.codex-tree/cursor/l1.md` first; use `l2` or `l3` when the task needs deeper module or symbol detail.
+- No additional API calls or environment variables; generation is local string assembly only.
+
 ## Staleness Detection
 
 The `check` command compares tree state against the working directory:
@@ -293,5 +307,5 @@ The `check` command compares tree state against the working directory:
 1. **Structure is ground truth.** The AST layer is deterministic and verifiable. The AI intent layer is always derivable from the AST layer + source code.
 2. **Progressive disclosure.** Load what you need — tree.json for overview, module index for detail, intent for understanding.
 3. **Fail gracefully.** If the tree is stale or corrupt, the consumer falls back to raw source exploration. The tree is an optimization, not a requirement.
-4. **Model-independence.** The format uses standard JSON and Markdown. No model-specific encoding or token optimization in the core format. The `claude/` layer is an optional, model-specific cache.
+4. **Model-independence.** The format uses standard JSON and Markdown. No model-specific encoding or token optimization in the core format. The `claude/` and `cursor/` layers are optional, consumer-specific digests over the same underlying tree; they do not change the canonical AST or intent JSON schemas.
 5. **Language-independence.** Symbol kinds and visibility levels are normalized across languages. Language-specific details are preserved in signatures.
