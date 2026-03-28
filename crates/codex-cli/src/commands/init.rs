@@ -12,16 +12,25 @@ use crate::utils::{calculate_dir_size, find_git_root, format_size};
 
 // ── Public entry point ────────────────────────────────────────────────────────
 
-pub fn run(
-    path: &Path,
-    no_intent: bool,
-    no_claude: bool,
-    no_cursor: bool,
-    _languages: Option<&str>,
-    dry_run: bool,
-    verbose: bool,
-    quiet: bool,
-) -> Result<()> {
+/// Boolean flags for `codex-tree init` (keeps `run` under Clippy's argument limit).
+pub struct InitOptions {
+    pub no_intent: bool,
+    pub no_claude: bool,
+    pub no_cursor: bool,
+    pub dry_run: bool,
+    pub verbose: bool,
+    pub quiet: bool,
+}
+
+pub fn run(path: &Path, options: InitOptions, _languages: Option<&str>) -> Result<()> {
+    let InitOptions {
+        no_intent,
+        no_claude,
+        no_cursor,
+        dry_run,
+        verbose,
+        quiet,
+    } = options;
     // ── 1. Resolve absolute path ──────────────────────────────────────────────
     let abs_path = std::fs::canonicalize(path).map_err(|e| {
         // Provide a friendlier error if the path simply doesn't exist.

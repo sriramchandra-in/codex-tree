@@ -127,13 +127,15 @@ fn main() {
             dry_run,
         } => commands::init::run(
             Path::new(&cli.path),
-            *no_intent,
-            *no_claude,
-            *no_cursor,
+            commands::init::InitOptions {
+                no_intent: *no_intent,
+                no_claude: *no_claude,
+                no_cursor: *no_cursor,
+                dry_run: *dry_run,
+                verbose: cli.verbose,
+                quiet: cli.quiet,
+            },
             languages.as_deref(),
-            *dry_run,
-            cli.verbose,
-            cli.quiet,
         ),
         Commands::Update {
             no_intent,

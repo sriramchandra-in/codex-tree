@@ -136,8 +136,8 @@ pub fn write_cursor_layer(output_dir: &Path, l1: &str, l2: &str, l3: &str) -> st
 mod tests {
     use super::*;
     use codex_parser::types::{
-        Export, Span, Symbol, SymbolKind, TreeEntry, TreeStats, TreeStructure,
-        TreeVersion, TreeVersionNumber, Visibility,
+        Export, Span, Symbol, SymbolKind, TreeEntry, TreeStats, TreeStructure, TreeVersion,
+        TreeVersionNumber, Visibility,
     };
 
     fn make_version() -> TreeVersion {
