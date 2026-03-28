@@ -1,7 +1,7 @@
 {
   "path": "crates/codex-analyzer/src/lib.rs",
   "language": "rust",
-  "content_hash": "sha256:e757af9d6dc40e4b273e6c2147720e6e8eef97522acb346732548e6bca3892f3",
+  "content_hash": "sha256:36541dab9bc691034759132cedeb1264ff2e0e582e5bd1e4bab8f67ffc545576",
   "symbols": [
     {
       "name": "analyzer",
@@ -34,24 +34,24 @@
       "signature": "pub mod claude_layer"
     },
     {
-      "name": "cursor_layer",
+      "name": "client",
       "kind": "module",
       "visibility": "public",
       "span": {
         "start_line": 17,
         "end_line": 17
       },
-      "signature": "pub mod cursor_layer"
+      "signature": "pub mod client"
     },
     {
-      "name": "client",
+      "name": "cursor_layer",
       "kind": "module",
       "visibility": "public",
       "span": {
         "start_line": 18,
         "end_line": 18
       },
-      "signature": "pub mod client"
+      "signature": "pub mod cursor_layer"
     },
     {
       "name": "error",
@@ -109,11 +109,11 @@
       "kind": "module"
     },
     {
-      "name": "cursor_layer",
+      "name": "client",
       "kind": "module"
     },
     {
-      "name": "client",
+      "name": "cursor_layer",
       "kind": "module"
     },
     {

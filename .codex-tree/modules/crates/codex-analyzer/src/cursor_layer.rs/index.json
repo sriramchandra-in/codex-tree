@@ -1,7 +1,7 @@
 {
   "path": "crates/codex-analyzer/src/cursor_layer.rs",
   "language": "rust",
-  "content_hash": "sha256:3a9baedf0b2d730ae7cad1d20d14452f99ce8b5f80dfa633cf6685ff41733432",
+  "content_hash": "sha256:42c351929f3808efff2e19f0e78ce7aa466882ea13f7407059e8210a5bfc0387",
   "symbols": [
     {
       "name": "cursor_usage_guide",
@@ -169,7 +169,7 @@
       "kind": "use"
     },
     {
-      "source": "codex_parser::types::{\n        Export, Span, Symbol, SymbolKind, TreeEntry, TreeStats, TreeStructure,\n        TreeVersion, TreeVersionNumber, Visibility,\n    }",
+      "source": "codex_parser::types::{\n        Export, Span, Symbol, SymbolKind, TreeEntry, TreeStats, TreeStructure, TreeVersion,\n        TreeVersionNumber, Visibility,\n    }",
       "kind": "use"
     }
   ],

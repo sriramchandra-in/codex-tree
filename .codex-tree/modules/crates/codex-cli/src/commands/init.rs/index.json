@@ -1,25 +1,36 @@
 {
   "path": "crates/codex-cli/src/commands/init.rs",
   "language": "rust",
-  "content_hash": "sha256:6147f787b41929092d1f74c11b08d553127afee00d26fd612e0ed658f2ab27f9",
+  "content_hash": "sha256:afe3f6eabf745fc8c7b7275d93dafc6f7af3c683c9a51a3d5df4fdf3ad326ab4",
   "symbols": [
+    {
+      "name": "InitOptions",
+      "kind": "struct",
+      "visibility": "public",
+      "span": {
+        "start_line": 16,
+        "end_line": 23
+      },
+      "signature": "pub struct InitOptions",
+      "doc_comment": "/// Boolean flags for `codex-tree init` (keeps `run` under Clippy's argument limit).\n"
+    },
     {
       "name": "run",
       "kind": "function",
       "visibility": "public",
       "span": {
-        "start_line": 15,
-        "end_line": 184
+        "start_line": 25,
+        "end_line": 193
       },
-      "signature": "pub fn run(\n    path: &Path,\n    no_intent: bool,\n    no_claude: bool,\n    no_cursor: bool,\n    _languages: Option<&str>,\n    dry_run: bool,\n    verbose: bool,\n    quiet: bool,\n) -> Result<()>"
+      "signature": "pub fn run(path: &Path, options: InitOptions, _languages: Option<&str>) -> Result<()>"
     },
     {
       "name": "run_intent_analysis",
       "kind": "function",
       "visibility": "private",
       "span": {
-        "start_line": 189,
-        "end_line": 220
+        "start_line": 198,
+        "end_line": 229
       },
       "signature": "fn run_intent_analysis(\n    codex_tree_dir: &std::path::Path,\n    modules: &[codex_parser::types::ModuleIndex],\n    quiet: bool,\n) -> Result<codex_analyzer::types::IntentOutput>",
       "doc_comment": "/// Run intent analysis via Claude API. Returns None with a warning on failure.\n"
@@ -29,8 +40,8 @@
       "kind": "function",
       "visibility": "private",
       "span": {
-        "start_line": 223,
-        "end_line": 250
+        "start_line": 232,
+        "end_line": 259
       },
       "signature": "fn generate_claude_layer(\n    codex_tree_dir: &std::path::Path,\n    tree: &codex_parser::types::TreeStructure,\n    modules: &[codex_parser::types::ModuleIndex],\n    version: &codex_parser::types::TreeVersion,\n    intent: Option<&codex_analyzer::types::IntentOutput>,\n    quiet: bool,\n)",
       "doc_comment": "/// Generate the Claude optimization layer (L1/L2/L3 markdown files).\n"
@@ -40,8 +51,8 @@
       "kind": "function",
       "visibility": "private",
       "span": {
-        "start_line": 253,
-        "end_line": 280
+        "start_line": 262,
+        "end_line": 289
       },
       "signature": "fn generate_cursor_layer(\n    codex_tree_dir: &std::path::Path,\n    tree: &codex_parser::types::TreeStructure,\n    modules: &[codex_parser::types::ModuleIndex],\n    version: &codex_parser::types::TreeVersion,\n    intent: Option<&codex_analyzer::types::IntentOutput>,\n    quiet: bool,\n)",
       "doc_comment": "/// Generate the Cursor optimization layer (L1/L2/L3 markdown under `cursor/`).\n"
@@ -98,6 +109,10 @@
     }
   ],
   "exports": [
+    {
+      "name": "InitOptions",
+      "kind": "struct"
+    },
     {
       "name": "run",
       "kind": "function"

@@ -1,0 +1,58 @@
+{
+  "sequence": 2,
+  "timestamp": "2026-03-28T13:52:20Z",
+  "source_commit": "a0e789b2ba0b67a75175ead17fe2708249908020",
+  "changed_files": [
+    ".codex-tree/cursor/l1.md",
+    ".codex-tree/cursor/l2.md",
+    ".codex-tree/cursor/l3.md",
+    ".codex-tree/deltas/1.json",
+    ".codex-tree/version.json",
+    "crates/codex-analyzer/src/cursor_layer.rs",
+    "crates/codex-analyzer/src/lib.rs",
+    "crates/codex-cli/src/commands/init.rs",
+    "crates/codex-cli/src/main.rs"
+  ],
+  "operations": [
+    {
+      "op": "modify",
+      "path": "crates/codex-analyzer/src/cursor_layer.rs",
+      "symbols_added": [],
+      "symbols_removed": [],
+      "symbols_modified": []
+    },
+    {
+      "op": "modify",
+      "path": "crates/codex-analyzer/src/lib.rs",
+      "symbols_added": [],
+      "symbols_removed": [],
+      "symbols_modified": [
+        "client",
+        "cursor_layer"
+      ]
+    },
+    {
+      "op": "modify",
+      "path": "crates/codex-cli/src/commands/init.rs",
+      "symbols_added": [
+        "InitOptions"
+      ],
+      "symbols_removed": [],
+      "symbols_modified": [
+        "generate_claude_layer",
+        "generate_cursor_layer",
+        "run",
+        "run_intent_analysis"
+      ]
+    },
+    {
+      "op": "modify",
+      "path": "crates/codex-cli/src/main.rs",
+      "symbols_added": [],
+      "symbols_removed": [],
+      "symbols_modified": [
+        "main"
+      ]
+    }
+  ]
+}

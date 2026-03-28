@@ -1,7 +1,7 @@
 {
   "path": "crates/codex-cli/src/main.rs",
   "language": "rust",
-  "content_hash": "sha256:7fa7dc1967a86239f97dacecf7d3a3bd90b8383a4e860881588caa867b15b154",
+  "content_hash": "sha256:76942a9e7db941a3487a822e0a98c04931dfc51b0051168d5c3d9334b87d2d77",
   "symbols": [
     {
       "name": "commands",
@@ -79,7 +79,7 @@
       "visibility": "private",
       "span": {
         "start_line": 118,
-        "end_line": 189
+        "end_line": 191
       },
       "signature": "fn main()"
     }
