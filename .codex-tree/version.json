@@ -2,19 +2,19 @@
   "format_version": "0.1.0",
   "tree_version": {
     "generation": 4,
-    "delta_count": 3
+    "delta_count": 4
   },
   "generated_at": "2026-03-28T13:48:49Z",
   "generator": "codex-tree 0.1.0",
-  "source_commit": "ed47d64478d0f1315c137772e5bc90239f4cde5b",
-  "source_commit_date": "2026-03-28T10:03:21-04:00",
+  "source_commit": "58cd6298f8043c226e78c038a73f7e5f1983aa4e",
+  "source_commit_date": "2026-03-28T10:13:12-04:00",
   "stats": {
     "total_files": 33,
     "total_symbols": 230,
-    "total_lines_of_code": 5770,
+    "total_lines_of_code": 5757,
     "languages": [
       "rust"
     ],
-    "delta_size_bytes": 5690
+    "delta_size_bytes": 6608
   }
 }

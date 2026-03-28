@@ -1,0 +1,36 @@
+{
+  "sequence": 4,
+  "timestamp": "2026-03-28T14:13:42Z",
+  "source_commit": "58cd6298f8043c226e78c038a73f7e5f1983aa4e",
+  "changed_files": [
+    ".codex-tree/cursor/l1.md",
+    ".codex-tree/cursor/l2.md",
+    ".codex-tree/cursor/l3.md",
+    ".codex-tree/deltas/3.json",
+    ".codex-tree/modules/crates/codex-cli/src/commands/report.rs/index.json",
+    ".codex-tree/version.json",
+    "crates/codex-cli/src/commands/report.rs",
+    "specs/cli-interface.md"
+  ],
+  "operations": [
+    {
+      "op": "modify",
+      "path": "crates/codex-cli/src/commands/report.rs",
+      "symbols_added": [
+        "digest_token_delta"
+      ],
+      "symbols_removed": [
+        "cursor_digest_token_delta"
+      ],
+      "symbols_modified": [
+        "ContentKind",
+        "TokenEstimate",
+        "bytes_to_tokens",
+        "estimate_tokens",
+        "format_number",
+        "print_strategy_row",
+        "run"
+      ]
+    }
+  ]
+}

@@ -1,7 +1,7 @@
 {
   "path": "crates/codex-cli/src/commands/report.rs",
   "language": "rust",
-  "content_hash": "sha256:7ede0a409bf9ae6005c831cdc40eca88bc0a27f795055615089a722451b17d4a",
+  "content_hash": "sha256:c82215342d9cd0134740e6ea71325f71ca571e339d39138e09f6dc11dd5514a0",
   "symbols": [
     {
       "name": "Report",
@@ -29,7 +29,7 @@
       "visibility": "private",
       "span": {
         "start_line": 36,
-        "end_line": 55
+        "end_line": 61
       },
       "signature": "struct TokenEstimate"
     },
@@ -38,8 +38,8 @@
       "kind": "function",
       "visibility": "public",
       "span": {
-        "start_line": 59,
-        "end_line": 199
+        "start_line": 65,
+        "end_line": 186
       },
       "signature": "pub fn run(path: &Path, format: &str, _benchmark: bool, _verbose: bool, quiet: bool) -> Result<()>"
     },
@@ -48,8 +48,8 @@
       "kind": "function",
       "visibility": "private",
       "span": {
-        "start_line": 201,
-        "end_line": 213
+        "start_line": 188,
+        "end_line": 200
       },
       "signature": "fn print_strategy_row(label: &str, tokens: usize, raw_tokens: usize)"
     },
@@ -58,30 +58,30 @@
       "kind": "function",
       "visibility": "private",
       "span": {
-        "start_line": 221,
-        "end_line": 288
+        "start_line": 208,
+        "end_line": 274
       },
       "signature": "fn estimate_tokens(\n    git_root: &Path,\n    codex_tree_dir: &Path,\n    modules: &[ModuleIndex],\n) -> Result<TokenEstimate>",
       "doc_comment": "/// Estimate token counts for raw source vs tree representations.\n\n///\n\n/// The scaffolding reads all file sizes and computes the byte totals.\n\n/// The core decision is how to convert bytes → tokens for each content type.\n"
     },
     {
-      "name": "cursor_digest_token_delta",
+      "name": "digest_token_delta",
       "kind": "function",
       "visibility": "private",
       "span": {
-        "start_line": 291,
-        "end_line": 303
+        "start_line": 277,
+        "end_line": 290
       },
-      "signature": "fn cursor_digest_token_delta(codex_tree_dir: &Path) -> (Option<String>, usize)",
-      "doc_comment": "/// Prefer `cursor/l2.md`, then `l1.md`; return (relative path for display, extra tokens).\n"
+      "signature": "fn digest_token_delta(codex_tree_dir: &Path, layer: &str) -> (Option<String>, usize)",
+      "doc_comment": "/// Prefer `{layer}/l2.md`, then `l1.md`; return (relative path for display, extra tokens).\n"
     },
     {
       "name": "ContentKind",
       "kind": "enum",
       "visibility": "private",
       "span": {
-        "start_line": 307,
-        "end_line": 311
+        "start_line": 294,
+        "end_line": 298
       },
       "signature": "enum ContentKind"
     },
@@ -90,8 +90,8 @@
       "kind": "function",
       "visibility": "private",
       "span": {
-        "start_line": 327,
-        "end_line": 334
+        "start_line": 314,
+        "end_line": 321
       },
       "signature": "fn bytes_to_tokens(bytes: usize, kind: ContentKind) -> usize",
       "doc_comment": "/// Convert a byte count to an estimated token count using content-aware ratios.\n\n///\n\n/// BPE tokenizers (like Claude's) split text into subword units. The average\n\n/// bytes-per-token ratio varies by content type:\n\n///\n\n/// - **Code** (~3.5 bytes/token): identifiers get split at camelCase/snake_case\n\n///   boundaries, but keywords and operators are usually single tokens. Indentation\n\n///   whitespace compresses well (one token per indent level regardless of spaces).\n\n///\n\n/// - **JSON** (~3.0 bytes/token): more token-dense because of repeated structural\n\n///   characters (`\"`, `{`, `}`, `:`, `,`) that each consume a token, and quoted\n\n///   keys that tokenize less efficiently than bare identifiers.\n\n///\n\n/// - **Markdown** (~3.3 bytes/token): mix of prose, headings, and code fences.\n"
@@ -101,8 +101,8 @@
       "kind": "function",
       "visibility": "private",
       "span": {
-        "start_line": 338,
-        "end_line": 346
+        "start_line": 325,
+        "end_line": 333
       },
       "signature": "fn format_number(n: usize) -> String"
     }
