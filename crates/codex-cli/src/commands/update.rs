@@ -30,6 +30,7 @@ pub fn run(
     path: &Path,
     no_intent: bool,
     no_claude: bool,
+    no_cursor: bool,
     no_compact: bool,
     verbose: bool,
     quiet: bool,
@@ -228,6 +229,21 @@ pub fn run(
         }
     }
 
+    if !no_cursor {
+        if let Ok(tree_json) = fs::read_to_string(codex_tree_dir.join("tree.json")) {
+            if let Ok(tree) = serde_json::from_str::<TreeStructure>(&tree_json) {
+                generate_cursor_layer(
+                    &codex_tree_dir,
+                    &tree,
+                    &read_all_modules(&codex_tree_dir)?,
+                    &version,
+                    intent_output.as_ref(),
+                    quiet,
+                );
+            }
+        }
+    }
+
     // ── 10. Print summary ─────────────────────────────────────────────────────
     if !quiet {
         println!();
@@ -388,6 +404,35 @@ fn generate_claude_layer(
         if !quiet {
             eprintln!(
                 "  {} Failed to write Claude layer: {}",
+                "Warning:".yellow().bold(),
+                e
+            );
+        }
+    }
+}
+
+fn generate_cursor_layer(
+    codex_tree_dir: &std::path::Path,
+    tree: &TreeStructure,
+    modules: &[ModuleIndex],
+    version: &TreeVersion,
+    intent: Option<&codex_analyzer::types::IntentOutput>,
+    quiet: bool,
+) {
+    use codex_analyzer::cursor_layer;
+
+    if !quiet {
+        println!("{}", "  Generating Cursor layer...".dimmed());
+    }
+
+    let l1 = cursor_layer::generate_cursor_l1(tree, modules, version);
+    let l2 = cursor_layer::generate_cursor_l2(tree, modules, version, intent);
+    let l3 = cursor_layer::generate_cursor_l3(tree, modules, version, intent);
+
+    if let Err(e) = cursor_layer::write_cursor_layer(codex_tree_dir, &l1, &l2, &l3) {
+        if !quiet {
+            eprintln!(
+                "  {} Failed to write Cursor layer: {}",
                 "Warning:".yellow().bold(),
                 e
             );

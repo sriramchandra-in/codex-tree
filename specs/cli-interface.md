@@ -32,6 +32,7 @@ codex-tree init [OPTIONS]
 Options:
   --no-intent        Skip AI intent layer generation
   --no-claude        Skip Claude optimization layer generation
+  --no-cursor        Skip Cursor optimization layer generation
   --languages <L>    Comma-separated list of languages to parse (default: auto-detect)
   --dry-run          Show what would be generated without writing files
 ```
@@ -43,9 +44,11 @@ Options:
 4. Generate `version.json` (generation=1, delta_count=0)
 5. Generate `tree.json` (top-level structure map)
 6. Generate `modules/` (per-file index.json)
-7. If `--no-intent` is NOT set: call Claude API to generate `intent/`
-8. If `--no-claude` is NOT set: generate `claude/` (L1, L2, L3)
-9. Print summary: files parsed, symbols found, tree size, time elapsed
+7. Create empty `intent/`, `claude/`, and `cursor/` directories as part of the tree layout (see format spec)
+8. If `--no-intent` is NOT set: call Claude API to generate `intent/`
+9. If `--no-claude` is NOT set: generate `claude/` (L1, L2, L3)
+10. If `--no-cursor` is NOT set: generate `cursor/` (L1, L2, L3 — same digest as Claude layer plus Cursor usage preamble)
+11. Print summary: files parsed, symbols found, tree size, time elapsed
 
 **Default exclusions** (in addition to `.gitignore`):
 - `.git/`, `.codex-tree/`, `target/`, `node_modules/`, `__pycache__/`
@@ -81,6 +84,7 @@ codex-tree update [OPTIONS]
 Options:
   --no-intent        Skip AI intent analysis for changed files
   --no-claude        Skip Claude layer regeneration
+  --no-cursor        Skip Cursor layer regeneration
   --no-compact       Skip auto-compaction even if thresholds are met
 ```
 
@@ -95,7 +99,8 @@ Options:
 8. If compaction thresholds met and `--no-compact` is NOT set: run compaction
 9. If `--no-intent` is NOT set: update intent for changed files
 10. If `--no-claude` is NOT set: regenerate Claude layer
-11. Print summary: files changed, symbols added/modified/removed, delta size
+11. If `--no-cursor` is NOT set: regenerate Cursor layer
+12. Print summary: files changed, symbols added/modified/removed, delta size
 
 **Compaction thresholds:**
 - `delta_count >= 10`
@@ -114,12 +119,13 @@ codex-tree regen [OPTIONS]
 Options:
   --no-intent        Skip AI intent layer generation
   --no-claude        Skip Claude optimization layer generation
+  --no-cursor        Skip Cursor optimization layer generation
   --languages <L>    Comma-separated list of languages to parse
 ```
 
 **Behavior:**
 1. Delete existing `.codex-tree/` directory
-2. Run the same process as `init` but with `generation` incremented from the previous value
+2. Run the same process as `init` but with `generation` incremented from the previous value (including Claude and Cursor layers unless their skip flags are set)
 3. Print summary including comparison with previous generation (if available)
 
 ### report
@@ -170,8 +176,8 @@ codex-tree report
 
 **Benchmark mode (`--benchmark`):**
 Runs an actual AI session comparing token usage with and without the tree:
-1. Session A: Load `.codex-tree/claude/l2.md`, ask Claude to describe the project
-2. Session B: No tree, let Claude explore the codebase from scratch
+1. Session A: Load `.codex-tree/claude/l2.md` (or `.codex-tree/cursor/l2.md` in Cursor), ask the model to describe the project
+2. Session B: No tree, let the model explore the codebase from scratch
 3. Measure: tokens consumed, time elapsed, accuracy of understanding
 4. Report comparison
 
@@ -216,9 +222,11 @@ codex-tree check
 
 | Variable | Purpose | Required |
 |----------|---------|----------|
-| `ANTHROPIC_API_KEY` | Claude API authentication | Only for intent/claude layer generation |
+| `ANTHROPIC_API_KEY` | Claude API authentication | Only for intent layer generation (and thus for intent-enriched Claude/Cursor L2/L3 text) |
 | `CODEX_TREE_MODEL` | Claude model to use for intent (default: `claude-sonnet-4-20250514`) | No |
 | `CODEX_TREE_BUDGET` | Max token spend per run (default: unlimited) | No |
+
+The **Claude** and **Cursor** markdown layers (`claude/`, `cursor/`) are generated locally from the tree (and cached intent JSON if present). No separate API key is required for those layers.
 
 ## Exit Code Summary
 

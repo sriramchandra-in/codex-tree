@@ -1,7 +1,7 @@
 {
   "path": "crates/codex-cli/src/commands/update.rs",
   "language": "rust",
-  "content_hash": "sha256:11719649d2074494b5682ba600c757d450b40e5508c08b7042ecd909a3e1170f",
+  "content_hash": "sha256:eee57f7528da74e3b6ab0e474c481b413f42919e6a3260ee341b9fbcb6526bf4",
   "symbols": [
     {
       "name": "run",
@@ -9,17 +9,17 @@
       "visibility": "public",
       "span": {
         "start_line": 29,
-        "end_line": 266
+        "end_line": 282
       },
-      "signature": "pub fn run(\n    path: &Path,\n    no_intent: bool,\n    no_claude: bool,\n    no_compact: bool,\n    verbose: bool,\n    quiet: bool,\n) -> Result<()>"
+      "signature": "pub fn run(\n    path: &Path,\n    no_intent: bool,\n    no_claude: bool,\n    no_cursor: bool,\n    no_compact: bool,\n    verbose: bool,\n    quiet: bool,\n) -> Result<()>"
     },
     {
       "name": "update_module_on_disk",
       "kind": "function",
       "visibility": "private",
       "span": {
-        "start_line": 271,
-        "end_line": 279
+        "start_line": 287,
+        "end_line": 295
       },
       "signature": "fn update_module_on_disk(codex_tree_dir: &Path, module: &ModuleIndex) -> Result<()>",
       "doc_comment": "/// Write a `ModuleIndex` to `modules/{path}/index.json`.\n"
@@ -29,8 +29,8 @@
       "kind": "function",
       "visibility": "private",
       "span": {
-        "start_line": 283,
-        "end_line": 330
+        "start_line": 299,
+        "end_line": 346
       },
       "signature": "fn detect_changed_by_hash(codex_tree_dir: &Path, git_root: &Path) -> Result<Vec<String>>",
       "doc_comment": "/// When there is no `source_commit` in version.json, detect changed files by\n\n/// comparing the `content_hash` in each module index against the current file.\n"
@@ -40,8 +40,8 @@
       "kind": "function",
       "visibility": "private",
       "span": {
-        "start_line": 335,
-        "end_line": 366
+        "start_line": 351,
+        "end_line": 382
       },
       "signature": "fn run_intent_analysis(\n    codex_tree_dir: &std::path::Path,\n    modules: &[codex_parser::types::ModuleIndex],\n    quiet: bool,\n) -> Result<codex_analyzer::types::IntentOutput>",
       "doc_comment": "/// Run intent analysis via Claude API. Returns None with a warning on failure.\n"
@@ -51,11 +51,21 @@
       "kind": "function",
       "visibility": "private",
       "span": {
-        "start_line": 369,
-        "end_line": 396
+        "start_line": 385,
+        "end_line": 412
       },
       "signature": "fn generate_claude_layer(\n    codex_tree_dir: &std::path::Path,\n    tree: &codex_parser::types::TreeStructure,\n    modules: &[codex_parser::types::ModuleIndex],\n    version: &codex_parser::types::TreeVersion,\n    intent: Option<&codex_analyzer::types::IntentOutput>,\n    quiet: bool,\n)",
       "doc_comment": "/// Generate the Claude optimization layer (L1/L2/L3 markdown files).\n"
+    },
+    {
+      "name": "generate_cursor_layer",
+      "kind": "function",
+      "visibility": "private",
+      "span": {
+        "start_line": 414,
+        "end_line": 441
+      },
+      "signature": "fn generate_cursor_layer(\n    codex_tree_dir: &std::path::Path,\n    tree: &TreeStructure,\n    modules: &[ModuleIndex],\n    version: &TreeVersion,\n    intent: Option<&codex_analyzer::types::IntentOutput>,\n    quiet: bool,\n)"
     }
   ],
   "imports": [
@@ -121,6 +131,10 @@
     },
     {
       "source": "codex_analyzer::claude_layer",
+      "kind": "use"
+    },
+    {
+      "source": "codex_analyzer::cursor_layer",
       "kind": "use"
     }
   ],

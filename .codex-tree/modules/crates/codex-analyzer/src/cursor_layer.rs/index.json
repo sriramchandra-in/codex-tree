@@ -1,0 +1,198 @@
+{
+  "path": "crates/codex-analyzer/src/cursor_layer.rs",
+  "language": "rust",
+  "content_hash": "sha256:3a9baedf0b2d730ae7cad1d20d14452f99ce8b5f80dfa633cf6685ff41733432",
+  "symbols": [
+    {
+      "name": "cursor_usage_guide",
+      "kind": "function",
+      "visibility": "private",
+      "span": {
+        "start_line": 20,
+        "end_line": 48
+      },
+      "signature": "fn cursor_usage_guide() -> &'static str",
+      "doc_comment": "/// Markdown block inserted after the codex-tree metadata header on every level.\n\n///\n\n/// Kept compact so the digest itself remains the bulk of the tokens.\n"
+    },
+    {
+      "name": "wrap_for_cursor",
+      "kind": "function",
+      "visibility": "private",
+      "span": {
+        "start_line": 52,
+        "end_line": 82
+      },
+      "signature": "fn wrap_for_cursor(base: &str) -> String",
+      "doc_comment": "/// Inserts the Cursor guide immediately after the HTML metadata comment and\n\n/// following blank lines, then a horizontal rule before the original body.\n"
+    },
+    {
+      "name": "generate_cursor_l1",
+      "kind": "function",
+      "visibility": "public",
+      "span": {
+        "start_line": 85,
+        "end_line": 91
+      },
+      "signature": "pub fn generate_cursor_l1(\n    tree: &TreeStructure,\n    modules: &[ModuleIndex],\n    version: &TreeVersion,\n) -> String",
+      "doc_comment": "/// L1 digest with Cursor framing (~500 tokens of structure + compact guide).\n"
+    },
+    {
+      "name": "generate_cursor_l2",
+      "kind": "function",
+      "visibility": "public",
+      "span": {
+        "start_line": 93,
+        "end_line": 100
+      },
+      "signature": "pub fn generate_cursor_l2(\n    tree: &TreeStructure,\n    modules: &[ModuleIndex],\n    version: &TreeVersion,\n    intent: Option<&IntentOutput>,\n) -> String"
+    },
+    {
+      "name": "generate_cursor_l3",
+      "kind": "function",
+      "visibility": "public",
+      "span": {
+        "start_line": 102,
+        "end_line": 109
+      },
+      "signature": "pub fn generate_cursor_l3(\n    tree: &TreeStructure,\n    modules: &[ModuleIndex],\n    version: &TreeVersion,\n    intent: Option<&IntentOutput>,\n) -> String"
+    },
+    {
+      "name": "generate_cursor_layer_output",
+      "kind": "function",
+      "visibility": "public",
+      "span": {
+        "start_line": 112,
+        "end_line": 123
+      },
+      "signature": "pub fn generate_cursor_layer_output(\n    tree: &TreeStructure,\n    modules: &[ModuleIndex],\n    version: &TreeVersion,\n    intent: Option<&IntentOutput>,\n) -> crate::types::CursorLayerOutput",
+      "doc_comment": "/// Builds all three levels (convenience for callers that want [`crate::types::CursorLayerOutput`]).\n"
+    },
+    {
+      "name": "write_cursor_layer",
+      "kind": "function",
+      "visibility": "public",
+      "span": {
+        "start_line": 126,
+        "end_line": 133
+      },
+      "signature": "pub fn write_cursor_layer(output_dir: &Path, l1: &str, l2: &str, l3: &str) -> std::io::Result<()>",
+      "doc_comment": "/// Writes `l1.md`, `l2.md`, `l3.md` under `<output_dir>/cursor/`.\n"
+    },
+    {
+      "name": "tests",
+      "kind": "module",
+      "visibility": "private",
+      "span": {
+        "start_line": 136,
+        "end_line": 219
+      },
+      "signature": "mod tests"
+    },
+    {
+      "name": "make_version",
+      "kind": "function",
+      "visibility": "private",
+      "span": {
+        "start_line": 143,
+        "end_line": 162
+      },
+      "signature": "fn make_version() -> TreeVersion"
+    },
+    {
+      "name": "make_tree",
+      "kind": "function",
+      "visibility": "private",
+      "span": {
+        "start_line": 164,
+        "end_line": 174
+      },
+      "signature": "fn make_tree() -> TreeStructure"
+    },
+    {
+      "name": "make_modules",
+      "kind": "function",
+      "visibility": "private",
+      "span": {
+        "start_line": 176,
+        "end_line": 199
+      },
+      "signature": "fn make_modules() -> Vec<ModuleIndex>"
+    },
+    {
+      "name": "cursor_l1_inserts_guide_and_keeps_overview",
+      "kind": "function",
+      "visibility": "private",
+      "span": {
+        "start_line": 202,
+        "end_line": 208
+      },
+      "signature": "fn cursor_l1_inserts_guide_and_keeps_overview()"
+    },
+    {
+      "name": "write_cursor_layer_creates_files",
+      "kind": "function",
+      "visibility": "private",
+      "span": {
+        "start_line": 211,
+        "end_line": 218
+      },
+      "signature": "fn write_cursor_layer_creates_files()"
+    }
+  ],
+  "imports": [
+    {
+      "source": "std::fmt::Write as FmtWrite",
+      "kind": "use"
+    },
+    {
+      "source": "std::fs",
+      "kind": "use"
+    },
+    {
+      "source": "std::path::Path",
+      "kind": "use"
+    },
+    {
+      "source": "codex_parser::types::{ModuleIndex, TreeStructure, TreeVersion}",
+      "kind": "use"
+    },
+    {
+      "source": "crate::claude_layer",
+      "kind": "use"
+    },
+    {
+      "source": "crate::types::IntentOutput",
+      "kind": "use"
+    },
+    {
+      "source": "super::*",
+      "kind": "use"
+    },
+    {
+      "source": "codex_parser::types::{\n        Export, Span, Symbol, SymbolKind, TreeEntry, TreeStats, TreeStructure,\n        TreeVersion, TreeVersionNumber, Visibility,\n    }",
+      "kind": "use"
+    }
+  ],
+  "exports": [
+    {
+      "name": "generate_cursor_l1",
+      "kind": "function"
+    },
+    {
+      "name": "generate_cursor_l2",
+      "kind": "function"
+    },
+    {
+      "name": "generate_cursor_l3",
+      "kind": "function"
+    },
+    {
+      "name": "generate_cursor_layer_output",
+      "kind": "function"
+    },
+    {
+      "name": "write_cursor_layer",
+      "kind": "function"
+    }
+  ]
+}

@@ -18,7 +18,8 @@ use crate::types::{ModuleIndex, TreeStats, TreeStructure, TreeVersion, TreeVersi
 ///   modules/{relative/path}/index.json   (one per ModuleIndex)
 ///   deltas/          (empty, reserved for future incremental deltas)
 ///   intent/          (empty, reserved for intent declarations)
-///   claude/          (empty, reserved for Claude-specific metadata)
+///   claude/          (empty, reserved for Claude-specific digest)
+///   cursor/          (empty, reserved for Cursor-specific digest)
 /// ```
 pub fn write_tree(
     output_dir: &Path,
@@ -31,6 +32,7 @@ pub fn write_tree(
     fs::create_dir_all(output_dir.join("deltas"))?;
     fs::create_dir_all(output_dir.join("intent"))?;
     fs::create_dir_all(output_dir.join("claude"))?;
+    fs::create_dir_all(output_dir.join("cursor"))?;
 
     // ── version.json ──────────────────────────────────────────────────────────
     let version_json = serde_json::to_string_pretty(version)?;

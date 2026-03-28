@@ -9,10 +9,12 @@
 //   cache        — Content-hash-based analysis caching
 //   analyzer     — Main orchestration engine
 //   claude_layer — Claude-optimised markdown layer generation (L1/L2/L3)
+//   cursor_layer — Cursor-optimised markdown (same digest + Cursor usage guide)
 
 pub mod analyzer;
 pub mod cache;
 pub mod claude_layer;
+pub mod cursor_layer;
 pub mod client;
 pub mod error;
 pub mod prompts;

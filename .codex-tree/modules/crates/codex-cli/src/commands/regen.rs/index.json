@@ -1,7 +1,7 @@
 {
   "path": "crates/codex-cli/src/commands/regen.rs",
   "language": "rust",
-  "content_hash": "sha256:80d886a9e7a33d17ca9772e4ddabcb60221f602c769b224cc076d36990457a29",
+  "content_hash": "sha256:ce1b3f4547cd727a2d8ec98dd6ad7caefab7f6718ac082bdb27287d72e31f5f1",
   "symbols": [
     {
       "name": "run",
@@ -9,17 +9,17 @@
       "visibility": "public",
       "span": {
         "start_line": 21,
-        "end_line": 170
+        "end_line": 182
       },
-      "signature": "pub fn run(\n    path: &Path,\n    no_intent: bool,\n    no_claude: bool,\n    _languages: Option<&str>,\n    verbose: bool,\n    quiet: bool,\n) -> Result<()>"
+      "signature": "pub fn run(\n    path: &Path,\n    no_intent: bool,\n    no_claude: bool,\n    no_cursor: bool,\n    _languages: Option<&str>,\n    verbose: bool,\n    quiet: bool,\n) -> Result<()>"
     },
     {
       "name": "run_intent_analysis",
       "kind": "function",
       "visibility": "private",
       "span": {
-        "start_line": 175,
-        "end_line": 206
+        "start_line": 187,
+        "end_line": 218
       },
       "signature": "fn run_intent_analysis(\n    codex_tree_dir: &std::path::Path,\n    modules: &[codex_parser::types::ModuleIndex],\n    quiet: bool,\n) -> Result<codex_analyzer::types::IntentOutput>",
       "doc_comment": "/// Run intent analysis via Claude API. Returns None with a warning on failure.\n"
@@ -29,11 +29,21 @@
       "kind": "function",
       "visibility": "private",
       "span": {
-        "start_line": 209,
-        "end_line": 236
+        "start_line": 221,
+        "end_line": 248
       },
       "signature": "fn generate_claude_layer(\n    codex_tree_dir: &std::path::Path,\n    tree: &codex_parser::types::TreeStructure,\n    modules: &[codex_parser::types::ModuleIndex],\n    version: &codex_parser::types::TreeVersion,\n    intent: Option<&codex_analyzer::types::IntentOutput>,\n    quiet: bool,\n)",
       "doc_comment": "/// Generate the Claude optimization layer (L1/L2/L3 markdown files).\n"
+    },
+    {
+      "name": "generate_cursor_layer",
+      "kind": "function",
+      "visibility": "private",
+      "span": {
+        "start_line": 250,
+        "end_line": 277
+      },
+      "signature": "fn generate_cursor_layer(\n    codex_tree_dir: &std::path::Path,\n    tree: &codex_parser::types::TreeStructure,\n    modules: &[codex_parser::types::ModuleIndex],\n    version: &codex_parser::types::TreeVersion,\n    intent: Option<&codex_analyzer::types::IntentOutput>,\n    quiet: bool,\n)"
     }
   ],
   "imports": [
@@ -87,6 +97,10 @@
     },
     {
       "source": "codex_analyzer::claude_layer",
+      "kind": "use"
+    },
+    {
+      "source": "codex_analyzer::cursor_layer",
       "kind": "use"
     }
   ],

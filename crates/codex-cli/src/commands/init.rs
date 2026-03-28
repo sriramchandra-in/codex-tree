@@ -16,6 +16,7 @@ pub fn run(
     path: &Path,
     no_intent: bool,
     no_claude: bool,
+    no_cursor: bool,
     _languages: Option<&str>,
     dry_run: bool,
     verbose: bool,
@@ -113,6 +114,17 @@ pub fn run(
     // ── 10b. Claude optimization layer ───────────────────────────────────
     if !no_claude {
         generate_claude_layer(
+            &output_dir,
+            &tree,
+            &modules,
+            &version,
+            intent_output.as_ref(),
+            quiet,
+        );
+    }
+
+    if !no_cursor {
+        generate_cursor_layer(
             &output_dir,
             &tree,
             &modules,
@@ -230,6 +242,36 @@ fn generate_claude_layer(
         if !quiet {
             eprintln!(
                 "  {} Failed to write Claude layer: {}",
+                "Warning:".yellow().bold(),
+                e
+            );
+        }
+    }
+}
+
+/// Generate the Cursor optimization layer (L1/L2/L3 markdown under `cursor/`).
+fn generate_cursor_layer(
+    codex_tree_dir: &std::path::Path,
+    tree: &codex_parser::types::TreeStructure,
+    modules: &[codex_parser::types::ModuleIndex],
+    version: &codex_parser::types::TreeVersion,
+    intent: Option<&codex_analyzer::types::IntentOutput>,
+    quiet: bool,
+) {
+    use codex_analyzer::cursor_layer;
+
+    if !quiet {
+        println!("{}", "  Generating Cursor layer...".dimmed());
+    }
+
+    let l1 = cursor_layer::generate_cursor_l1(tree, modules, version);
+    let l2 = cursor_layer::generate_cursor_l2(tree, modules, version, intent);
+    let l3 = cursor_layer::generate_cursor_l3(tree, modules, version, intent);
+
+    if let Err(e) = cursor_layer::write_cursor_layer(codex_tree_dir, &l1, &l2, &l3) {
+        if !quiet {
+            eprintln!(
+                "  {} Failed to write Cursor layer: {}",
                 "Warning:".yellow().bold(),
                 e
             );

@@ -1,7 +1,7 @@
 {
   "path": "crates/codex-analyzer/src/types.rs",
   "language": "rust",
-  "content_hash": "sha256:fd68060d15e720ad6fc40cc993822869530ff015e9d229f128987c7d4f9959d8",
+  "content_hash": "sha256:b0c94dbce4466557df29c5164b1f8b78327ff2098c6218a5de3f03cd6f71df6e",
   "symbols": [
     {
       "name": "Provenance",
@@ -83,6 +83,17 @@
       },
       "signature": "pub struct ClaudeLayerOutput",
       "doc_comment": "/// The three progressive-detail markdown documents for `.codex-tree/claude/`.\n\n///\n\n/// These are generated locally from tree data + intent, no API call needed.\n\n/// In Scala: `case class ClaudeLayerOutput(l1: String, l2: String, l3: String)`\n"
+    },
+    {
+      "name": "CursorLayerOutput",
+      "kind": "struct",
+      "visibility": "public",
+      "span": {
+        "start_line": 132,
+        "end_line": 136
+      },
+      "signature": "pub struct CursorLayerOutput",
+      "doc_comment": "/// The three progressive-detail markdown documents for `.codex-tree/cursor/`.\n\n///\n\n/// Same underlying content as [`ClaudeLayerOutput`], plus a Cursor usage preamble.\n\n/// Generated locally from tree data + intent, no API call.\n"
     }
   ],
   "imports": [
@@ -122,6 +133,10 @@
     },
     {
       "name": "ClaudeLayerOutput",
+      "kind": "struct"
+    },
+    {
+      "name": "CursorLayerOutput",
       "kind": "struct"
     }
   ]
