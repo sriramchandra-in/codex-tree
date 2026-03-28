@@ -8,14 +8,23 @@ pub enum CliError {
     #[error(".codex-tree/ already exists at {path}\n\nA knowledge tree has already been generated for this project.\n\n  To update incrementally:  codex-tree update\n  To rebuild from scratch:  codex-tree regen\n  To force overwrite:       rm -rf .codex-tree && codex-tree init")]
     TreeAlreadyExists { path: PathBuf },
 
+    #[error(".codex-tree/ not found at {path}\n\nNo knowledge tree exists for this project.\n\n  To generate one: codex-tree init")]
+    TreeNotFound { path: PathBuf },
+
     #[error("No source files found at {path}\n\ncodex-tree found no files matching any registered language.\nSupported languages: {languages}\n\nTo fix: Ensure the path points to a directory with source files.")]
     NoSourceFiles { path: PathBuf, languages: String },
+
+    #[error("Git error: {message}\n\n{hint}")]
+    Git { message: String, hint: String },
 
     #[error("{0}")]
     Parser(#[from] codex_parser::error::ParserError),
 
     #[error("{0}")]
     Io(#[from] std::io::Error),
+
+    #[error("{0}")]
+    Json(#[from] serde_json::Error),
 }
 
 pub type Result<T> = std::result::Result<T, CliError>;

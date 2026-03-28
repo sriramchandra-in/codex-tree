@@ -13,5 +13,6 @@ pub mod languages;
 pub mod registry;
 pub mod types;
 
+pub mod diff;
 pub mod parser;
 pub mod serializer;

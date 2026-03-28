@@ -200,3 +200,40 @@ pub struct TreeStats {
     /// Compressed size of the delta store in bytes.
     pub delta_size_bytes: u64,
 }
+
+// ── Delta types ───────────────────────────────────────────────────────────────
+
+/// A single delta operation on a module.
+///
+/// `#[serde(tag = "op")]` serialises as `{"op": "add", ...}` — a tagged union
+/// analogous to a Scala sealed trait with `@JsonTypeInfo` discriminator field.
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(tag = "op", rename_all = "snake_case")]
+pub enum DeltaOperation {
+    Add {
+        path: String,
+        module_index: ModuleIndex,
+    },
+    Modify {
+        path: String,
+        symbols_added: Vec<String>,
+        symbols_removed: Vec<String>,
+        symbols_modified: Vec<String>,
+    },
+    Remove {
+        path: String,
+    },
+}
+
+/// An incremental update record stored as `deltas/{sequence}.json`.
+///
+/// Each delta describes the structural changes between one tree state and
+/// the next, indexed by the git commit that triggered the update.
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct Delta {
+    pub sequence: u32,
+    pub timestamp: String,
+    pub source_commit: Option<String>,
+    pub changed_files: Vec<String>,
+    pub operations: Vec<DeltaOperation>,
+}
