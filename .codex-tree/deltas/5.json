@@ -1,0 +1,220 @@
+{
+  "sequence": 5,
+  "timestamp": "2026-03-28T14:19:51Z",
+  "source_commit": "f5a0d548502f9a5ef5b52f793fc08f5d426ff8f3",
+  "changed_files": [
+    ".codex-tree/cursor/l1.md",
+    ".codex-tree/cursor/l2.md",
+    ".codex-tree/cursor/l3.md",
+    ".codex-tree/deltas/4.json",
+    ".codex-tree/modules/crates/codex-cli/src/commands/report.rs/index.json",
+    ".codex-tree/version.json",
+    "Cargo.lock",
+    "crates/codex-cli/src/commands/init.rs",
+    "crates/codex-cli/src/commands/regen.rs",
+    "crates/codex-parser/Cargo.toml",
+    "crates/codex-parser/src/languages/mod.rs",
+    "crates/codex-parser/src/languages/python.rs",
+    "crates/codex-parser/src/registry.rs"
+  ],
+  "operations": [
+    {
+      "op": "modify",
+      "path": "crates/codex-cli/src/commands/init.rs",
+      "symbols_added": [],
+      "symbols_removed": [],
+      "symbols_modified": [
+        "generate_claude_layer",
+        "generate_cursor_layer",
+        "run",
+        "run_intent_analysis"
+      ]
+    },
+    {
+      "op": "modify",
+      "path": "crates/codex-cli/src/commands/regen.rs",
+      "symbols_added": [],
+      "symbols_removed": [],
+      "symbols_modified": [
+        "generate_claude_layer",
+        "generate_cursor_layer",
+        "run",
+        "run_intent_analysis"
+      ]
+    },
+    {
+      "op": "modify",
+      "path": "crates/codex-parser/src/languages/mod.rs",
+      "symbols_added": [
+        "python"
+      ],
+      "symbols_removed": [],
+      "symbols_modified": [
+        "rust"
+      ]
+    },
+    {
+      "op": "add",
+      "path": "crates/codex-parser/src/languages/python.rs",
+      "module_index": {
+        "path": "crates/codex-parser/src/languages/python.rs",
+        "language": "rust",
+        "content_hash": "sha256:22f976dd0d68f355c3f04fc263549fd83a70a08fdc3010f4dd7c1c5123537ee6",
+        "symbols": [
+          {
+            "name": "PythonAdapter",
+            "kind": "struct",
+            "visibility": "public",
+            "span": {
+              "start_line": 7,
+              "end_line": 7
+            },
+            "signature": "pub struct PythonAdapter",
+            "doc_comment": "/// Language adapter for Python source files.\n"
+          },
+          {
+            "name": "LanguageAdapter",
+            "kind": "impl",
+            "visibility": "private",
+            "span": {
+              "start_line": 9,
+              "end_line": 33
+            },
+            "signature": "impl LanguageAdapter for PythonAdapter"
+          },
+          {
+            "name": "language_id",
+            "kind": "function",
+            "visibility": "private",
+            "span": {
+              "start_line": 10,
+              "end_line": 12
+            },
+            "signature": "fn language_id(&self) -> &str",
+            "parent": "LanguageAdapter"
+          },
+          {
+            "name": "file_extensions",
+            "kind": "function",
+            "visibility": "private",
+            "span": {
+              "start_line": 14,
+              "end_line": 16
+            },
+            "signature": "fn file_extensions(&self) -> &[&str]",
+            "parent": "LanguageAdapter"
+          },
+          {
+            "name": "tree_sitter_language",
+            "kind": "function",
+            "visibility": "private",
+            "span": {
+              "start_line": 18,
+              "end_line": 20
+            },
+            "signature": "fn tree_sitter_language(&self) -> Language",
+            "parent": "LanguageAdapter"
+          },
+          {
+            "name": "extract_symbols",
+            "kind": "function",
+            "visibility": "private",
+            "span": {
+              "start_line": 22,
+              "end_line": 26
+            },
+            "signature": "fn extract_symbols(&self, tree: &tree_sitter::Tree, source: &[u8]) -> Vec<Symbol>",
+            "parent": "LanguageAdapter"
+          },
+          {
+            "name": "extract_imports",
+            "kind": "function",
+            "visibility": "private",
+            "span": {
+              "start_line": 28,
+              "end_line": 32
+            },
+            "signature": "fn extract_imports(&self, tree: &tree_sitter::Tree, source: &[u8]) -> Vec<Import>",
+            "parent": "LanguageAdapter"
+          },
+          {
+            "name": "PythonAdapter",
+            "kind": "impl",
+            "visibility": "private",
+            "span": {
+              "start_line": 35,
+              "end_line": 158
+            },
+            "signature": "impl PythonAdapter"
+          },
+          {
+            "name": "walk_for_imports",
+            "kind": "function",
+            "visibility": "private",
+            "span": {
+              "start_line": 36,
+              "end_line": 64
+            },
+            "signature": "fn walk_for_imports(node: tree_sitter::Node, source: &[u8], imports: &mut Vec<Import>)",
+            "parent": "PythonAdapter"
+          },
+          {
+            "name": "map_node_kind",
+            "kind": "function",
+            "visibility": "private",
+            "span": {
+              "start_line": 66,
+              "end_line": 72
+            },
+            "signature": "fn map_node_kind(kind: &str) -> Option<SymbolKind>",
+            "parent": "PythonAdapter"
+          },
+          {
+            "name": "walk_for_symbols",
+            "kind": "function",
+            "visibility": "private",
+            "span": {
+              "start_line": 74,
+              "end_line": 157
+            },
+            "signature": "fn walk_for_symbols(\n        node: tree_sitter::Node,\n        source: &[u8],\n        parent: Option<&str>,\n        symbols: &mut Vec<Symbol>,\n    )",
+            "parent": "PythonAdapter"
+          }
+        ],
+        "imports": [
+          {
+            "source": "tree_sitter::Language",
+            "kind": "use"
+          },
+          {
+            "source": "crate::language::LanguageAdapter",
+            "kind": "use"
+          },
+          {
+            "source": "crate::types::{Import, Span, Symbol, SymbolKind, Visibility}",
+            "kind": "use"
+          }
+        ],
+        "exports": [
+          {
+            "name": "PythonAdapter",
+            "kind": "struct"
+          }
+        ]
+      }
+    },
+    {
+      "op": "modify",
+      "path": "crates/codex-parser/src/registry.rs",
+      "symbols_added": [],
+      "symbols_removed": [],
+      "symbols_modified": [
+        "Default",
+        "ParserRegistry",
+        "ParserRegistry",
+        "default",
+        "with_defaults"
+      ]
+    }
+  ]
+}

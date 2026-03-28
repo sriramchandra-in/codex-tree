@@ -1,21 +1,35 @@
 {
   "path": "crates/codex-parser/src/languages/mod.rs",
   "language": "rust",
-  "content_hash": "sha256:1b7b5e9c465edea7c8381f4615e78262ebc82ac91403e9247a2a45754d5ead8c",
+  "content_hash": "sha256:8766ca2d67976aa84523c6ac6902dd5df5b3b2bb0cc25fa731c9d701e59db465",
   "symbols": [
     {
-      "name": "rust",
+      "name": "python",
       "kind": "module",
       "visibility": "public",
       "span": {
         "start_line": 1,
         "end_line": 1
       },
+      "signature": "pub mod python"
+    },
+    {
+      "name": "rust",
+      "kind": "module",
+      "visibility": "public",
+      "span": {
+        "start_line": 2,
+        "end_line": 2
+      },
       "signature": "pub mod rust"
     }
   ],
   "imports": [],
   "exports": [
+    {
+      "name": "python",
+      "kind": "module"
+    },
     {
       "name": "rust",
       "kind": "module"

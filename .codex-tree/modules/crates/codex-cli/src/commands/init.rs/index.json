@@ -1,7 +1,7 @@
 {
   "path": "crates/codex-cli/src/commands/init.rs",
   "language": "rust",
-  "content_hash": "sha256:afe3f6eabf745fc8c7b7275d93dafc6f7af3c683c9a51a3d5df4fdf3ad326ab4",
+  "content_hash": "sha256:fd5ea149b1500863d48ed5206e49f5c182c38dd1585ca2e3ad58dc8f04d6e9df",
   "symbols": [
     {
       "name": "InitOptions",
@@ -20,7 +20,7 @@
       "visibility": "public",
       "span": {
         "start_line": 25,
-        "end_line": 193
+        "end_line": 194
       },
       "signature": "pub fn run(path: &Path, options: InitOptions, _languages: Option<&str>) -> Result<()>"
     },
@@ -29,8 +29,8 @@
       "kind": "function",
       "visibility": "private",
       "span": {
-        "start_line": 198,
-        "end_line": 229
+        "start_line": 199,
+        "end_line": 230
       },
       "signature": "fn run_intent_analysis(\n    codex_tree_dir: &std::path::Path,\n    modules: &[codex_parser::types::ModuleIndex],\n    quiet: bool,\n) -> Result<codex_analyzer::types::IntentOutput>",
       "doc_comment": "/// Run intent analysis via Claude API. Returns None with a warning on failure.\n"
@@ -40,8 +40,8 @@
       "kind": "function",
       "visibility": "private",
       "span": {
-        "start_line": 232,
-        "end_line": 259
+        "start_line": 233,
+        "end_line": 260
       },
       "signature": "fn generate_claude_layer(\n    codex_tree_dir: &std::path::Path,\n    tree: &codex_parser::types::TreeStructure,\n    modules: &[codex_parser::types::ModuleIndex],\n    version: &codex_parser::types::TreeVersion,\n    intent: Option<&codex_analyzer::types::IntentOutput>,\n    quiet: bool,\n)",
       "doc_comment": "/// Generate the Claude optimization layer (L1/L2/L3 markdown files).\n"
@@ -51,8 +51,8 @@
       "kind": "function",
       "visibility": "private",
       "span": {
-        "start_line": 262,
-        "end_line": 289
+        "start_line": 263,
+        "end_line": 290
       },
       "signature": "fn generate_cursor_layer(\n    codex_tree_dir: &std::path::Path,\n    tree: &codex_parser::types::TreeStructure,\n    modules: &[codex_parser::types::ModuleIndex],\n    version: &codex_parser::types::TreeVersion,\n    intent: Option<&codex_analyzer::types::IntentOutput>,\n    quiet: bool,\n)",
       "doc_comment": "/// Generate the Cursor optimization layer (L1/L2/L3 markdown under `cursor/`).\n"

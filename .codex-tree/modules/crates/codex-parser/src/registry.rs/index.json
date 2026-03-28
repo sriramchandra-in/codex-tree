@@ -1,7 +1,7 @@
 {
   "path": "crates/codex-parser/src/registry.rs",
   "language": "rust",
-  "content_hash": "sha256:900eefcce54515ff0a77a7c5d9735b1b0d6be54ab821572a458158385bc07d11",
+  "content_hash": "sha256:d2e0c07315a323e29a57fb6e6705c9d188cdb9e543f751abca760503dd7cfd19",
   "symbols": [
     {
       "name": "ParserRegistry",
@@ -20,7 +20,7 @@
       "visibility": "private",
       "span": {
         "start_line": 20,
-        "end_line": 67
+        "end_line": 68
       },
       "signature": "impl ParserRegistry"
     },
@@ -78,7 +78,7 @@
       "visibility": "public",
       "span": {
         "start_line": 62,
-        "end_line": 66
+        "end_line": 67
       },
       "signature": "pub fn with_defaults() -> Self",
       "parent": "ParserRegistry",
@@ -89,8 +89,8 @@
       "kind": "impl",
       "visibility": "private",
       "span": {
-        "start_line": 72,
-        "end_line": 76
+        "start_line": 73,
+        "end_line": 77
       },
       "signature": "impl Default for ParserRegistry",
       "doc_comment": "/// `Default` delegates to `with_defaults` so that `ParserRegistry::default()`\n\n/// gives you a fully-configured registry — analogous to a Scala companion\n\n/// `object`'s `apply()` factory method.\n"
@@ -100,8 +100,8 @@
       "kind": "function",
       "visibility": "private",
       "span": {
-        "start_line": 73,
-        "end_line": 75
+        "start_line": 74,
+        "end_line": 76
       },
       "signature": "fn default() -> Self",
       "parent": "Default"
