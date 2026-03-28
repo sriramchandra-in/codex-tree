@@ -1,0 +1,42 @@
+{
+  "path": "crates/codex-parser/tests/integration.rs",
+  "language": "rust",
+  "content_hash": "sha256:e726f52ce359a57e39d854f9d1d8bd54f1a5fcae853e3cd610df60c507a81a90",
+  "symbols": [
+    {
+      "name": "test_self_parse",
+      "kind": "function",
+      "visibility": "private",
+      "span": {
+        "start_line": 12,
+        "end_line": 69
+      },
+      "signature": "fn test_self_parse()"
+    },
+    {
+      "name": "test_self_parse_full_repo",
+      "kind": "function",
+      "visibility": "private",
+      "span": {
+        "start_line": 76,
+        "end_line": 116
+      },
+      "signature": "fn test_self_parse_full_repo()"
+    }
+  ],
+  "imports": [
+    {
+      "source": "codex_parser::parser::parse_directory",
+      "kind": "use"
+    },
+    {
+      "source": "codex_parser::registry::ParserRegistry",
+      "kind": "use"
+    },
+    {
+      "source": "std::path::Path",
+      "kind": "use"
+    }
+  ],
+  "exports": []
+}

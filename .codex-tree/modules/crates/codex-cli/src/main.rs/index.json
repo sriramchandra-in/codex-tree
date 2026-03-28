@@ -1,0 +1,72 @@
+{
+  "path": "crates/codex-cli/src/main.rs",
+  "language": "rust",
+  "content_hash": "sha256:0b545d9d5b53fa3bfacac880f769492eeb1f85b99b9a43fa7faedefd7618fb99",
+  "symbols": [
+    {
+      "name": "commands",
+      "kind": "module",
+      "visibility": "private",
+      "span": {
+        "start_line": 6,
+        "end_line": 6
+      },
+      "signature": "mod commands"
+    },
+    {
+      "name": "error",
+      "kind": "module",
+      "visibility": "private",
+      "span": {
+        "start_line": 7,
+        "end_line": 7
+      },
+      "signature": "mod error"
+    },
+    {
+      "name": "Cli",
+      "kind": "struct",
+      "visibility": "private",
+      "span": {
+        "start_line": 12,
+        "end_line": 27
+      },
+      "signature": "struct Cli"
+    },
+    {
+      "name": "Commands",
+      "kind": "enum",
+      "visibility": "private",
+      "span": {
+        "start_line": 30,
+        "end_line": 101
+      },
+      "signature": "enum Commands"
+    },
+    {
+      "name": "main",
+      "kind": "function",
+      "visibility": "private",
+      "span": {
+        "start_line": 103,
+        "end_line": 131
+      },
+      "signature": "fn main()"
+    }
+  ],
+  "imports": [
+    {
+      "source": "std::path::Path",
+      "kind": "use"
+    },
+    {
+      "source": "clap::{Parser, Subcommand}",
+      "kind": "use"
+    },
+    {
+      "source": "colored::Colorize",
+      "kind": "use"
+    }
+  ],
+  "exports": []
+}

@@ -1,0 +1,24 @@
+{
+  "path": "crates/codex-cli/src/commands/mod.rs",
+  "language": "rust",
+  "content_hash": "sha256:48fedc35874adef5bd11f0750d4e5a6cf3f2c8ab9c4e5aa9fdc0333e536cd387",
+  "symbols": [
+    {
+      "name": "init",
+      "kind": "module",
+      "visibility": "public",
+      "span": {
+        "start_line": 1,
+        "end_line": 1
+      },
+      "signature": "pub mod init"
+    }
+  ],
+  "imports": [],
+  "exports": [
+    {
+      "name": "init",
+      "kind": "module"
+    }
+  ]
+}

@@ -1,0 +1,102 @@
+{
+  "path": "crates/codex-parser/src/parser.rs",
+  "language": "rust",
+  "content_hash": "sha256:c156fd2fefa84013c1a5e439b0076d7ca14e31eb4d0c25d15f48706f652c14fd",
+  "symbols": [
+    {
+      "name": "parse_file",
+      "kind": "function",
+      "visibility": "public",
+      "span": {
+        "start_line": 21,
+        "end_line": 74
+      },
+      "signature": "pub fn parse_file(path: &Path, source: &[u8], registry: &ParserRegistry) -> Result<ModuleIndex>",
+      "doc_comment": "/// Parse a single source file and return a `ModuleIndex`.\n\n///\n\n/// Steps:\n\n///   1. Resolve the file extension and look up a registered `LanguageAdapter`.\n\n///   2. Build a `tree_sitter::Parser`, set the grammar, and parse the bytes.\n\n///   3. Delegate symbol and import extraction to the adapter.\n\n///   4. Derive the public `exports` list from symbols with public visibility.\n\n///   5. Hash the raw bytes for change-detection.\n"
+    },
+    {
+      "name": "parse_directory",
+      "kind": "function",
+      "visibility": "public",
+      "span": {
+        "start_line": 84,
+        "end_line": 156
+      },
+      "signature": "pub fn parse_directory(\n    root: &Path,\n    registry: &ParserRegistry,\n    exclude_dirs: &[&str],\n) -> Result<(TreeStructure, Vec<ModuleIndex>)>",
+      "doc_comment": "/// Walk a directory tree and parse every supported source file.\n\n///\n\n/// Returns both a `TreeStructure` (the hierarchy for `tree.json`) and a flat\n\n/// `Vec<ModuleIndex>` (one entry per successfully parsed file).\n\n///\n\n/// Files whose extension has no registered adapter are silently skipped.\n\n/// Directories listed in `exclude_dirs` (matched by directory name, not full\n\n/// path) are not entered.\n"
+    },
+    {
+      "name": "compute_hash",
+      "kind": "function",
+      "visibility": "private",
+      "span": {
+        "start_line": 161,
+        "end_line": 166
+      },
+      "signature": "fn compute_hash(source: &[u8]) -> String",
+      "doc_comment": "/// SHA-256 content hash, returned as `\"sha256:<hex_lowercase>\"`.\n"
+    },
+    {
+      "name": "build_tree_structure",
+      "kind": "function",
+      "visibility": "private",
+      "span": {
+        "start_line": 171,
+        "end_line": 270
+      },
+      "signature": "fn build_tree_structure(root: &Path, modules: &[ModuleIndex]) -> TreeStructure",
+      "doc_comment": "/// Convert a flat list of `ModuleIndex` entries into a `TreeStructure` that\n\n/// contains both `TreeEntry::File` entries and aggregate `TreeEntry::Directory`\n\n/// entries.\n"
+    },
+    {
+      "name": "entry_path",
+      "kind": "function",
+      "visibility": "private",
+      "span": {
+        "start_line": 273,
+        "end_line": 278
+      },
+      "signature": "fn entry_path(entry: &TreeEntry) -> &str",
+      "doc_comment": "/// Extract the `path` field from any `TreeEntry` variant.\n"
+    }
+  ],
+  "imports": [
+    {
+      "source": "std::collections::HashSet",
+      "kind": "use"
+    },
+    {
+      "source": "std::path::Path",
+      "kind": "use"
+    },
+    {
+      "source": "sha2::{Digest, Sha256}",
+      "kind": "use"
+    },
+    {
+      "source": "walkdir::WalkDir",
+      "kind": "use"
+    },
+    {
+      "source": "crate::error::{ParserError, Result}",
+      "kind": "use"
+    },
+    {
+      "source": "crate::registry::ParserRegistry",
+      "kind": "use"
+    },
+    {
+      "source": "crate::types::{Export, ModuleIndex, TreeEntry, TreeStructure, Visibility}",
+      "kind": "use"
+    }
+  ],
+  "exports": [
+    {
+      "name": "parse_file",
+      "kind": "function"
+    },
+    {
+      "name": "parse_directory",
+      "kind": "function"
+    }
+  ]
+}

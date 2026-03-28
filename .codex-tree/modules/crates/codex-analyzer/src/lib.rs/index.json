@@ -1,0 +1,8 @@
+{
+  "path": "crates/codex-analyzer/src/lib.rs",
+  "language": "rust",
+  "content_hash": "sha256:1005652d54ae862785e77163bb3f0060f596f25cd47a93ba3a09cf9c1591a374",
+  "symbols": [],
+  "imports": [],
+  "exports": []
+}

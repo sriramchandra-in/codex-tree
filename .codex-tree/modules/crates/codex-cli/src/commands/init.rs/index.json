@@ -1,0 +1,102 @@
+{
+  "path": "crates/codex-cli/src/commands/init.rs",
+  "language": "rust",
+  "content_hash": "sha256:4968b857a595df27a9af1fddce445fd6d32777b1f5c48424c25f874d77f35542",
+  "symbols": [
+    {
+      "name": "run",
+      "kind": "function",
+      "visibility": "public",
+      "span": {
+        "start_line": 13,
+        "end_line": 153
+      },
+      "signature": "pub fn run(\n    path: &Path,\n    _no_intent: bool,\n    _no_claude: bool,\n    _languages: Option<&str>,\n    dry_run: bool,\n    verbose: bool,\n    quiet: bool,\n) -> Result<()>"
+    },
+    {
+      "name": "find_git_root",
+      "kind": "function",
+      "visibility": "private",
+      "span": {
+        "start_line": 159,
+        "end_line": 170
+      },
+      "signature": "fn find_git_root(start: &Path) -> Option<PathBuf>",
+      "doc_comment": "/// Walk up the directory tree from `start` looking for a `.git` directory.\n\n/// Returns the directory that *contains* `.git` (i.e. the repo root).\n"
+    },
+    {
+      "name": "format_size",
+      "kind": "function",
+      "visibility": "private",
+      "span": {
+        "start_line": 173,
+        "end_line": 183
+      },
+      "signature": "fn format_size(bytes: u64) -> String",
+      "doc_comment": "/// Format a byte count as a human-readable string: B, KB, or MB.\n"
+    },
+    {
+      "name": "KB",
+      "kind": "const",
+      "visibility": "private",
+      "span": {
+        "start_line": 174,
+        "end_line": 174
+      },
+      "signature": "const KB: u64 = 1_024"
+    },
+    {
+      "name": "MB",
+      "kind": "const",
+      "visibility": "private",
+      "span": {
+        "start_line": 175,
+        "end_line": 175
+      },
+      "signature": "const MB: u64 = 1_024 * KB"
+    },
+    {
+      "name": "calculate_dir_size",
+      "kind": "function",
+      "visibility": "private",
+      "span": {
+        "start_line": 186,
+        "end_line": 197
+      },
+      "signature": "fn calculate_dir_size(path: &Path) -> std::io::Result<u64>",
+      "doc_comment": "/// Recursively sum the sizes of every file under `path`.\n"
+    }
+  ],
+  "imports": [
+    {
+      "source": "std::path::{Path, PathBuf}",
+      "kind": "use"
+    },
+    {
+      "source": "colored::Colorize",
+      "kind": "use"
+    },
+    {
+      "source": "codex_parser::parser::parse_directory",
+      "kind": "use"
+    },
+    {
+      "source": "codex_parser::registry::ParserRegistry",
+      "kind": "use"
+    },
+    {
+      "source": "codex_parser::serializer::{compute_stats, create_initial_version, write_tree}",
+      "kind": "use"
+    },
+    {
+      "source": "crate::error::{CliError, Result}",
+      "kind": "use"
+    }
+  ],
+  "exports": [
+    {
+      "name": "run",
+      "kind": "function"
+    }
+  ]
+}

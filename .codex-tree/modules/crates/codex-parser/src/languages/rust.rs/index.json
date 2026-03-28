@@ -1,0 +1,137 @@
+{
+  "path": "crates/codex-parser/src/languages/rust.rs",
+  "language": "rust",
+  "content_hash": "sha256:bdf995b6746c8b38115a3e6f600af6e2b5bd972a2e948fcb0d50c7450a06a851",
+  "symbols": [
+    {
+      "name": "RustAdapter",
+      "kind": "struct",
+      "visibility": "public",
+      "span": {
+        "start_line": 10,
+        "end_line": 10
+      },
+      "signature": "pub struct RustAdapter",
+      "doc_comment": "/// Language adapter for Rust source files.\n\n///\n\n/// This struct is a unit struct (no fields) — equivalent to a Scala `object`\n\n/// that extends a trait.  It exists only as a handle to call the trait methods.\n"
+    },
+    {
+      "name": "LanguageAdapter",
+      "kind": "impl",
+      "visibility": "private",
+      "span": {
+        "start_line": 12,
+        "end_line": 36
+      },
+      "signature": "impl LanguageAdapter for RustAdapter"
+    },
+    {
+      "name": "language_id",
+      "kind": "function",
+      "visibility": "private",
+      "span": {
+        "start_line": 13,
+        "end_line": 15
+      },
+      "signature": "fn language_id(&self) -> &str",
+      "parent": "LanguageAdapter"
+    },
+    {
+      "name": "file_extensions",
+      "kind": "function",
+      "visibility": "private",
+      "span": {
+        "start_line": 17,
+        "end_line": 19
+      },
+      "signature": "fn file_extensions(&self) -> &[&str]",
+      "parent": "LanguageAdapter"
+    },
+    {
+      "name": "tree_sitter_language",
+      "kind": "function",
+      "visibility": "private",
+      "span": {
+        "start_line": 21,
+        "end_line": 23
+      },
+      "signature": "fn tree_sitter_language(&self) -> Language",
+      "parent": "LanguageAdapter"
+    },
+    {
+      "name": "extract_symbols",
+      "kind": "function",
+      "visibility": "private",
+      "span": {
+        "start_line": 25,
+        "end_line": 29
+      },
+      "signature": "fn extract_symbols(&self, tree: &tree_sitter::Tree, source: &[u8]) -> Vec<Symbol>",
+      "parent": "LanguageAdapter"
+    },
+    {
+      "name": "extract_imports",
+      "kind": "function",
+      "visibility": "private",
+      "span": {
+        "start_line": 31,
+        "end_line": 35
+      },
+      "signature": "fn extract_imports(&self, tree: &tree_sitter::Tree, source: &[u8]) -> Vec<Import>",
+      "parent": "LanguageAdapter"
+    },
+    {
+      "name": "RustAdapter",
+      "kind": "impl",
+      "visibility": "private",
+      "span": {
+        "start_line": 38,
+        "end_line": 197
+      },
+      "signature": "impl RustAdapter"
+    },
+    {
+      "name": "walk_for_imports",
+      "kind": "function",
+      "visibility": "private",
+      "span": {
+        "start_line": 43,
+        "end_line": 62
+      },
+      "signature": "fn walk_for_imports(node: tree_sitter::Node, source: &[u8], imports: &mut Vec<Import>)",
+      "parent": "RustAdapter",
+      "doc_comment": "/// Recursively walk the CST collecting `use_declaration` nodes.\n\n///\n\n/// This is a simple recursive descent — for very large files a cursor-based\n\n/// iterative walk would be more stack-efficient, but this is fine for now.\n"
+    },
+    {
+      "name": "walk_for_symbols",
+      "kind": "function",
+      "visibility": "private",
+      "span": {
+        "start_line": 68,
+        "end_line": 196
+      },
+      "signature": "fn walk_for_symbols(\n        node: tree_sitter::Node,\n        source: &[u8],\n        parent: Option<&str>,\n        symbols: &mut Vec<Symbol>,\n    )",
+      "parent": "RustAdapter",
+      "doc_comment": "/// Recursively walk the CST collecting declaration nodes as `Symbol`s.\n\n///\n\n/// `parent` carries the name of the enclosing `impl` block so that methods\n\n/// and associated items can record their owner.\n"
+    }
+  ],
+  "imports": [
+    {
+      "source": "tree_sitter::Language",
+      "kind": "use"
+    },
+    {
+      "source": "crate::language::LanguageAdapter",
+      "kind": "use"
+    },
+    {
+      "source": "crate::types::{Import, Span, Symbol, SymbolKind, Visibility}",
+      "kind": "use"
+    }
+  ],
+  "exports": [
+    {
+      "name": "RustAdapter",
+      "kind": "struct"
+    }
+  ]
+}

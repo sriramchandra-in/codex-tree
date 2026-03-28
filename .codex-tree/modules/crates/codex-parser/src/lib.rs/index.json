@@ -1,0 +1,108 @@
+{
+  "path": "crates/codex-parser/src/lib.rs",
+  "language": "rust",
+  "content_hash": "sha256:3e8bfca13953a0c252bb41ea9d8fa81d1f6f9421a8f264e21d58628b660373c5",
+  "symbols": [
+    {
+      "name": "error",
+      "kind": "module",
+      "visibility": "public",
+      "span": {
+        "start_line": 10,
+        "end_line": 10
+      },
+      "signature": "pub mod error"
+    },
+    {
+      "name": "language",
+      "kind": "module",
+      "visibility": "public",
+      "span": {
+        "start_line": 11,
+        "end_line": 11
+      },
+      "signature": "pub mod language"
+    },
+    {
+      "name": "languages",
+      "kind": "module",
+      "visibility": "public",
+      "span": {
+        "start_line": 12,
+        "end_line": 12
+      },
+      "signature": "pub mod languages"
+    },
+    {
+      "name": "registry",
+      "kind": "module",
+      "visibility": "public",
+      "span": {
+        "start_line": 13,
+        "end_line": 13
+      },
+      "signature": "pub mod registry"
+    },
+    {
+      "name": "types",
+      "kind": "module",
+      "visibility": "public",
+      "span": {
+        "start_line": 14,
+        "end_line": 14
+      },
+      "signature": "pub mod types"
+    },
+    {
+      "name": "parser",
+      "kind": "module",
+      "visibility": "public",
+      "span": {
+        "start_line": 16,
+        "end_line": 16
+      },
+      "signature": "pub mod parser"
+    },
+    {
+      "name": "serializer",
+      "kind": "module",
+      "visibility": "public",
+      "span": {
+        "start_line": 17,
+        "end_line": 17
+      },
+      "signature": "pub mod serializer"
+    }
+  ],
+  "imports": [],
+  "exports": [
+    {
+      "name": "error",
+      "kind": "module"
+    },
+    {
+      "name": "language",
+      "kind": "module"
+    },
+    {
+      "name": "languages",
+      "kind": "module"
+    },
+    {
+      "name": "registry",
+      "kind": "module"
+    },
+    {
+      "name": "types",
+      "kind": "module"
+    },
+    {
+      "name": "parser",
+      "kind": "module"
+    },
+    {
+      "name": "serializer",
+      "kind": "module"
+    }
+  ]
+}

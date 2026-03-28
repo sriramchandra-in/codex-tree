@@ -1,0 +1,219 @@
+{
+  "root": "/home/vakkadar/projects/codex-tree",
+  "entries": [
+    {
+      "type": "directory",
+      "path": "crates",
+      "children_count": 3,
+      "total_symbol_count": 80,
+      "total_line_count": 1724
+    },
+    {
+      "type": "directory",
+      "path": "crates/codex-analyzer",
+      "children_count": 1,
+      "total_symbol_count": 0,
+      "total_line_count": 0
+    },
+    {
+      "type": "directory",
+      "path": "crates/codex-analyzer/src",
+      "children_count": 1,
+      "total_symbol_count": 0,
+      "total_line_count": 0
+    },
+    {
+      "type": "file",
+      "path": "crates/codex-analyzer/src/lib.rs",
+      "language": "rust",
+      "symbol_count": 0,
+      "line_count": 0,
+      "imports_count": 0,
+      "exports_count": 0
+    },
+    {
+      "type": "directory",
+      "path": "crates/codex-cli",
+      "children_count": 1,
+      "total_symbol_count": 14,
+      "total_line_count": 350
+    },
+    {
+      "type": "directory",
+      "path": "crates/codex-cli/src",
+      "children_count": 3,
+      "total_symbol_count": 14,
+      "total_line_count": 350
+    },
+    {
+      "type": "directory",
+      "path": "crates/codex-cli/src/commands",
+      "children_count": 2,
+      "total_symbol_count": 7,
+      "total_line_count": 198
+    },
+    {
+      "type": "file",
+      "path": "crates/codex-cli/src/commands/init.rs",
+      "language": "rust",
+      "symbol_count": 6,
+      "line_count": 197,
+      "imports_count": 6,
+      "exports_count": 1
+    },
+    {
+      "type": "file",
+      "path": "crates/codex-cli/src/commands/mod.rs",
+      "language": "rust",
+      "symbol_count": 1,
+      "line_count": 1,
+      "imports_count": 0,
+      "exports_count": 1
+    },
+    {
+      "type": "file",
+      "path": "crates/codex-cli/src/error.rs",
+      "language": "rust",
+      "symbol_count": 2,
+      "line_count": 21,
+      "imports_count": 1,
+      "exports_count": 2
+    },
+    {
+      "type": "file",
+      "path": "crates/codex-cli/src/main.rs",
+      "language": "rust",
+      "symbol_count": 5,
+      "line_count": 131,
+      "imports_count": 3,
+      "exports_count": 0
+    },
+    {
+      "type": "directory",
+      "path": "crates/codex-parser",
+      "children_count": 2,
+      "total_symbol_count": 66,
+      "total_line_count": 1374
+    },
+    {
+      "type": "directory",
+      "path": "crates/codex-parser/src",
+      "children_count": 8,
+      "total_symbol_count": 54,
+      "total_line_count": 1008
+    },
+    {
+      "type": "file",
+      "path": "crates/codex-parser/src/error.rs",
+      "language": "rust",
+      "symbol_count": 2,
+      "line_count": 40,
+      "imports_count": 0,
+      "exports_count": 2
+    },
+    {
+      "type": "file",
+      "path": "crates/codex-parser/src/language.rs",
+      "language": "rust",
+      "symbol_count": 1,
+      "line_count": 39,
+      "imports_count": 2,
+      "exports_count": 1
+    },
+    {
+      "type": "directory",
+      "path": "crates/codex-parser/src/languages",
+      "children_count": 2,
+      "total_symbol_count": 11,
+      "total_line_count": 198
+    },
+    {
+      "type": "file",
+      "path": "crates/codex-parser/src/languages/mod.rs",
+      "language": "rust",
+      "symbol_count": 1,
+      "line_count": 1,
+      "imports_count": 0,
+      "exports_count": 1
+    },
+    {
+      "type": "file",
+      "path": "crates/codex-parser/src/languages/rust.rs",
+      "language": "rust",
+      "symbol_count": 10,
+      "line_count": 197,
+      "imports_count": 3,
+      "exports_count": 1
+    },
+    {
+      "type": "file",
+      "path": "crates/codex-parser/src/lib.rs",
+      "language": "rust",
+      "symbol_count": 7,
+      "line_count": 17,
+      "imports_count": 0,
+      "exports_count": 7
+    },
+    {
+      "type": "file",
+      "path": "crates/codex-parser/src/parser.rs",
+      "language": "rust",
+      "symbol_count": 5,
+      "line_count": 278,
+      "imports_count": 7,
+      "exports_count": 2
+    },
+    {
+      "type": "file",
+      "path": "crates/codex-parser/src/registry.rs",
+      "language": "rust",
+      "symbol_count": 9,
+      "line_count": 76,
+      "imports_count": 2,
+      "exports_count": 6
+    },
+    {
+      "type": "file",
+      "path": "crates/codex-parser/src/serializer.rs",
+      "language": "rust",
+      "symbol_count": 5,
+      "line_count": 158,
+      "imports_count": 6,
+      "exports_count": 3
+    },
+    {
+      "type": "file",
+      "path": "crates/codex-parser/src/types.rs",
+      "language": "rust",
+      "symbol_count": 14,
+      "line_count": 202,
+      "imports_count": 1,
+      "exports_count": 12
+    },
+    {
+      "type": "directory",
+      "path": "crates/codex-parser/tests",
+      "children_count": 2,
+      "total_symbol_count": 12,
+      "total_line_count": 366
+    },
+    {
+      "type": "file",
+      "path": "crates/codex-parser/tests/integration.rs",
+      "language": "rust",
+      "symbol_count": 2,
+      "line_count": 116,
+      "imports_count": 3,
+      "exports_count": 0
+    },
+    {
+      "type": "file",
+      "path": "crates/codex-parser/tests/rust_parsing.rs",
+      "language": "rust",
+      "symbol_count": 10,
+      "line_count": 250,
+      "imports_count": 4,
+      "exports_count": 0
+    }
+  ]
+}

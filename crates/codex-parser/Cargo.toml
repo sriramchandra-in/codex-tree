@@ -1,0 +1,20 @@
+[package]
+name = "codex-parser"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+description = "Language-independent AST parser for codex-tree knowledge trees"
+
+[dependencies]
+tree-sitter = "0.25"
+tree-sitter-rust = "0.24"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+walkdir = "2"
+thiserror = "2"
+sha2 = "0.10"
+
+[dev-dependencies]
+insta = { version = "1", features = ["json"] }
+tempfile = "3"

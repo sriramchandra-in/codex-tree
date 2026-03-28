@@ -1,0 +1,204 @@
+{
+  "path": "crates/codex-parser/src/types.rs",
+  "language": "rust",
+  "content_hash": "sha256:b4d841ce7e3ef77f1c2e51915a78e0fbf2c0361572b9fd03b8ae11f6e058cc97",
+  "symbols": [
+    {
+      "name": "SymbolKind",
+      "kind": "enum",
+      "visibility": "public",
+      "span": {
+        "start_line": 16,
+        "end_line": 35
+      },
+      "signature": "pub enum SymbolKind"
+    },
+    {
+      "name": "Visibility",
+      "kind": "enum",
+      "visibility": "public",
+      "span": {
+        "start_line": 46,
+        "end_line": 53
+      },
+      "signature": "pub enum Visibility"
+    },
+    {
+      "name": "Span",
+      "kind": "struct",
+      "visibility": "public",
+      "span": {
+        "start_line": 60,
+        "end_line": 63
+      },
+      "signature": "pub struct Span"
+    },
+    {
+      "name": "Symbol",
+      "kind": "struct",
+      "visibility": "public",
+      "span": {
+        "start_line": 72,
+        "end_line": 85
+      },
+      "signature": "pub struct Symbol"
+    },
+    {
+      "name": "Import",
+      "kind": "struct",
+      "visibility": "public",
+      "span": {
+        "start_line": 91,
+        "end_line": 96
+      },
+      "signature": "pub struct Import"
+    },
+    {
+      "name": "Export",
+      "kind": "struct",
+      "visibility": "public",
+      "span": {
+        "start_line": 100,
+        "end_line": 103
+      },
+      "signature": "pub struct Export"
+    },
+    {
+      "name": "ModuleIndex",
+      "kind": "struct",
+      "visibility": "public",
+      "span": {
+        "start_line": 111,
+        "end_line": 121
+      },
+      "signature": "pub struct ModuleIndex"
+    },
+    {
+      "name": "TreeEntry",
+      "kind": "enum",
+      "visibility": "public",
+      "span": {
+        "start_line": 132,
+        "end_line": 147
+      },
+      "signature": "pub enum TreeEntry"
+    },
+    {
+      "name": "TreeStructure",
+      "kind": "struct",
+      "visibility": "public",
+      "span": {
+        "start_line": 151,
+        "end_line": 155
+      },
+      "signature": "pub struct TreeStructure"
+    },
+    {
+      "name": "TreeVersion",
+      "kind": "struct",
+      "visibility": "public",
+      "span": {
+        "start_line": 161,
+        "end_line": 174
+      },
+      "signature": "pub struct TreeVersion"
+    },
+    {
+      "name": "TreeVersionNumber",
+      "kind": "struct",
+      "visibility": "public",
+      "span": {
+        "start_line": 181,
+        "end_line": 184
+      },
+      "signature": "pub struct TreeVersionNumber"
+    },
+    {
+      "name": "TreeVersionNumber",
+      "kind": "impl",
+      "visibility": "private",
+      "span": {
+        "start_line": 186,
+        "end_line": 190
+      },
+      "signature": "impl std::fmt::Display for TreeVersionNumber"
+    },
+    {
+      "name": "fmt",
+      "kind": "function",
+      "visibility": "private",
+      "span": {
+        "start_line": 187,
+        "end_line": 189
+      },
+      "signature": "fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result",
+      "parent": "TreeVersionNumber"
+    },
+    {
+      "name": "TreeStats",
+      "kind": "struct",
+      "visibility": "public",
+      "span": {
+        "start_line": 194,
+        "end_line": 202
+      },
+      "signature": "pub struct TreeStats"
+    }
+  ],
+  "imports": [
+    {
+      "source": "serde::{Deserialize, Serialize}",
+      "kind": "use"
+    }
+  ],
+  "exports": [
+    {
+      "name": "SymbolKind",
+      "kind": "enum"
+    },
+    {
+      "name": "Visibility",
+      "kind": "enum"
+    },
+    {
+      "name": "Span",
+      "kind": "struct"
+    },
+    {
+      "name": "Symbol",
+      "kind": "struct"
+    },
+    {
+      "name": "Import",
+      "kind": "struct"
+    },
+    {
+      "name": "Export",
+      "kind": "struct"
+    },
+    {
+      "name": "ModuleIndex",
+      "kind": "struct"
+    },
+    {
+      "name": "TreeEntry",
+      "kind": "enum"
+    },
+    {
+      "name": "TreeStructure",
+      "kind": "struct"
+    },
+    {
+      "name": "TreeVersion",
+      "kind": "struct"
+    },
+    {
+      "name": "TreeVersionNumber",
+      "kind": "struct"
+    },
+    {
+      "name": "TreeStats",
+      "kind": "struct"
+    }
+  ]
+}

@@ -1,0 +1,127 @@
+{
+  "path": "crates/codex-parser/tests/rust_parsing.rs",
+  "language": "rust",
+  "content_hash": "sha256:ec208a2d6663746dde1553860b0b9737fb91155f57bf6428e1f8947f63ee4e32",
+  "symbols": [
+    {
+      "name": "registry",
+      "kind": "function",
+      "visibility": "private",
+      "span": {
+        "start_line": 6,
+        "end_line": 8
+      },
+      "signature": "fn registry() -> ParserRegistry"
+    },
+    {
+      "name": "parse_rs",
+      "kind": "function",
+      "visibility": "private",
+      "span": {
+        "start_line": 13,
+        "end_line": 17
+      },
+      "signature": "fn parse_rs(source: &[u8]) -> codex_parser::types::ModuleIndex",
+      "doc_comment": "/// Parse `source` bytes as a `fake.rs` file and return the `ModuleIndex`.\n"
+    },
+    {
+      "name": "test_parse_function",
+      "kind": "function",
+      "visibility": "private",
+      "span": {
+        "start_line": 22,
+        "end_line": 38
+      },
+      "signature": "fn test_parse_function()"
+    },
+    {
+      "name": "test_parse_struct",
+      "kind": "function",
+      "visibility": "private",
+      "span": {
+        "start_line": 41,
+        "end_line": 64
+      },
+      "signature": "fn test_parse_struct()"
+    },
+    {
+      "name": "test_parse_enum",
+      "kind": "function",
+      "visibility": "private",
+      "span": {
+        "start_line": 67,
+        "end_line": 79
+      },
+      "signature": "fn test_parse_enum()"
+    },
+    {
+      "name": "test_parse_trait",
+      "kind": "function",
+      "visibility": "private",
+      "span": {
+        "start_line": 82,
+        "end_line": 94
+      },
+      "signature": "fn test_parse_trait()"
+    },
+    {
+      "name": "test_parse_impl_block",
+      "kind": "function",
+      "visibility": "private",
+      "span": {
+        "start_line": 97,
+        "end_line": 140
+      },
+      "signature": "fn test_parse_impl_block()"
+    },
+    {
+      "name": "test_parse_imports",
+      "kind": "function",
+      "visibility": "private",
+      "span": {
+        "start_line": 143,
+        "end_line": 170
+      },
+      "signature": "fn test_parse_imports()"
+    },
+    {
+      "name": "test_parse_multiple_items",
+      "kind": "function",
+      "visibility": "private",
+      "span": {
+        "start_line": 173,
+        "end_line": 217
+      },
+      "signature": "fn test_parse_multiple_items()"
+    },
+    {
+      "name": "test_parse_visibility_variants",
+      "kind": "function",
+      "visibility": "private",
+      "span": {
+        "start_line": 220,
+        "end_line": 250
+      },
+      "signature": "fn test_parse_visibility_variants()"
+    }
+  ],
+  "imports": [
+    {
+      "source": "codex_parser::parser::parse_file",
+      "kind": "use"
+    },
+    {
+      "source": "codex_parser::registry::ParserRegistry",
+      "kind": "use"
+    },
+    {
+      "source": "codex_parser::types::{SymbolKind, Visibility}",
+      "kind": "use"
+    },
+    {
+      "source": "std::path::Path",
+      "kind": "use"
+    }
+  ],
+  "exports": []
+}

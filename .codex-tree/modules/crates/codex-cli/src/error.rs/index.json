@@ -1,0 +1,43 @@
+{
+  "path": "crates/codex-cli/src/error.rs",
+  "language": "rust",
+  "content_hash": "sha256:414c97d2dbbee3ff154946e047dc67295e9edb89e37accd0d3514c1ca7874312",
+  "symbols": [
+    {
+      "name": "CliError",
+      "kind": "enum",
+      "visibility": "public",
+      "span": {
+        "start_line": 4,
+        "end_line": 19
+      },
+      "signature": "pub enum CliError"
+    },
+    {
+      "name": "Result",
+      "kind": "type_alias",
+      "visibility": "public",
+      "span": {
+        "start_line": 21,
+        "end_line": 21
+      },
+      "signature": "pub type Result<T> = std::result::Result<T, CliError>"
+    }
+  ],
+  "imports": [
+    {
+      "source": "std::path::PathBuf",
+      "kind": "use"
+    }
+  ],
+  "exports": [
+    {
+      "name": "CliError",
+      "kind": "enum"
+    },
+    {
+      "name": "Result",
+      "kind": "type_alias"
+    }
+  ]
+}

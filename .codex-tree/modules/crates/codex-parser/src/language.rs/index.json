@@ -1,0 +1,34 @@
+{
+  "path": "crates/codex-parser/src/language.rs",
+  "language": "rust",
+  "content_hash": "sha256:256860febd496868fd40ed1cbdf2811d0751bc040ff1fb99841bca04b58330de",
+  "symbols": [
+    {
+      "name": "LanguageAdapter",
+      "kind": "trait",
+      "visibility": "public",
+      "span": {
+        "start_line": 20,
+        "end_line": 39
+      },
+      "signature": "pub trait LanguageAdapter: Send + Sync",
+      "doc_comment": "/// The core abstraction for language support — every language plugin implements this.\n\n///\n\n/// In Scala this would be:\n\n/// ```scala\n\n/// trait LanguageAdapter {\n\n///   def languageId: String\n\n///   def fileExtensions: Seq[String]\n\n///   def extractSymbols(tree: Tree, source: Array[Byte]): Seq[Symbol]\n\n///   def extractImports(tree: Tree, source: Array[Byte]): Seq[Import]\n\n/// }\n\n/// ```\n\n///\n\n/// The `Send + Sync` bounds are the Rust equivalent of \"this object is safe to\n\n/// share across threads\" — required because the registry may be used from a\n\n/// parallel file-walking task.\n"
+    }
+  ],
+  "imports": [
+    {
+      "source": "tree_sitter::Language",
+      "kind": "use"
+    },
+    {
+      "source": "crate::types::{Import, Symbol}",
+      "kind": "use"
+    }
+  ],
+  "exports": [
+    {
+      "name": "LanguageAdapter",
+      "kind": "trait"
+    }
+  ]
+}

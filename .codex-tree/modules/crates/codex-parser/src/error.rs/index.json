@@ -1,0 +1,39 @@
+{
+  "path": "crates/codex-parser/src/error.rs",
+  "language": "rust",
+  "content_hash": "sha256:6167bae231bf25b9505b8e03828e5d5f5e518c661063aa9b489b833cce1e58f3",
+  "symbols": [
+    {
+      "name": "ParserError",
+      "kind": "enum",
+      "visibility": "public",
+      "span": {
+        "start_line": 6,
+        "end_line": 35
+      },
+      "signature": "pub enum ParserError"
+    },
+    {
+      "name": "Result",
+      "kind": "type_alias",
+      "visibility": "public",
+      "span": {
+        "start_line": 40,
+        "end_line": 40
+      },
+      "signature": "pub type Result<T> = std::result::Result<T, ParserError>",
+      "doc_comment": "/// Convenience alias — mirrors Scala's `type Result[A] = Either[ParserError, A]`\n\n/// but using Rust's built-in `Result<T, E>`.  Import this in every module so\n\n/// you can write `Result<Foo>` instead of `std::result::Result<Foo, ParserError>`.\n"
+    }
+  ],
+  "imports": [],
+  "exports": [
+    {
+      "name": "ParserError",
+      "kind": "enum"
+    },
+    {
+      "name": "Result",
+      "kind": "type_alias"
+    }
+  ]
+}

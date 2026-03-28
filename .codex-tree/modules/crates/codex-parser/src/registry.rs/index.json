@@ -1,0 +1,146 @@
+{
+  "path": "crates/codex-parser/src/registry.rs",
+  "language": "rust",
+  "content_hash": "sha256:900eefcce54515ff0a77a7c5d9735b1b0d6be54ab821572a458158385bc07d11",
+  "symbols": [
+    {
+      "name": "ParserRegistry",
+      "kind": "struct",
+      "visibility": "public",
+      "span": {
+        "start_line": 14,
+        "end_line": 18
+      },
+      "signature": "pub struct ParserRegistry",
+      "doc_comment": "/// Maps file extensions to language adapters.\n\n///\n\n/// Rust's `Box<dyn LanguageAdapter>` is a *trait object* — a fat pointer\n\n/// (data ptr + vtable ptr) that gives you dynamic dispatch without knowing\n\n/// the concrete type at compile time.  In Scala this is just a value typed\n\n/// as the trait: `val adapter: LanguageAdapter = new RustAdapter`.\n\n///\n\n/// The `Vec` owns the adapters; the `HashMap` stores indices into it rather\n\n/// than duplicate `Box`es, keeping ownership unambiguous.\n"
+    },
+    {
+      "name": "ParserRegistry",
+      "kind": "impl",
+      "visibility": "private",
+      "span": {
+        "start_line": 20,
+        "end_line": 67
+      },
+      "signature": "impl ParserRegistry"
+    },
+    {
+      "name": "new",
+      "kind": "function",
+      "visibility": "public",
+      "span": {
+        "start_line": 22,
+        "end_line": 27
+      },
+      "signature": "pub fn new() -> Self",
+      "parent": "ParserRegistry",
+      "doc_comment": "/// Create an empty registry with no adapters registered.\n"
+    },
+    {
+      "name": "register",
+      "kind": "function",
+      "visibility": "public",
+      "span": {
+        "start_line": 33,
+        "end_line": 39
+      },
+      "signature": "pub fn register(&mut self, adapter: Box<dyn LanguageAdapter>)",
+      "parent": "ParserRegistry",
+      "doc_comment": "/// Register a language adapter and claim all its file extensions.\n\n///\n\n/// If two adapters claim the same extension the last one wins — useful\n\n/// for overriding a built-in with a custom implementation.\n"
+    },
+    {
+      "name": "get_adapter",
+      "kind": "function",
+      "visibility": "public",
+      "span": {
+        "start_line": 50,
+        "end_line": 54
+      },
+      "signature": "pub fn get_adapter(&self, extension: &str) -> Option<&dyn LanguageAdapter>",
+      "parent": "ParserRegistry",
+      "doc_comment": "/// Look up an adapter by file extension (without the leading dot).\n\n///\n\n/// Returns `None` when no adapter is registered for that extension —\n\n/// callers should convert this to `ParserError::UnsupportedLanguage`.\n\n///\n\n/// The return type `Option<&dyn LanguageAdapter>` is Rust's way of saying\n\n/// \"a borrowed reference to some value that implements LanguageAdapter\" —\n\n/// equivalent to `Option[LanguageAdapter]` in Scala where the value is a\n\n/// shared reference, not a copy.\n"
+    },
+    {
+      "name": "languages",
+      "kind": "function",
+      "visibility": "public",
+      "span": {
+        "start_line": 57,
+        "end_line": 59
+      },
+      "signature": "pub fn languages(&self) -> Vec<&str>",
+      "parent": "ParserRegistry",
+      "doc_comment": "/// Return the language IDs of all registered adapters (in registration order).\n"
+    },
+    {
+      "name": "with_defaults",
+      "kind": "function",
+      "visibility": "public",
+      "span": {
+        "start_line": 62,
+        "end_line": 66
+      },
+      "signature": "pub fn with_defaults() -> Self",
+      "parent": "ParserRegistry",
+      "doc_comment": "/// Build a registry pre-loaded with all built-in language adapters.\n"
+    },
+    {
+      "name": "Default",
+      "kind": "impl",
+      "visibility": "private",
+      "span": {
+        "start_line": 72,
+        "end_line": 76
+      },
+      "signature": "impl Default for ParserRegistry",
+      "doc_comment": "/// `Default` delegates to `with_defaults` so that `ParserRegistry::default()`\n\n/// gives you a fully-configured registry — analogous to a Scala companion\n\n/// `object`'s `apply()` factory method.\n"
+    },
+    {
+      "name": "default",
+      "kind": "function",
+      "visibility": "private",
+      "span": {
+        "start_line": 73,
+        "end_line": 75
+      },
+      "signature": "fn default() -> Self",
+      "parent": "Default"
+    }
+  ],
+  "imports": [
+    {
+      "source": "std::collections::HashMap",
+      "kind": "use"
+    },
+    {
+      "source": "crate::language::LanguageAdapter",
+      "kind": "use"
+    }
+  ],
+  "exports": [
+    {
+      "name": "ParserRegistry",
+      "kind": "struct"
+    },
+    {
+      "name": "new",
+      "kind": "function"
+    },
+    {
+      "name": "register",
+      "kind": "function"
+    },
+    {
+      "name": "get_adapter",
+      "kind": "function"
+    },
+    {
+      "name": "languages",
+      "kind": "function"
+    },
+    {
+      "name": "with_defaults",
+      "kind": "function"
+    }
+  ]
+}
