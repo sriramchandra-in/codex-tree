@@ -144,12 +144,11 @@ Options:
 Prints tree statistics plus **context strategies** (estimated tokens vs reading all indexed raw source):
 
 1. **Nothing (raw source only)** — token estimate for reading every parsed source file with no codex-tree context (baseline).
-2. **Just tree (JSON indexes)** — `tree.json` + all `modules/**/index.json` (structural AST layer only).
-3. **Tree + Cursor** — just tree plus `.codex-tree/cursor/l2.md` if present, else `cursor/l1.md`; if no cursor digest exists, matches “just tree”.
+2. **Tree only (JSON indexes)** — `tree.json` + all `modules/**/index.json` (structural AST layer only).
+3. **Tree + Claude** — tree plus `.codex-tree/claude/l2.md` if present, else `claude/l1.md`; if no claude digest exists, matches “tree only”.
+4. **Tree + Cursor** — tree plus `.codex-tree/cursor/l2.md` if present, else `cursor/l1.md`; if no cursor digest exists, matches “tree only”.
 
-A **Detail** section still lists modules-only tokens, `tree.json`-only tokens, and legacy savings (modules JSON vs raw).
-
-**JSON output (`--format json`):** `token_estimate` includes `raw_source_tokens`, `just_tree_tokens`, `tree_plus_cursor_tokens`, `cursor_digest_used` (path or null), `savings_just_tree`, `savings_tree_plus_cursor`, plus the existing `tree_tokens`, `tree_l1_tokens`, and `savings_ratio` fields.
+**JSON output (`--format json`):** `token_estimate` includes `raw_source_tokens`, `just_tree_tokens`, `tree_plus_claude_tokens`, `claude_digest_used`, `tree_plus_cursor_tokens`, `cursor_digest_used`, `savings_just_tree`, `savings_tree_plus_claude`, `savings_tree_plus_cursor`, plus the existing `tree_tokens`, `tree_l1_tokens`, and `savings_ratio` fields.
 
 Token counts use byte-size heuristics (code vs JSON vs markdown bytes-per-token ratios); they are estimates, not tokenizer-exact.
 

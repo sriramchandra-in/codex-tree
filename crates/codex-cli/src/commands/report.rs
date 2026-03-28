@@ -38,6 +38,10 @@ struct TokenEstimate {
     raw_source_tokens: usize,
     /// `tree.json` + all `modules/**/index.json` (structural tree only).
     just_tree_tokens: usize,
+    /// Structural tree + `.codex-tree/claude/l2.md` (typical Claude Code attach).
+    tree_plus_claude_tokens: usize,
+    /// Which digest file was added for `tree_plus_claude_tokens`, if any.
+    claude_digest_used: Option<String>,
     /// Structural tree + `.codex-tree/cursor/l2.md` (typical Cursor attach).
     tree_plus_cursor_tokens: usize,
     /// Which digest file was added for `tree_plus_cursor_tokens`, if any.
@@ -48,6 +52,8 @@ struct TokenEstimate {
     tree_l1_tokens: usize,
     /// Savings: 1 - (just_tree_tokens / raw_source_tokens).
     savings_just_tree: f64,
+    /// Savings: 1 - (tree_plus_claude_tokens / raw_source_tokens).
+    savings_tree_plus_claude: f64,
     /// Savings: 1 - (tree_plus_cursor_tokens / raw_source_tokens).
     savings_tree_plus_cursor: f64,
     /// Legacy: modules-only vs raw (same as older `savings_ratio`).
@@ -147,50 +153,31 @@ pub fn run(path: &Path, format: &str, _benchmark: bool, _verbose: bool, quiet: b
             raw,
         );
         print_strategy_row(
-            "  Just tree (JSON indexes)",
+            "  Tree only (JSON indexes)",
             report.token_estimate.just_tree_tokens,
             raw,
         );
+
+        // Tree + Claude
+        let tree_claude_label = match &report.token_estimate.claude_digest_used {
+            Some(p) => format!("  Tree + Claude ({})", p),
+            None => "  Tree + Claude (no digest)".to_string(),
+        };
+        print_strategy_row(
+            &tree_claude_label,
+            report.token_estimate.tree_plus_claude_tokens,
+            raw,
+        );
+
+        // Tree + Cursor
         let tree_cursor_label = match &report.token_estimate.cursor_digest_used {
-            Some(p) => format!("  Tree + Cursor (JSON + {})", p),
-            None => "  Tree + Cursor (no digest on disk)".to_string(),
+            Some(p) => format!("  Tree + Cursor ({})", p),
+            None => "  Tree + Cursor (no digest)".to_string(),
         };
         print_strategy_row(
             &tree_cursor_label,
             report.token_estimate.tree_plus_cursor_tokens,
             raw,
-        );
-        if let Some(ref path) = report.token_estimate.cursor_digest_used {
-            println!(
-                "  {:<40} {}",
-                "".dimmed(),
-                format!("(digest: {})", path).dimmed()
-            );
-        } else if report.token_estimate.tree_plus_cursor_tokens
-            == report.token_estimate.just_tree_tokens
-        {
-            println!(
-                "  {:<40} {}",
-                "".dimmed(),
-                "(no cursor/l2.md — same as tree-only)".dimmed()
-            );
-        }
-        println!();
-        println!("  {}", "Detail (bytes→tokens heuristics)".bold());
-        println!(
-            "  {:<26} {} tokens",
-            "  Modules JSON only:".dimmed(),
-            format_number(report.token_estimate.tree_tokens)
-        );
-        println!(
-            "  {:<26} {} tokens",
-            "  tree.json only:".dimmed(),
-            format_number(report.token_estimate.tree_l1_tokens)
-        );
-        println!(
-            "  {:<26} {:.0}%",
-            "  Savings (modules vs raw):".dimmed(),
-            report.token_estimate.savings_ratio * 100.0
         );
         println!();
     }
@@ -255,46 +242,46 @@ fn estimate_tokens(
     let just_tree_bytes = tree_json_size.saturating_add(module_json_bytes);
     let just_tree_tokens = bytes_to_tokens(just_tree_bytes, ContentKind::Json);
 
-    let (cursor_digest_used, cursor_extra_tokens) = cursor_digest_token_delta(codex_tree_dir);
-    let tree_plus_cursor_tokens = just_tree_tokens.saturating_add(cursor_extra_tokens);
+    // Digest strategies: tree.json overview + digest replaces module indexes
+    let (claude_digest_used, claude_digest_tokens) = digest_token_delta(codex_tree_dir, "claude");
+    let tree_plus_claude_tokens = tree_l1_tokens.saturating_add(claude_digest_tokens);
 
-    let savings_ratio = if raw_source_tokens > 0 {
-        1.0 - (tree_tokens as f64 / raw_source_tokens as f64)
-    } else {
-        0.0
-    };
-    let savings_just_tree = if raw_source_tokens > 0 {
-        1.0 - (just_tree_tokens as f64 / raw_source_tokens as f64)
-    } else {
-        0.0
-    };
-    let savings_tree_plus_cursor = if raw_source_tokens > 0 {
-        1.0 - (tree_plus_cursor_tokens as f64 / raw_source_tokens as f64)
-    } else {
-        0.0
+    let (cursor_digest_used, cursor_digest_tokens) = digest_token_delta(codex_tree_dir, "cursor");
+    let tree_plus_cursor_tokens = tree_l1_tokens.saturating_add(cursor_digest_tokens);
+
+    let savings = |strategy_tokens: usize| -> f64 {
+        if raw_source_tokens > 0 {
+            1.0 - (strategy_tokens as f64 / raw_source_tokens as f64)
+        } else {
+            0.0
+        }
     };
 
     Ok(TokenEstimate {
         raw_source_tokens,
         just_tree_tokens,
+        tree_plus_claude_tokens,
+        claude_digest_used,
         tree_plus_cursor_tokens,
         cursor_digest_used,
         tree_tokens,
         tree_l1_tokens,
-        savings_just_tree,
-        savings_tree_plus_cursor,
-        savings_ratio,
+        savings_just_tree: savings(just_tree_tokens),
+        savings_tree_plus_claude: savings(tree_plus_claude_tokens),
+        savings_tree_plus_cursor: savings(tree_plus_cursor_tokens),
+        savings_ratio: savings(tree_tokens),
     })
 }
 
-/// Prefer `cursor/l2.md`, then `l1.md`; return (relative path for display, extra tokens).
-fn cursor_digest_token_delta(codex_tree_dir: &Path) -> (Option<String>, usize) {
-    for rel in ["cursor/l2.md", "cursor/l1.md"] {
-        let p = codex_tree_dir.join(rel);
+/// Prefer `{layer}/l2.md`, then `l1.md`; return (relative path for display, extra tokens).
+fn digest_token_delta(codex_tree_dir: &Path, layer: &str) -> (Option<String>, usize) {
+    for level in ["l2.md", "l1.md"] {
+        let rel = format!("{}/{}", layer, level);
+        let p = codex_tree_dir.join(&rel);
         if let Ok(meta) = fs::metadata(&p) {
             let bytes = meta.len() as usize;
             return (
-                Some(rel.to_string()),
+                Some(rel),
                 bytes_to_tokens(bytes, ContentKind::Markdown),
             );
         }
